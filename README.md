@@ -46,7 +46,7 @@ and the process will repeat until we have the real Monopoly winner.
 
 The interface will show the current game status. You
 
-## ![](img/icons8-document-24.png) Documentation
+## ![](img/icons8-user-manual-24.png) Documentation
 The documentation on how to use/modify our modules, projects will be available shortly in GitHub Pages.
 
 ## ![](img/icons8-user-manual-24.png) Contribute
@@ -55,10 +55,7 @@ We welcome all of the developers into the development of this program. Please co
 ----
 ## Other Stuff
 ### Configuration structure
-Please check on the documentation page for more information.
-
-### Contributors
-- [@sagelga](https://github.com/sagelga)
+Please check on the [documentation](https://sagelga.github.io/monopoly-analysis) page for more information.
 
 ### Boring things that you need to know
 The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the gameplay.
