@@ -2,6 +2,7 @@ import service
 import loader
 import database
 
+
 def start():
     """
     This fucntion will basically a program starter.
@@ -18,13 +19,15 @@ def start():
 
     """
     service.announce("Initiating the service")
-    service.announce("Welcome to Monopoly Analysis. Please choose the game package.")
-    loader.GLOBAL_CONFIG_FOLDER = "config/" + input()
+    service.announce(
+        "Welcome to Monopoly Analysis. Please choose the game package.")
     loader.configuration_loader()
 
-class Player:
-    def __init__(self):
-        self.money = loader.getMoney()
-        self.property = dict()
+
+# class Player:
+#     def __init__(self):
+#         self.money = loader.getMoney()
+#         self.property = dict()
+
 
 start()
