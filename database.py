@@ -36,7 +36,7 @@ def initiate():
     """
     database.connect()
 
-    for i in range(3):
+    for _ in range(3):
         DATABASE.execute()
 
     # make sure the database change is commited + closed.
