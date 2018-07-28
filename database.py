@@ -1,72 +1,68 @@
-import sqlite3
+import os
 
+import service
+
+try:
+    # SQLite is a infamous package. We need these.
+    import sqlite3
+except ImportError as inst:
+    service.error(inst)
+    # try:
+    #     import pip
+    #     pip.main(['install', sqlite3])
+
+
+"""
+This file is for connecting the database, update database, reset database.
+Absolutely about doing something with database.
+
+If doing the transaction preparation, use transaction module.
+"""
 DATABASE = None
 
-def connect_database(db_src = 'config/StandardAmerican/property.db'):
-    DATABASE = sqlite3.connect(db_src)    
+
+def connect_database(db_src='config/StandardAmerican/property.db'):
+    try:
+        DATABASE = sqlite3.connect(db_src)
+    except Exception as inst:
+        service.error(inst)
+
     return
 
-def get_property_owner(property):
-    """
-    Return:
-        player: (String) 
-            player's username that owns the property.
-            If not owned, will return None
-    """
 
-    # return None
+def generate_database():
+    """
+    Generate a new database from the script given in database folder.
+    As these database cannot be reused.
+    """
+    for i in range(3):
+        DATABASE.execute()
+
+    # make sure the database change is commited.
+    DATABASE.commit()
     pass
 
-def transfer(player, 
-            new_player,
-            property = list(), 
-            money = 0):
+
+def find(column, table, row='Null', operator='=', quantity='Null'):
     """
-    Parameter: 
-        property: (List) 
-            Lists of property that will be transfered to new_player from player
-            If left blank, property will not be transfered.
-
-        money: (Integer) 
-            Money that will be transfered to new_player from player
-            If left blank, money will not be transfered
-
-    Return:
-        none
-
-    Exception:
-        TransactionException: 
-            Raised when transaction is not completed, resulted from errors
-    """ 
-    # try:
-    #     # Start the transaction methods
-    # catch PropertyException:
-    #     pass
-    # catch MoneyException:
+    SELECT <column> FROM <table> WHERE <row> <operator> <quantity>
+    """
+    DATABASE.execute("SELECT {} FROM {} WHERE {} {} {}".format(
+        column, table, row, operator, quantity))
+    DATABASE.commit()
     pass
-    
-    def check_property(player, property):
-        """
-        Exception:
-            PropertyException: 
-                Raised when player do not own one of the property.
-        """
-        # Start the query from player, 
-        # SELECT name FROM property_owner WHERE property == property
 
-        # If query failed, raise PropertyException
-        pass
-        
 
-    def check_money(player, money):
-        """
-        Exception:
-            MoneyException: 
-                Raised when player do not have enough money.
-        """
-        # Start the query from player
-        # SELECT money from player WHERE name = player
+def update(table_name, column, operator, quantity, pk_column, pk_column_value):
+    """
+    Do this transaction (IN SQL)
+    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
 
-        # If query result is lower than money, raise MoneyException
-        pass
-        
+    :param column:
+    :param table:
+    :param row:
+    :param quantity:
+    :return:
+    """
+    DATABASE.execute("UPDATE {} SET {} {} {} WHERE {} = {}"
+                     .format(table_name, column, operator, quantity, pk_column, pk_column_value))

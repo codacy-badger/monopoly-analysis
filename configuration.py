@@ -10,6 +10,9 @@ Parameters:
 """
 
 CONFIG = {
+    'game_package': '',
+    'file_to_check': ['property.csv', 'game.sqlite', 'tiles.csv'],
+
     'auto_roll': False,
     'dice_face': {1, 2, 3, 4, 5, 6},
     'speed_dice': False,
