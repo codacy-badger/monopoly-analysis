@@ -66,8 +66,13 @@ The interface will show the current game status. You
 The documentation on how to use/modify our modules, projects will be available shortly in GitHub Pages.
 
 ### Module distribution
-This project is divided to 4 files (Python file), which is<br>
-[`main.py`]() [`service.py`]() [`actions.py`]() [`transaction.py`]() [`database.py`]() [`configuration.py`]()
+This project is divided to 6 modules (Python file), which is<br>
+[`main.py`](https://github.com/sagelga/monopoly-analysis/blob/master/main.py)
+[`service.py`](https://github.com/sagelga/monopoly-analysis/blob/master/service.py)
+[`actions.py`](https://github.com/sagelga/monopoly-analysis/blob/master/actions.py)
+[`transaction.py`](https://github.com/sagelga/monopoly-analysis/blob/master/transaction.py)
+[`database.py`](https://github.com/sagelga/monopoly-analysis/blob/master/database.py)
+[`configuration.py`](https://github.com/sagelga/monopoly-analysis/blob/master/configuration.py)
 
 which each module has it's own purpose
 - main          : serves as program initiator + flow control
@@ -79,7 +84,7 @@ which each module has it's own purpose
 
 User can edit the configuration to suit their game.
 
-## ![](img/icons8-user-manual-24.png) Contribute
+## ![](img/icons8-code-fork-24.png) Contribute
 We welcome all of the developers into the development of this program. Please contact me for more information or to enroll.
 
 ----
