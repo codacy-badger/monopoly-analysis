@@ -1,4 +1,5 @@
 import os
+import logging
 
 # --- Module Import -----------------------------
 import service
@@ -25,6 +26,7 @@ def connect():
     try:
         global DATABASE
         DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
+        DATABASE = DATABASE.cursor()
     except Exception as inst:
         service.error(inst)
     return
@@ -43,7 +45,16 @@ def initiate():
         service.error("There is no game.sqlite in {}".format(
             configuration.CONFIG['database_path']))
 
-    # Create database
+    # Create database using pre-created CREATE script
+    for j in configuration.CONFIG['database_create_file']:
+        script = ""
+        with open("config/database/{}".format(j)) as sql_script:
+            for i in sql_script:
+                script += "{}\n".format(i)
+            # logging.debug(script)
+            sql_script.close()  # Close file
+
+        DATABASE.execute(script)
 
     # make sure the database change is closed.
     DATABASE.close()

@@ -20,7 +20,8 @@ def add_user(username):
     """
     pass
 
-
+def delete_user(username):
+    pass
 def reorder(username: str, new_order: int):
     """
     Reorder the user into different sequence
@@ -32,6 +33,7 @@ def reorder(username: str, new_order: int):
         new_order: (Integer)
             the new order that order to be
     """
+    pass
 
 
 def transfer(player, new_player, property=list(), money=0):
@@ -218,6 +220,35 @@ def get_balance(player):
     # Return the money amount
     pass
 
+def set_balance(player, amount):
+    """
+    Set the money balance to the database
+    """
+    pass
+
+def update_value(player):
+    """
+    Update player value from the database
+    """
+    pass
+
+def get_mortgage_status(property):
+    """
+    Get the mortgage status, based on <property>
+    """
+    pass
+
+def mortgage(player, property):
+    """
+    Mortgage the property and add money to player
+    """
+    pass
+
+def remortgage(property):
+    """
+    Remortgage the property
+    """
+    pass
 
 class TransactionError(Exception):
     """Will rise when the transaction cannot be completed"""

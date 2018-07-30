@@ -1,3 +1,7 @@
+# Build file using make
+make clean
+make html
+
 # Move to the project folder
 ls
 cd docs/html

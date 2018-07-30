@@ -22,21 +22,6 @@ def create_user():
     return
 
 
-def update_configuration(key: str, value):
-    """
-    Use for updating the configuration dictionary
-
-    Parameter:
-        key: setting topic that want to be changed
-        value: new value to be changed into
-    """
-    if value is not None:
-        service.announce("Overriding '{}' from configuration".format(key))
-        configuration.CONFIG[key] = value
-
-    return
-
-
 def check_game_package_configuration():
     """
     Use for checking the game package configuration.

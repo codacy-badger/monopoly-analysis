@@ -1,11 +1,10 @@
+![](img/monopoly-logo.png)
 # Monopoly Analysis
 *version Alpha 0.1*
 
-![](img/monopoly-logo.png)
-
 The famous fast-trading board game Monopoly meets decision support analysis.
 
-> It's the fast-dealing property trading game where players buy, sell, dream and scheme their way to riches
+> Monopoly, the fast-dealing property trading game where players buy, sell, dream and scheme their way to riches
 
 **WARNING** This program is still in Alpha. There will be a lot of hickups along the way. Sorry for the inconveninece.
 
@@ -22,15 +21,30 @@ Users that use this program will able to:
 - Estimates the property values and upgrades
 - Show risks and rewards throughout the gameplay
 
-## ![](img/icons8-software-installer-24.png) How to install
+and of course, understand what is going to happen next, just like you do. Win.
+
+## ![](img/icons8-downloading-updates-24.png) Installation
 Download this repository by cloning or click [here to download the .zip file](https://github.com/sagelga/monopoly-analysis/archive/master.zip).
 
-If you have cloned (or download) this service, run this on your Terminal (or command prompt)
+> This program requires Python programming language and SQLite. Please download prior the launch of the program.
+
+If you do not have Python or/and SQLite, you can run (for Linux)
+```
+sudo apt-get install python3
+sudo apt-get install sqlite
+```
+and many other ways to install `python3` and `sqlite3`.<br>
+Please check here later for more information about dependencies.
+
+## ![](img/icons8-exe-24.png) How to start
+You can checkout the `configuration.py` for edits on game settings, including starting money, jail penalty, etc.
+
+If you have open the folder in Terminal, you can start by running this prompt
 ```
 python3 main.py
 ```
 
-> This program will requires Python programming language. Please download prior the launch of the program.
+Python supports Windows, MacOS, Linux Distributions. You can start the game from Command Prompt (Windows), Windows PowerShell (Windows) and Terminal (MacOS and Linux Distribution)
 
 ## ![](img/icons8-game-controller-24.png) How to use
 > For more details, please check out our [user manual](https://sagelga.github.io/monopoly-analysis/).
@@ -44,7 +58,7 @@ Step 2: Type in the orders that each user get (or skip if you liked to make us r
 Step 3: Type in the rolls you get (or skip if you liked to make us random)<br>
 Step 4: Choose to do any actions (Buy/Trade Property, Auction, Make/Redo Mortgage, Buy/Sell Assets or Finish Turn)<br>
 
-and the process will repeat until we have the real Monopoly winner.
+and the process will repeat until we have the last man standing
 
 The interface will show the current game status. You
 
@@ -52,15 +66,10 @@ The interface will show the current game status. You
 The documentation on how to use/modify our modules, projects will be available shortly in GitHub Pages.
 
 ### Module distribution
-This project is divided to 4 files (Python file), which is
-[`main.py`]()
-[`service.py`]()
-[`actions.py`]()
-[`transaction.py`]()
-[`database.py`]()
-[`configuration.py`]()
+This project is divided to 4 files (Python file), which is<br>
+[`main.py`]() [`service.py`]() [`actions.py`]() [`transaction.py`]() [`database.py`]() [`configuration.py`]()
 
-which
+which each module has it's own purpose
 - main          : serves as program initiator + flow control
 - service       : handle action made by user or asked for response from user
 - action        : handle background action
@@ -68,10 +77,7 @@ which
 - database      : create transaction directly to SQLite database
 - configuration : user defined rules, which can **only** be retrieved.
 
-#### Rules
-All logical calculations are done in service and transaction.<br>
-All interfaces is done in service<br>
-All database change must be done in transaction first.<br>
+User can edit the configuration to suit their game.
 
 ## ![](img/icons8-user-manual-24.png) Contribute
 We welcome all of the developers into the development of this program. Please contact me for more information or to enroll.
@@ -89,13 +95,17 @@ Make sure that you are **forking this repository** for further inspections.
 
 If you liked to use this repository in a commercial or for-profit benefits, please contact me and respective game trademark owner.
 
-If you liked to suggests on legal terms we have in this repository, please **directly** contact me via E-Mail, provided in my profile page.
+If you liked to suggests on legal terms we have in this repository, please **directly** contact me via email, provided in my profile page.
 
 [Monopoly](https://www.hasbro.com/en-us/brands/monopoly) is a trademark from Hasbro or its subsidiaries, licensors, licensees, suppliers and accounts.<br>
-© 1935, 2017 Hasbro, Pawtucket, RI 02861-1059 USA. All Rights Reserved. TM & ® denote U.S. Trademarks.
 
 Icons inside this project's README file is from [icons8.com](icons8.com).
 
-Project is made possible with Python and Sphynx document generator.
+Information about Monopoly game rule is from official Monopoly website and Wikipedia.
 
-Information about the Monopoly gaming rule is from multiple sources. Please check each "game package" to see more information.
+---
+
+[![](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
+[![](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)
+[![](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+[![](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)

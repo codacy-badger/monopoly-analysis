@@ -14,6 +14,7 @@ CONFIG = {
 
     'database_path': 'config/StandardAmerican/game.sqlite',
     'database_create_path': 'config/database/',
+    'database_create_file': ['Player.sql', 'PlayerProperty.sql', 'Property.sql'],
 
     'auto_roll': False,
     'dice_face': (1, 2, 3, 4, 5, 6),
@@ -47,3 +48,17 @@ CONFIG = {
     'remortgage_price': 0.6,
     'remortgage_price_mode': 'relative'
 }
+
+def update(key: str, value):
+    """
+    Use for updating the configuration dictionary
+
+    Parameter:
+        key: setting topic that want to be changed
+        value: new value to be changed into
+    """
+    if value is not None:
+        service.announce("Overriding '{}' from configuration".format(key))
+        configuration.CONFIG[key] = value
+
+    return
