@@ -78,7 +78,10 @@ def roll_dice():
             individual_dice_result: (Integer)
                 Range between 1 to 6
         """
-        return random.randint(1, 6)
+        dice_face = configuration.CONFIG['dice_face']
+        number = random.randint(0, len(dice_face))
+
+        return dice_face[number]
 
     dice_result = list()
     result = 0
