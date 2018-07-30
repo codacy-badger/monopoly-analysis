@@ -11,20 +11,64 @@ If you liked to change the service information, please change it in config/globa
 """
 
 
-def get_property_owner(property):
+def add_user(username):
     """
+    Create a transaction that will add user to the database
+
+    Parameter:
+        username: name of the user (username) that will be added
+    """
+    pass
+
+
+def reorder(username: str, new_order: int):
+    """
+    Reorder the user into different sequence
+
+    Parameter:
+        username: (String)
+            username that need to be reorder
+
+        new_order: (Integer)
+            the new order that order to be
+    """
+
+
+def get_property_owner(property: list, **propertyId):
+    """
+    Parameter:
+        property: (String List)
+            Property name that doesn't know owner
+
+        propertyId: (Integer List)
+            ID of the property. ranged from 1 to 28
+            **Internal use only**
+
     Return:
         player: (String)
             player's username that owns the property.
             If not owned, will return None
     """
 
-    # return None
-    pass
+    username = None
+    return username
+
+
+def get_balance(player):
+    """
+    Check player's money account
+    """
+
+    # Create transaction to check player money balance
+
+    # Return the money amount
+    money = 0
+    return money
 
 
 def transfer(player, new_player, property=list(), money=0):
     """
+    Use to transfer money and/or property from player -> new player
     Parameter:
         player: (String)
             Player that starts the transfer
@@ -41,9 +85,6 @@ def transfer(player, new_player, property=list(), money=0):
             Money that will be transfered to new_player from player
             If left blank or zero, money will not be transfered and raised ValueError
             If left negative, money will not be transfered and raised ValueError
-
-    Return:
-        none
 
     Exception:
         ValueError:
@@ -67,27 +108,24 @@ def transfer(player, new_player, property=list(), money=0):
 
     def check_property(player, property):
         """
-        Exception:
-            PropertyException:
-                Raised when player do not own one of the property.
-        """
-        # Start the query from player,
-        # SELECT name FROM property_owner WHERE property == property
+        INTERNAL FUNCTION
+        Check property ownership validation
 
-        # If query failed, raise PropertyException
-        pass
+        Return:
+            1 if player owned that property, else 0
+        """
+
+        return 1 if (player == get_property_owner(property)) else 0
 
     def check_money(player, money):
         """
-        Exception:
-            MoneyException:
-                Raised when player do not have enough money.
-        """
-        # Start the query from player
-        # SELECT money from player WHERE name = player
+        INTERNAL FUNCTION
+        Check money validation
 
-        # If query result is lower than money, raise MoneyException
-        pass
+        Return:
+            1 if enough, else 0
+        """
+        return 1 if (money <= get_balance(player)) else 0
 
 
 def buy_property(player, property, price=None):

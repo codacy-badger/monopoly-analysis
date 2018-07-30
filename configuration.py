@@ -1,7 +1,6 @@
 """
-Welcome to the configuration file, where you can set rules to the game...
-
-Some game version package will have this file and it will overrides it.
+This module store set of game rules.
+For advanced player, you can edit this file to suit your game experience
 
 Parameters:
     speed_dice (Default: False) -> Have speed dice in your game
@@ -10,26 +9,41 @@ Parameters:
 """
 
 CONFIG = {
-    'game_package': '',
+    'game_package': 'StandardAmerican',
     'file_to_check': ['property.csv', 'game.sqlite', 'tiles.csv'],
 
-    'database_path': 'config/StandardAmerican/property.db',
+    'database_path': 'config/StandardAmerican/game.sqlite',
+    'database_create_path': 'config/database/',
 
     'auto_roll': False,
     'dice_face': {1, 2, 3, 4, 5, 6},
+    'dice_count': 2,
+
     'speed_dice': False,
     'speed_dice_face': {1, 2, 3, 'Mr. Monopoly', 'Mr. Monopoly', 'Bus'},
+
     'free_parking_skip_turn': True,
-    'money_unit': 'M',
+    'money_unit': '$',
     'money_denomination': 1,
 
     'starter_money': 200,
     'pass_go_salary': 200,
+
     'income_tax': 200,
     'luxury_tax': 100,
 
     'jail_cost': 50,
+    'free_jail_double_roll': True,
+    'free_jail_double_roll_attempt': 2,
+
+    'three_double_jail': True,
+
     'auction_start_price': 0.1,
+    'auction_start_price_mode': 'relative',
+
     'house_sell': 0.5,
-    'remortgage_price': 0.6
+    'house_sell_mode': 'relative',
+
+    'remortgage_price': 0.6,
+    'remortgage_price_mode': 'relative'
 }

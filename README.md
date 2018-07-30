@@ -9,6 +9,8 @@ The famous fast-trading board game Monopoly meets decision support analysis.
 
 **WARNING** This program is still in Alpha. There will be a lot of hickups along the way. Sorry for the inconveninece.
 
+**WARNING** This program **currently** have no user interface. User that cannot troubleshoot Python code should not try the program until beta.
+
 ## ![](img/icons8-goal-24.png) Objective
 This repository and project is created for **decision support** usage.<br>
 Users can use this project in decisions-making purpose that could change the game aspects or leaders.
@@ -23,7 +25,7 @@ Users that use this program will able to:
 ## ![](img/icons8-software-installer-24.png) How to install
 Download this repository by cloning or click [here to download the .zip file](https://github.com/sagelga/monopoly-analysis/archive/master.zip).
 
-If you clone this repository, please type in this command to start the service.
+If you have cloned (or download) this service, run this on your Terminal (or command prompt)
 ```
 python3 main.py
 ```
@@ -48,6 +50,28 @@ The interface will show the current game status. You
 
 ## ![](img/icons8-user-manual-24.png) Documentation
 The documentation on how to use/modify our modules, projects will be available shortly in GitHub Pages.
+
+### Module distribution
+This project is divided to 4 files (Python file), which is
+[`main.py`]()
+[`service.py`]()
+[`actions.py`]()
+[`transaction.py`]()
+[`database.py`]()
+[`configuration.py`]()
+
+which
+- main          : serves as program initiator + flow control
+- service       : handle action made by user or asked for response from user
+- action        : handle background action
+- transaction   : prepare transaction to be made on database
+- database      : create transaction directly to SQLite database
+- configuration : user defined rules, which can **only** be retrieved.
+
+#### Rules
+All logical calculations are done in service and transaction.<br>
+All interfaces is done in service<br>
+All database change must be done in transaction first.<br>
 
 ## ![](img/icons8-user-manual-24.png) Contribute
 We welcome all of the developers into the development of this program. Please contact me for more information or to enroll.

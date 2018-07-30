@@ -1,5 +1,6 @@
 import os
 
+# --- Module Import -----------------------------
 import service
 import configuration
 import database
@@ -31,16 +32,20 @@ def connect():
 
 def initiate():
     """
-    Generate a new database from the script given in database folder.
-    As these database cannot be reused.
+    Generate a new brand new table (database) from the script given in `database/` folder.
+    Generally for starting the new game.
     """
+    # Connect the database
     database.connect()
 
-    for _ in range(3):
-        DATABASE.execute()
+    # Check for old database file
+    if not os.path.exists(configuration.CONFIG['database_path']):
+        service.error("There is no game.sqlite in {}".format(
+            configuration.CONFIG['database_path']))
 
-    # make sure the database change is commited + closed.
-    DATABASE.commit()
+    # Create database
+
+    # make sure the database change is closed.
     DATABASE.close()
     pass
 

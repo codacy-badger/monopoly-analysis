@@ -1,30 +1,29 @@
-Property,               Type,               Price,      Mortgage,   0 House,   1 House,    2 House,    3 House,    4 House,    Hotel
-Mediterranean Avenue,   Site,               60,         30,         2,          10,         30,         90,         160,        250
-Baltic Avenue           Site,               60,         30,	        4,          20,         60,         180,        320,        450
-Reading RR              Transport,          200,        100,        25,         50,         100,        200,        0,          0
-Oriental Avenue,        Site,               100,        50,         6,	        30,	        90,     	270,	    400,        550
-Vermont Avenue,         Site,               100,        50,         6,	        30,	        90,     	270,	    400,        550
-Connecticut Avenue,     Site,               120,        60,         8,	        40,	        100,        300,	    450,        600
-St. Charles Place,      Site,               140,        70,         10,	        50,	        150,        450,	    625,        750
-Electric Company,       Utility,            150,        75,         4x,         10x,        0,          0,          0,          0
-States Avenue,          Site,               140,        70,         10,	        50,         150,        450,        625,        750
-Virginia Avenue,        Site,               160,        80,         12,	        60,         180,        500,        700,        900
-Pennsylvania RR,        Transport,          200,        100,        25,         50,         100,        200,        0,          0	
-St. James Place,        Site,               180,        90,         14,	        70,         200,        550,        750,        950
-Tennessee Avenue,       Site,               180,        90,         14,	        70,         200,        550,        750,        950
-New York Avenue,        Site,               200,        100,        16,	        80,         220,        600,        800,        1000
-Kentucky Avenue,        Site,               220,        110,        18,	        90,         250,        700,        875,        1050
-Indiana Avenue,         Site,               220,        110,        18,	        90,         250,        700,        875,        1050
-Illinois Avenue,        Site,               240,        120,        20,	        100,        300,        750,        925,        1100
-B&O RR,                 Transport,          200,        100,        25,         50,         100,        200,        0,          0
-Atlantic Avenue,        Site,               260,        130,        22,	        110,        330,        800,        975,        1150
-Ventnor Avenue,         Site,               260,        130,        22,	        110,        330,        800,        975,        1150
-Water Works,            Utility,            150,        75,         4x,         10x,        0,          0,          0,          0	
-Marvin Gardens,         Site,               280,        140,        24,         120,        360,        850,        1025,       1200
-Pacific Avenue,         Site,               300,        150,        26,         130,        390,        900,        1100,       1275
-North Carolina Avenue,  Site,               300,        150,        26,         130,        390,        900,        1100,       1275
-Pennsylvania Avenue,    Site,               320,        160,        28,         150,        450,        1000,       1200,       1400
-Short Line,             Transport,          200,        100,        25,         50,         100,        200,        0,          0	
-Park Place,             Site,               350,        175,        35,	        175,        500,        1100,       1300,       1500
-Boardwalk,              Site,               400,        200,        50,	        200,        600,        1400,       1700,       2000
-
+propertyId, propertyColor,  propertyColorId,    Property,               Type,               Price,      Mortgage,   0 House,   1 House,    2 House,    3 House,    4 House,    Hotel
+1,          Brown,          1,                  Mediterranean Avenue,   Site,               60,         30,         2,          10,         30,         90,         160,        250
+2,          Brown,          2,                  Baltic Avenue,          Site,               60,         30,	        4,          20,         60,         180,        320,        450
+3,          Black,          1,                  Reading RR,             Transport,          200,        100,        25,         50,         100,        200,        0,          0
+4,          Light Blue,     1,                  Oriental Avenue,        Site,               100,        50,         6,	        30,	        90,     	270,	    400,        550
+5,          Light Blue,     2,                  Vermont Avenue,         Site,               100,        50,         6,	        30,	        90,     	270,	    400,        550
+6,          Light Blue,     3,                  Connecticut Avenue,     Site,               120,        60,         8,	        40,	        100,        300,	    450,        600
+7,          Magenta,        1,                  St. Charles Place,      Site,               140,        70,         10,	        50,	        150,        450,	    625,        750
+8,          White,          1,                  Electric Company,       Utility,            150,        75,         4,          10,         0,          0,          0,          0
+9,          Magenta,        2,                  States Avenue,          Site,               140,        70,         10,	        50,         150,        450,        625,        750
+10,         Magenta,        3,                  Virginia Avenue,        Site,               160,        80,         12,	        60,         180,        500,        700,        900
+11,         Black,          2,                  Pennsylvania RR,        Transport,          200,        100,        25,         50,         100,        200,        0,          0
+12,         Orange,         1,                  St. James Place,        Site,               180,        90,         14,	        70,         200,        550,        750,        950
+13,         Orange,         2,                  Tennessee Avenue,       Site,               180,        90,         14,	        70,         200,        550,        750,        950
+14,         Orange,         3,                  New York Avenue,        Site,               200,        100,        16,	        80,         220,        600,        800,        1000
+15,         Red,            1,                  Kentucky Avenue,        Site,               220,        110,        18,	        90,         250,        700,        875,        1050
+16,         Red,            2,                  Indiana Avenue,         Site,               220,        110,        18,	        90,         250,        700,        875,        1050
+17,         Red,            3,                  Illinois Avenue,        Site,               240,        120,        20,	        100,        300,        750,        925,        1100
+18,         Black,          3,                  B&O RR,                 Transport,          200,        100,        25,         50,         100,        200,        0,          0
+19,         Yellow,         1,                  Atlantic Avenue,        Site,               260,        130,        22,	        110,        330,        800,        975,        1150
+20,         Yellow,         2,                  Ventnor Avenue,         Site,               260,        130,        22,	        110,        330,        800,        975,        1150
+21,         White,          2,                  Water Works,            Utility,            150,        75,         4,          10,         0,          0,          0,          0
+22,         Yellow,         3,                  Marvin Gardens,         Site,               280,        140,        24,         120,        360,        850,        1025,       1200
+23,         Green,          1,                  Pacific Avenue,         Site,               300,        150,        26,         130,        390,        900,        1100,       1275
+24,         Green,          2,                  North Carolina Avenue,  Site,               300,        150,        26,         130,        390,        900,        1100,       1275
+25,         Green,          3,                  Pennsylvania Avenue,    Site,               320,        160,        28,         150,        450,        1000,       1200,       1400
+26,         Black,          4,                  Short Line,             Transport,          200,        100,        25,         50,         100,        200,        0,          0
+27,         Blue,           1,                  Park Place,             Site,               350,        175,        35,	        175,        500,        1100,       1300,       1500
+28,         Blue,           2,                  Boardwalk,              Site,               400,        200,        50,	        200,        600,        1400,       1700,       2000

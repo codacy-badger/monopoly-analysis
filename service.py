@@ -1,7 +1,9 @@
 import os
 
-import configuration
-import database
+# --- Module Import -----------------------------
+# import configuration
+# import database
+import actions
 
 
 def announce(text: str):
@@ -24,7 +26,7 @@ def announce(text: str):
 
 def error(instance: object):
     print("Service [ERROR] > {}".format(instance))
-    return
+    raise SystemError
 
 
 def prompt(player=None, prompt=None):
@@ -60,8 +62,8 @@ def prompt(player=None, prompt=None):
         announce(
             "Welcome to Monopoly Analysis. Please choose the game package.")
         game_package = input()
-        update_configuration('game_package', game_package)
-        check_game_package_configuration()
+        actions.update_configuration('game_package', game_package)
+        actions.check_game_package_configuration()
         return
 
     def user_prompt():
@@ -80,54 +82,4 @@ def prompt(player=None, prompt=None):
     elif prompt == 'user':
         return user_prompt()
 
-    return
-
-
-def update_configuration(key: str, value):
-    """
-    For upgrading the information in configuration.
-    WARNING: it does not update the real configuration file.
-
-    :param key:
-    :param value:
-    :return:
-    """
-    if value is not None:
-        announce("Overriding '{}' from configuration".format(key))
-        configuration.CONFIG[key] = value
-
-    return
-
-
-def check_game_package_configuration():
-    """
-    Use for checking the game package configuration.
-
-    :return:
-    """
-
-    game_package = configuration.CONFIG['game_package']
-
-    if not os.path.isdir("config/{}".format(game_package)):
-        error("Path does not exists!")
-        raise IOError
-
-    for i in configuration.CONFIG['file_to_check']:
-        if not os.path.exists("config/{}/{}".format(game_package, i)):
-            error(
-                "{} does not exists in game package folder!".format(i))
-            raise IOError
-
-    return
-
-
-def create_user(player):
-    while True:
-        username = prompt(prompt='user')
-
-        if username == "":
-            break
-
-        # Save user in database
-        database.insert('Player', player)
     return
