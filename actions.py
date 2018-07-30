@@ -4,6 +4,13 @@ import service
 import configuration
 import transaction
 
+"""
+Actions Module
+--------------
+Create, resolve issues in background.
+Also runs the game (logic) in background after player's action.
+"""
+
 
 def create_user():
     """

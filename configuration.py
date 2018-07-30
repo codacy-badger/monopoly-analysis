@@ -49,6 +49,7 @@ CONFIG = {
     'remortgage_price_mode': 'relative'
 }
 
+
 def update(key: str, value):
     """
     Use for updating the configuration dictionary
@@ -57,6 +58,9 @@ def update(key: str, value):
         key: setting topic that want to be changed
         value: new value to be changed into
     """
+    import service
+    import configuration
+
     if value is not None:
         service.announce("Overriding '{}' from configuration".format(key))
         configuration.CONFIG[key] = value

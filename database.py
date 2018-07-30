@@ -14,10 +14,12 @@ except ImportError as inst:
 
 
 """
+Database Module
+---------------
 This file is for connecting the database, update database, reset database.
-Absolutely about doing something with database.
+100% about doing any transaction with database.
 
-If doing the transaction preparation, use transaction module.
+If you want to create a transaction that created from action, use Transaction module
 """
 
 

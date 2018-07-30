@@ -6,8 +6,9 @@ import service
 
 
 """
-Transaction module will loads all the configuration files and information of the game.
-If you liked to change the service information, please change it in config/global.config file.
+Transacton Module
+-----------------
+Transaction module makes the actions into the pre SQL script.
 """
 
 
@@ -20,8 +21,18 @@ def add_user(username):
     """
     pass
 
+
 def delete_user(username):
+    """
+    Delete the user from the database, because they have bankrupt or quit the game
+
+    Parameter:
+        username: (String)
+            name of the user that will be deleted from Player table
+    """
     pass
+
+
 def reorder(username: str, new_order: int):
     """
     Reorder the user into different sequence
@@ -60,6 +71,7 @@ def transfer(player, new_player, property=list(), money=0):
         ValueError:
             Money data is not valid
             Property data is not valid
+
         TransactionException:
             Raised when transaction is not completed, resulted from errors
     """
@@ -115,8 +127,10 @@ def buy_house(player, property: str, amount: int):
     Parameter:
         player: (String)
             username of the user
+
         property: (String)
             1 property to buy a house in
+
         amount: (Integer)
             amount of home to buy
     """
@@ -157,6 +171,9 @@ def buy_hotel(player, property):
             username that wants to buy a hotel
         property: (String)
             property to buy a hotel
+
+    Exception:
+        TransactionError
     """
 
     # Check Data Validation
@@ -220,11 +237,13 @@ def get_balance(player):
     # Return the money amount
     pass
 
+
 def set_balance(player, amount):
     """
     Set the money balance to the database
     """
     pass
+
 
 def update_value(player):
     """
@@ -232,23 +251,33 @@ def update_value(player):
     """
     pass
 
+
 def get_mortgage_status(property):
     """
     Get the mortgage status, based on <property>
     """
     pass
 
+
 def mortgage(player, property):
     """
     Mortgage the property and add money to player
+
+    Raise:
+        TransactionError
     """
     pass
+
 
 def remortgage(property):
     """
     Remortgage the property
+
+    Raise:
+        TransactionError
     """
     pass
+
 
 class TransactionError(Exception):
     """Will rise when the transaction cannot be completed"""
