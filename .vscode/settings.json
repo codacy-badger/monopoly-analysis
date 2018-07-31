@@ -7,14 +7,21 @@
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-
         "*.pyc": true
     },
+    "workbench.colorTheme": "Material Night Eighties",
+    "window.closeWhenEmpty": true,
+    "explorer.sortOrder": "type",
+    "debug.inlineValues": true,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "git.autofetch": true,
+    "git.enableCommitSigning": true,
+    "python.autoComplete.addBrackets": true,
 }

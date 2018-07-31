@@ -24,6 +24,19 @@ If you want to create a transaction that created from action, use Transaction mo
 
 
 def connect():
+    """ Connect the database
+
+    Using the SQLite, the database is stored locally.
+
+    Args:
+        none
+
+    Returns:
+        none
+
+    Raises:
+        IOError :
+    """
     # Open the database
     try:
         global DATABASE
@@ -35,9 +48,18 @@ def connect():
 
 
 def initiate():
-    """
-    Generate a new brand new table (database) from the script given in `database/` folder.
+    """ Generate a new brand new table (database)
+
     Generally for starting the new game.
+
+    Args:
+        none
+
+    Returns:
+        none
+
+    Raises:
+        IOError :
     """
     # Connect the database
     database.connect()
@@ -64,8 +86,22 @@ def initiate():
 
 
 def select(column, table, row='Null', operator='=', quantity='Null'):
-    """
+    """ Create a SELECT script on database
+
     SELECT <column> FROM <table> WHERE <row> <operator> <quantity>
+
+    Args:
+        column :
+        table :
+        row :
+        operator :
+        quantity :
+
+    Returns:
+        none
+
+    Raises:
+        none
     """
     database.connect()
 
@@ -80,15 +116,23 @@ def select(column, table, row='Null', operator='=', quantity='Null'):
 
 
 def update(table_name, column, operator, quantity, pk_column, pk_column_value):
-    """
-    Do this transaction (IN SQL)
+    """ Do an UPDATE script on database
+
     UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
 
-    :param column:
-    :param table:
-    :param row:
-    :param quantity:
-    :return:
+    Args:
+        table_name :
+        column :
+        operator :
+        quantity :
+        pk_column :
+        pk_column_value :
+
+    Return:
+        none
+
+    Raise:
+        none
     """
     # Open the database
     database.connect()
@@ -103,18 +147,41 @@ def update(table_name, column, operator, quantity, pk_column, pk_column_value):
 
 
 def insert(table_name, pk_column):
+    """ Do an UPDATE script on database
+
+    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+
+    Args:
+        none
+
+    Return:
+        none
+
+    Raise:
+        none
+    """
     # Open the database
     database.connect()
 
     # Give the default value for new entries, but need to check data
 
     # DATABASE.execute("INSERT INTO {} VALUES {}", table_name, query_string)
+    pass
 
 
 def reset_database():
-    """
-    WARNING: This function is destructive.
-    Only used during the reset of the game.
+    """ Do an UPDATE script on database
+
+    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+
+    Args:
+        none
+
+    Return:
+        none
+
+    Raise:
+        none
     """
     database.connect()
     pass
