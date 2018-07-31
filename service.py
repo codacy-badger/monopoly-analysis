@@ -1,9 +1,15 @@
 import os
 
 # --- Module Import -----------------------------
-# import configuration
+import configuration
 # import database
 import actions
+
+"""
+Service Module
+--------------
+Service gives information and asks prompt from user
+"""
 
 
 def announce(text: str):
@@ -31,10 +37,14 @@ def error(instance: object):
 
 def prompt(player=None, prompt=None):
     """
+    Prompt user to do something to resolve background requests
 
-    :param player:
-    :param prompt:
-    :return:
+    Parameter:
+        player: (String)
+            Username of the player that needs to resolve request
+
+        prompt: (String)
+            Custom text that other function wants to show to user
     """
     def action_prompt(player: str):
         """
@@ -62,7 +72,7 @@ def prompt(player=None, prompt=None):
         announce(
             "Welcome to Monopoly Analysis. Please choose the game package.")
         game_package = input()
-        actions.update_configuration('game_package', game_package)
+        configuration.update('game_package', game_package)
         actions.check_game_package_configuration()
         return
 

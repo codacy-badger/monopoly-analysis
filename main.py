@@ -6,7 +6,10 @@ import configuration
 import actions
 
 """
+Main Module
+-----------
 This module will initiate other module + start the game.
+
 If you liked to start the program, type `python3 main.py`
 """
 

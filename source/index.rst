@@ -16,7 +16,9 @@ Source Code: https://github.com/sagelga/monopoly-analysis
 
    project
    code-main
-   code-loader
+   code-service
+   code-actions
+   code-transaction
    code-database
    database
    resource
