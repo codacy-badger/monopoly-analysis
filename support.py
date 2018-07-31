@@ -1,0 +1,44 @@
+import os
+
+import configuration
+import service
+
+"""
+Support Module
+--------------
+This module will check the game file configurations
+and do data integrity check
+"""
+
+
+def check_game_package_configuration():
+    """ Use for checking the game package configuration.
+
+    Raises:
+        IOError : File cannot be found in a correct folder
+    """
+
+    game_package = configuration.CONFIG['game_package']
+
+    if not os.path.isdir("config/{}".format(game_package)):
+        service.error("Path does not exists!")
+        raise IOError
+
+    for i in configuration.CONFIG['file_to_check']:
+        if not os.path.exists("config/{}/{}".format(game_package, i)):
+            service.error(
+                "{} does not exists in game package folder!".format(i))
+            raise IOError
+
+    return
+
+
+def check_module():
+    pass
+
+
+def check_library():
+    try:
+        import sqlite3
+    except Exception as inst:
+        print("Unable to load some core module")

@@ -12,6 +12,9 @@ Transaction module makes the actions into the pre SQL script.
 """
 
 
+""" --- Player / User Related Transaction --------------------------------- """
+
+
 def add_user(username):
     """
     Create a transaction that will add user to the database
@@ -47,77 +50,82 @@ def reorder(username: str, new_order: int):
     pass
 
 
-def transfer(player, new_player, property=list(), money=0):
-    """
-    Use to transfer money and/or property from player -> new player
-    Parameter:
-        player: (String)
-            Player that starts the transfer
-
-        new_player: (String)
-            Player that will get the benefit from the transfer
-
-        property: (List)
-            Lists of property that will be transfered to new_player from player
-            If left blank, property will not be transfered.
-            If given incorrect property, will raised ValueError
-
-        money: (Integer)
-            Money that will be transfered to new_player from player
-            If left blank or zero, money will not be transfered and raised ValueError
-            If left negative, money will not be transfered and raised ValueError
-
-    Exception:
-        ValueError:
-            Money data is not valid
-            Property data is not valid
-
-        TransactionException:
-            Raised when transaction is not completed, resulted from errors
-    """
-
-    def check_property(player, property):
-        """ INTERNAL FUNCTION
-        Check property ownership validation
-
-        Return:
-            1 if player owned that property, else 0
-        """
-
-        return True if (player == get_property_owner(property)) else False
-
-    def check_money(player, money):
-        """ INTERNAL FUNCTION
-        Check money validation
-
-        Return:
-            1 if enough, else 0
-        """
-        return True if (money <= get_balance(player)) else False
-
-    def transfer_money(player, new_player, amount):
-        """Do the real transfer of the money"""
-        pass
-
-    # Start coding transfer() here
-    if len(property) != 0:
-        # Check each property ownership
-        pass
-
-    if (money != 0):
-        # Check player's money balance
-        if (not check_money(player, money)):
-            raise TransactionError
-        else:
-            transfer_money(player, new_player, money)
+""" --- Property Transaction ---------------------------------------------- """
 
 
 def buy_property(player, property, price=None):
     pass
 
 
-def sell_property(player, property, price=None):
+# def sell_property(player, property, price=None):
+#     pass
+
+
+def get_property(property):
+    """ Retrieve property owner
+
+    Parameter:
+        property: (String or String List)
+            Property name that doesn't know owner
+
+        propertyId: (Integer List)
+            ID of the property. ranged from 1 to 28
+            **Internal use only**
+
+    Return:
+        player: (String)
+            player's username that owns the property.
+            If not owned, will return None
+    """
     pass
+
+
+def set_property(player, property):
+    """
+    """
+    pass
+
+
+def transfer_property(player, new_player, property):
+    """
+    """
+    pass
+
+
+""" --- Money Transaction ------------------------------------------------- """
+
+
+def get_money(player):
+    """
+    Check player's money account
+    """
+
+    # Create transaction to check player money balance
+
+    # Return the money amount
+    pass
+
+
+def set_money(player, amount):
+    """
+    Set the money balance to the database
+    """
+    pass
+
+
+def add_money(player, amount):
+    """
+    """
+    pass
+
+
+def subtract_money(player, amount):
+    """
+    """
+    pass
+
+
+""" --- House Transaction ------------------------------------------------- """
 
 
 def buy_house(player, property: str, amount: int):
@@ -159,6 +167,9 @@ def sell_house(player, property, amount):
     # If still good, make transaction to database
 
     pass
+
+
+""" --- Hotel Transaction ------------------------------------------------- """
 
 
 def buy_hotel(player, property):
@@ -208,41 +219,7 @@ def sell_hotel(player, property):
     pass
 
 
-def get_property_owner(property, **propertyId):
-    """
-    Parameter:
-        property: (String or String List)
-            Property name that doesn't know owner
-
-        propertyId: (Integer List)
-            ID of the property. ranged from 1 to 28
-            **Internal use only**
-
-    Return:
-        player: (String)
-            player's username that owns the property.
-            If not owned, will return None
-    """
-
-    pass
-
-
-def get_balance(player):
-    """
-    Check player's money account
-    """
-
-    # Create transaction to check player money balance
-
-    # Return the money amount
-    pass
-
-
-def set_balance(player, amount):
-    """
-    Set the money balance to the database
-    """
-    pass
+""" --- Player Valuation Transaction -------------------------------------- """
 
 
 def update_value(player):
@@ -252,6 +229,17 @@ def update_value(player):
     pass
 
 
+def get_value(player):
+    pass
+
+
+def set_value(player, value):
+    pass
+
+
+""" --- Mortgage Transaction ---------------------------------------------- """
+
+
 def get_mortgage_status(property):
     """
     Get the mortgage status, based on <property>
@@ -259,9 +247,14 @@ def get_mortgage_status(property):
     pass
 
 
-def mortgage(player, property):
+def set_mortgage_status(property, status):
     """
-    Mortgage the property and add money to player
+    """
+    pass
+
+
+def mortgage(player, property):
+    """ Mortgage the property and add money to player
 
     Raise:
         TransactionError
@@ -270,13 +263,80 @@ def mortgage(player, property):
 
 
 def remortgage(property):
-    """
-    Remortgage the property
+    """ Remortgage the property
 
     Raise:
         TransactionError
     """
     pass
+
+
+""" Composite Transaction ------------------------------------------------- """
+
+
+def transfer(player, new_player, property=list(), money=0):
+    """
+    Use to transfer money and/or property from player -> new player
+    Parameter:
+        player: (String)
+            Player that starts the transfer
+
+        new_player: (String)
+            Player that will get the benefit from the transfer
+
+        property: (List)
+            Lists of property that will be transfered to new_player from player
+            If left blank, property will not be transfered.
+            If given incorrect property, will raised ValueError
+
+        money: (Integer)
+            Money that will be transfered to new_player from player
+            If left blank or zero, money will not be transfered and raised ValueError
+            If left negative, money will not be transfered and raised ValueError
+
+    Exception:
+        ValueError:
+            Money data is not valid
+            Property data is not valid
+
+        TransactionException:
+            Raised when transaction is not completed, resulted from errors
+    """
+
+    def check_property(player, property):
+        """ INTERNAL FUNCTION
+        Check property ownership validation
+
+        Return:
+            1 if player owned that property, else 0
+        """
+
+        return True if (player == get_property(property)) else False
+
+    def check_money(player, money):
+        """ INTERNAL FUNCTION
+        Check money validation
+
+        Return:
+            1 if enough, else 0
+        """
+        return True if (money <= get_money(player)) else False
+
+    # Start coding transfer() here
+    if len(property) != 0:
+        # Check each property ownership
+        pass
+
+    if (money != 0):
+        # Check player's money balance
+        if (not check_money(player, money)):
+            raise TransactionError
+        else:
+            pass
+            # transfer_money(player, new_player, money)
+
+
+""" --- Self-defined Exception ------------------------------------------- """
 
 
 class TransactionError(Exception):

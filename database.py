@@ -169,7 +169,7 @@ def insert(table_name, pk_column):
     pass
 
 
-def reset_database():
+def reset():
     """ Do an UPDATE script on database
 
     UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>

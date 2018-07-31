@@ -13,8 +13,15 @@ Also runs the game (logic) in background after player's action.
 """
 
 
+"""
+Player/User Related Actions
+---------------------------
+"""
+
+
 def create_user():
     """ Use for creating new user and add it into database
+    NOTE: Will contact transaction.add_user() directly
     """
 
     # Repeatedly prompt user for username input
@@ -24,31 +31,50 @@ def create_user():
         if username == "":
             break
 
-        # Save user in database
+        # Create a transaction that adds a username to the game
         transaction.add_user(username)
     return
 
 
-def check_game_package_configuration():
-    """ Use for checking the game package configuration.
-
-    Raises:
-        IOError : File cannot be found in a correct folder
+def delete_user():
+    """ Delete user from the service
+    Just because they are bankrupt or quit the game during the gameplay.
+    NOTE: Will contact transaction.remove_user() directly
+    TODO: Need to resolve on how to deal with "quit during gameplay" user.
     """
+    pass
 
-    game_package = configuration.CONFIG['game_package']
 
-    if not os.path.isdir("config/{}".format(game_package)):
-        service.error("Path does not exists!")
-        raise IOError
+"""
+Suggestions / Decision Support Actions
+--------------------------------------
+"""
 
-    for i in configuration.CONFIG['file_to_check']:
-        if not os.path.exists("config/{}/{}".format(game_package, i)):
-            service.error(
-                "{} does not exists in game package folder!".format(i))
-            raise IOError
 
-    return
+def suggest_liquidate(player: str, amount: int):
+    """Suggests player to sell property (or mortgage) when the cash is not enough
+
+    By getting all the property from the database, and try to sell or mortgage properties.
+    All possible calculations will later be weighted by
+    - Methods of liquidation (like Mortgage or Sell)
+    - Monopoly bonus benefits
+    - Chance / Community Chest benefits
+    - Landing probability
+
+    Args:
+        player (String) : player that wants to liquidate the property
+        amount (Integer) : amount that need to be pay for rent (after making the money to 0)
+
+    Returns:
+        choice (List) : all possible ways to liquidate, and given back the weight of each ones (more weight is better deals)
+    """
+    pass
+
+
+"""
+Gameplay Actions
+----------------
+"""
 
 
 def roll_dice():
@@ -81,22 +107,3 @@ def roll_dice():
         result += individual_dice_result
 
     return result, dice_result
-
-def suggest_liquidate(player: str, amount: int):
-    """Suggests player to sell property (or mortgage) when the cash is not enough
-
-    By getting all the property from the database, and try to sell or mortgage properties.
-    All possible calculations will later be weighted by
-    - Methods of liquidation (like Mortgage or Sell)
-    - Monopoly bonus benefits
-    - Chance / Community Chest benefits
-    - Landing probability
-
-    Args:
-        player (String) : player that wants to liquidate the property
-        amount (Integer) : amount that need to be pay for rent (after making the money to 0)
-
-    Returns:
-        choice (List) : all possible ways to liquidate, and given back the weight of each ones (more weight is better deals)
-    """
-    # return result
