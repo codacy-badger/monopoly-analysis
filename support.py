@@ -34,11 +34,25 @@ def check_game_package_configuration():
 
 
 def check_module():
+    """
+    """
     pass
 
 
 def check_library():
+    """ Check library that are required in each module.
+    """
     try:
+        # --- Module Import -----------------------------
+        import service
+        import transaction
+        import database
+        import configuration
+        import actions
+        import support
+
+        # --- External Module Import
         import sqlite3
+
     except Exception as inst:
         print("Unable to load some core module")

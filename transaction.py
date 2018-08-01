@@ -16,8 +16,7 @@ Transaction module makes the actions into the pre SQL script.
 
 
 def add_user(username):
-    """
-    Create a transaction that will add user to the database
+    """ Create a transaction that will add user to the database
 
     Parameter:
         username: name of the user (username) that will be added
@@ -26,8 +25,7 @@ def add_user(username):
 
 
 def delete_user(username):
-    """
-    Delete the user from the database, because they have bankrupt or quit the game
+    """ Delete the user from the database, because they have bankrupt or quit the game
 
     Parameter:
         username: (String)
@@ -37,8 +35,7 @@ def delete_user(username):
 
 
 def reorder(username: str, new_order: int):
-    """
-    Reorder the user into different sequence
+    """ Reorder the user into different sequence
 
     Parameter:
         username: (String)
@@ -54,6 +51,17 @@ def reorder(username: str, new_order: int):
 
 
 def buy_property(player, property, price=None):
+    """ Buy a property
+    NOTE: Program will check for money. If not, it will raise TransactionError
+
+    Args:
+        player :
+        property :
+        price :
+
+    Raises:
+        TransactionError :
+    """
     pass
 
 
@@ -81,13 +89,22 @@ def get_property(property):
 
 
 def set_property(player, property):
-    """
+    """ Assign property to the player
+
+    Args:
+        player :
+        property :
     """
     pass
 
 
 def transfer_property(player, new_player, property):
-    """
+    """ Transfer property ownership
+
+    Args:
+        player :
+        new_player :
+        property :
     """
     pass
 
@@ -96,8 +113,7 @@ def transfer_property(player, new_player, property):
 
 
 def get_money(player):
-    """
-    Check player's money account
+    """ Check player's money account
     """
 
     # Create transaction to check player money balance
@@ -107,8 +123,7 @@ def get_money(player):
 
 
 def set_money(player, amount):
-    """
-    Set the money balance to the database
+    """ Set the money balance to the database
     """
     pass
 
@@ -129,8 +144,7 @@ def subtract_money(player, amount):
 
 
 def buy_house(player, property: str, amount: int):
-    """
-    Create a transaction when user want to buy a property
+    """ Create a transaction when user want to buy a property
 
     Parameter:
         player: (String)
@@ -156,6 +170,9 @@ def buy_house(player, property: str, amount: int):
 
 
 def sell_house(player, property, amount):
+    """
+    """
+
     # Data Input validation
     if (amount <= 0 or amount >= 5):
         raise ValueError("You cannot sell house that you do not own")
@@ -173,17 +190,15 @@ def sell_house(player, property, amount):
 
 
 def buy_hotel(player, property):
-    """
-    User wants to buy a hotel
+    """ Buy a hotel to the property
     Will complete when user can buy the hotel
+    NOTE: Will delete house, because following the hotel buy rule
 
-    Parameter:
-        player: (String)
-            username that wants to buy a hotel
-        property: (String)
-            property to buy a hotel
+    Args:
+        player (String) : username that wants to buy a hotel
+        property (String) : property to buy a hotel
 
-    Exception:
+    Raises:
         TransactionError
     """
 
@@ -204,6 +219,9 @@ def buy_hotel(player, property):
 
 
 def sell_hotel(player, property):
+    """ Sell the hotel to liquidify
+    NOTE: 1 hotel = 5 house (in the need of selling the hotel)
+    """
 
     # Check Data Validation
 
@@ -223,8 +241,7 @@ def sell_hotel(player, property):
 
 
 def update_value(player):
-    """
-    Update player value from the database
+    """ Update player value from the database
     """
     pass
 
@@ -241,8 +258,7 @@ def set_value(player, value):
 
 
 def get_mortgage_status(property):
-    """
-    Get the mortgage status, based on <property>
+    """ Get the mortgage status, based on <property>
     """
     pass
 
@@ -275,14 +291,12 @@ def remortgage(property):
 
 
 def transfer(player, new_player, property=list(), money=0):
-    """
-    Use to transfer money and/or property from player -> new player
-    Parameter:
-        player: (String)
-            Player that starts the transfer
+    """ Transfer money and/or property from player -> new player
 
-        new_player: (String)
-            Player that will get the benefit from the transfer
+    Args:
+        player (String) : Player that starts the transfer
+
+        new_player (String) : Player that will get the benefit from the transfer
 
         property: (List)
             Lists of property that will be transfered to new_player from player
@@ -294,7 +308,7 @@ def transfer(player, new_player, property=list(), money=0):
             If left blank or zero, money will not be transfered and raised ValueError
             If left negative, money will not be transfered and raised ValueError
 
-    Exception:
+    Raises:
         ValueError:
             Money data is not valid
             Property data is not valid

@@ -52,7 +52,7 @@ Suggestions / Decision Support Actions
 
 
 def suggest_liquidate(player: str, amount: int):
-    """Suggests player to sell property (or mortgage) when the cash is not enough
+    """ Suggests player to sell property (or mortgage) when the cash is not enough
 
     By getting all the property from the database, and try to sell or mortgage properties.
     All possible calculations will later be weighted by

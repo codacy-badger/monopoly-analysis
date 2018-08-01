@@ -13,9 +13,9 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "*.pyc": true
+        "**.pyc": true
     },
-    "workbench.colorTheme": "Material Night Eighties",
+    "workbench.colorTheme": "Atom One Dark",
     "window.closeWhenEmpty": true,
     "explorer.sortOrder": "type",
     "debug.inlineValues": true,
