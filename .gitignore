@@ -3,6 +3,7 @@
 
 # Custom ignore list
 docs/
+wiki/
 
 # From github.com/github/gitignore/blob/master/Python.gitignore
 __pycache__/
