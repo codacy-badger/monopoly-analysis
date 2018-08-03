@@ -20,6 +20,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Simple Workflow
-          command: |
-            python3 main.py
+        command: |
+            python3 -m venv venv
+            . venv/bin/activate
+      - run:
+          command: python3 main.py
