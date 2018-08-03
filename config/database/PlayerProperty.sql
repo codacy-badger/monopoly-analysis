@@ -18,12 +18,12 @@ CREATE TABLE PlayerProperty
     PRIMARY KEY (username, property),
 
     CONSTRAINT PlayerProperty_Player_name_fk
-    FOREIGN KEY (name)
-    REFERENCES Player (name)
+    FOREIGN KEY (username)
+    REFERENCES Player(username)
     ON DELETE CASCADE,
 
     CONSTRAINT PlayerProperty_Property_property_fk
     FOREIGN KEY (property)
     REFERENCES Property (property)
-    ON DELETE CASCADE,
+    ON DELETE CASCADE
 );
