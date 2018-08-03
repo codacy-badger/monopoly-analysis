@@ -115,7 +115,7 @@ Please check on the [documentation](https://sagelga.github.io/monopoly-analysis)
 
 **CircleCI**<br>
 |master|develop|
-|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)||
+|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop)|
 
 ### Boring things that you need to know
 The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the game play.
