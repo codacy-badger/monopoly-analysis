@@ -1,5 +1,6 @@
 import os
 
+import actions
 import configuration
 import database
 # --- Module Import -----------------------------
@@ -73,7 +74,9 @@ def initiate():
 
     # Create database using pre-created CREATE script
     for j in configuration.CONFIG['database_create_file']:
+        service.log(j)
         script = ""
+
         with open("config/database/{}".format(j)) as sql_script:
             for i in sql_script:
                 script += "{}\n".format(i)
@@ -161,7 +164,8 @@ def insert(table_name: str, values: list):
     INSERT INTO <table_name> VALUES (<values>);
 
     Args:
-        none
+        values:
+        table_name:
 
     Return:
         none
@@ -201,6 +205,7 @@ def reset():
     Raise:
         none
     """
+    service.log("Resetting the database")
     # Open the database
     database.connect()
 

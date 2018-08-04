@@ -95,3 +95,12 @@ def prompt(player=None, prompt=None):
         return user_prompt()
 
     return
+
+
+def log(log_text):
+    """
+
+    Args:
+        log_text:
+    """
+    print("[ Log ] > {}".format(log_text))

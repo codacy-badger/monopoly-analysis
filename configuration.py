@@ -11,7 +11,8 @@ CONFIG = {
 
     'database_path': 'config/StandardAmerican/game.sqlite',
     'database_create_path': 'config/database/',
-    'database_create_file': ['Player.sql', 'PlayerProperty.sql', 'Property.sql'],
+    'database_create_file': ['Player.sql', 'Property.sql', 'MoneyTransaction.sql', 'RollTransaction.sql',
+                             'PlayerProperty.sql'],
 
     'auto_roll': False,
     'dice_face': (1, 2, 3, 4, 5, 6),
