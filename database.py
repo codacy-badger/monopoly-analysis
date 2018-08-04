@@ -1,17 +1,15 @@
 import os
-import logging
 
-# --- Module Import -----------------------------
-import service
 import configuration
 import database
+# --- Module Import -----------------------------
+import service
 
 try:
     # SQLite is a infamous package. We need these.
     import sqlite3
 except ImportError as inst:
     service.error(inst)
-
 
 """
 Database Module
@@ -39,9 +37,10 @@ def connect():
     """
     # Open the database
     try:
-        global DATABASE
+        global DATABASE, DATABASE_CURSOR
+
         DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
-        DATABASE = DATABASE.cursor()
+        DATABASE_CURSOR = DATABASE.cursor()
     except Exception as inst:
         service.error(inst)
     return
@@ -61,6 +60,9 @@ def initiate():
     Raises:
         IOError :
     """
+    # Make sure that the old ones is deleted properly
+    database.reset()
+
     # Connect the database
     database.connect()
 
@@ -81,6 +83,7 @@ def initiate():
         DATABASE.execute(script)
 
     # make sure the database change is closed.
+    DATABASE.commit()
     DATABASE.close()
     pass
 
@@ -106,7 +109,7 @@ def select(column, table, row='Null', operator='=', quantity='Null'):
     database.connect()
 
     # Make transaction on SELECT
-    DATABASE.execute("SELECT {} FROM {} WHERE {} {} {}".format(
+    DATABASE.execute("SELECT {} FROM {} WHERE {} {} {};".format(
         column, table, row, operator, quantity))
 
     # make sure the database change is commited + closed.
@@ -115,18 +118,19 @@ def select(column, table, row='Null', operator='=', quantity='Null'):
     pass
 
 
-def update(table_name, column, operator, quantity, pk_column, pk_column_value):
+def update(table_name, column, operator, column_quantity,
+           where_column, where_column_value):
     """ Do an UPDATE script on database
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    UPDATE <table_name> SET <column> <operator> <column_quantity> WHERE <where_column> = <where_column_value>
 
     Args:
         table_name :
         column :
         operator :
-        quantity :
-        pk_column :
-        pk_column_value :
+        column_quantity :
+        where_column :
+        where_column_value :
 
     Return:
         none
@@ -138,18 +142,23 @@ def update(table_name, column, operator, quantity, pk_column, pk_column_value):
     database.connect()
 
     # Make transaction on UPDATE
-    DATABASE.execute("UPDATE {} SET {} {} {} WHERE {} = {}"
-                     .format(table_name, column, operator, quantity, pk_column, pk_column_value))
+    try:
+        DATABASE.execute("UPDATE {} SET {} {} {} WHERE {} = {};"
+                         .format(table_name, column, operator, column_quantity,
+                                 where_column, where_column_value))
 
-    # make sure the database change is commited + closed.
-    DATABASE.commit()
-    DATABASE.close()
+        # make sure the database change is committed + closed.
+        DATABASE.commit()
+        DATABASE.close()
+    except Exception as inst:
+        DATABASE.rollback()
+        service.error(inst)
 
 
-def insert(table_name, pk_column):
-    """ Do an UPDATE script on database
+def insert(table_name: str, values: list):
+    """ Do an INSERT script on database
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    INSERT INTO <table_name> VALUES (<values>);
 
     Args:
         none
@@ -165,14 +174,23 @@ def insert(table_name, pk_column):
 
     # Give the default value for new entries, but need to check data
 
-    # DATABASE.execute("INSERT INTO {} VALUES {}", table_name, query_string)
+    # Execute a SQL command
+    try:
+        DATABASE.execute("INSERT INTO {} VALUES ({})"
+                         .format(table_name, values))
+        DATABASE.commit()
+        DATABASE.close()
+    except Exception as inst:
+        DATABASE.rollback()
+        service.error(inst)
+
     pass
 
 
 def reset():
-    """ Do an UPDATE script on database
+    """ Reset the database to make it newly generated
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    NOTE: This function will be called during the game initiation.
 
     Args:
         none
@@ -183,5 +201,18 @@ def reset():
     Raise:
         none
     """
+    # Open the database
     database.connect()
+
+    try:
+        # Delete the old database file
+        os.remove(configuration.CONFIG['database_path'])
+
+        # Create the new database file
+        file = open(configuration.CONFIG['database_path'], 'w+')
+        file.close()
+
+    except Exception as inst:
+        # Rollback the change
+        service.error(inst)
     pass
