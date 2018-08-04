@@ -1,8 +1,7 @@
-import os
 import random
 
-import service
 import configuration
+import service
 import transaction
 
 """
@@ -11,6 +10,16 @@ Actions Module
 Create, resolve issues in background.
 Also runs the game (logic) in background after player's action.
 """
+
+"""
+General Actions Handler
+-----------------------
+"""
+
+
+def actions_handler(command):
+    """Will be triggered when user use '/' commands"""
+    pass
 
 
 """
@@ -28,6 +37,7 @@ def create_user():
     while True:
         username = service.prompt(prompt='user')
 
+        # If user pressed the ENTER without typing in any username, this function will finish itself.
         if username == "":
             break
 
@@ -39,6 +49,7 @@ def create_user():
 def delete_user():
     """ Delete user from the service
     Just because they are bankrupt or quit the game during the gameplay.
+
     NOTE: Will contact transaction.remove_user() directly
     TODO: Need to resolve on how to deal with "quit during gameplay" user.
     """
@@ -78,12 +89,14 @@ Gameplay Actions
 
 
 def roll_dice():
-    """ Roll 2 normal dice
+    """ Roll a dice. Any dice.
+    This function also can roll a speed dice.
 
-    Return:
+    Returns:
         result (Integer) : Result of the 2 dice
         dice_result (Integer List) : Individual result from 2 dice
     """
+
     def roll():
         """ Random a dice face and return it's result
 
