@@ -14,14 +14,12 @@ Source Code: https://github.com/sagelga/monopoly-analysis
    :maxdepth: 1
    :caption: Contents:
 
-   project
+   code-actions
+   code-database
    code-main
    code-service
-   code-actions
+   code-support
    code-transaction
-   code-database
-   database
-   resource
 
 Indices and tables
 ==================
