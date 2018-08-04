@@ -7,6 +7,7 @@ If you liked to start the program, type `python3 main.py`
 """
 
 # --- Load library ----------------------------------------
+import actions
 import database
 import service
 import startup
@@ -31,7 +32,7 @@ startup.check_library()
 database.initiate()
 
 # -- Add more players to the game until hitting ENTER -----
-# actions.create_user()
+actions.create_user()
 
 # Start the game process
 
