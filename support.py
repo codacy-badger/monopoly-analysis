@@ -11,7 +11,7 @@ and do data integrity check
 """
 
 
-def check_game_package_configuration():
+def check_game_file():
     """ Use for checking the game package configuration.
 
     Raises:
@@ -56,3 +56,17 @@ def check_library():
 
     except Exception as inst:
         print("Unable to load some core module")
+
+
+    pass
+
+def check_database_file():
+    def create_database_file():
+        pass
+    pass
+
+def check_core_file():
+    pass
+
+def check_library():
+    pass
