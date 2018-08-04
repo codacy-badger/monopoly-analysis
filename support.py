@@ -33,6 +33,7 @@ def check_game_file():
 
     return
 
+
 def check_database_file():
     """
 

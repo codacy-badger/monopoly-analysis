@@ -1,12 +1,35 @@
 # --- Module Import -----------------------------
 import configuration
-import support
 
 """
 Service Module
 --------------
 Service gives information and asks prompt from user
 """
+
+
+def error(instance: object):
+    """ Generate Error to user and then try not to break the program
+
+    Args:
+        instance:
+    """
+    print("{1}[ Error ]{2} > {0}".format(instance, '\x1b[6;30;41m', '\x1b[0m'))
+    raise instance
+
+
+def warning(instance: object):
+    print("{1}[ Warning ]{2} > {0}".format(
+        instance, '\x1b[6;30;43m', '\x1b[0m'))
+
+
+def log(log_text):
+    """
+
+    Args:
+        log_text:
+    """
+    print('\x1b[6;30;42m' + "[ Log ]" + '\x1b[0m' + " > " + log_text)
 
 
 def announce(text: str):
@@ -18,25 +41,6 @@ def announce(text: str):
     print("Service > {}".format(text))
 
     return
-
-
-def error(instance: object):
-    """ Generate Error to user and then try not to break the program
-
-    Args:
-        instance:
-    """
-    print("[ ERROR ] > {}".format(instance))
-    # raise SystemError
-
-
-def warning(instance: object):
-    """
-
-    Args:
-        instance:
-    """
-    print("[ Warning ] > {}".format(instance))
 
 
 def prompt(player=None, prompt=None):
@@ -79,16 +83,10 @@ def prompt(player=None, prompt=None):
         result = bool(input())
         return result
 
-    def package_prompt(player: str):
-        announce(
-            "Welcome to Monopoly Analysis. Please choose the game package.")
-        game_package = input()
-        configuration.update('game_package', game_package)
-        support.check_game_package_configuration()
-        return
-
     def user_prompt():
-        return
+        announce("Please type in your player name")
+        items = input()
+        return items
 
     # Edit prompt() here ----------
     if type(prompt) != type("String"):
@@ -98,18 +96,7 @@ def prompt(player=None, prompt=None):
         action_prompt(player)
     elif prompt == "confirm":
         confirm_prompt(player)
-    elif prompt == 'package':
-        return package_prompt(player)
     elif prompt == 'user':
         return user_prompt()
 
     return
-
-
-def log(log_text):
-    """
-
-    Args:
-        log_text:
-    """
-    print("[ Log ] > {}".format(log_text))

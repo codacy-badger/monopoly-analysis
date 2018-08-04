@@ -3,8 +3,9 @@ import os
 
 import configuration
 import database
-import service
 import sqlite3
+
+import service
 
 """
 Database Module
@@ -75,10 +76,13 @@ def initiate():
 def create(database_list: list):
     """ Create a database to the game.sql
 
+    Args:
+        database_list:
     """
     # Create database using pre-created CREATE script
     for j in database_list:
-        service.log(j)
+
+        service.log("Loading database file : {}".format(j))
         script = ""
 
         with open("config/database/{}".format(j)) as sql_script:
@@ -94,6 +98,13 @@ def create(database_list: list):
     # make sure the database change is closed.
     DATABASE.commit()
     DATABASE.close()
+
+
+def describe():
+    """
+
+    """
+    pass
 
 
 def select(column, table, row='Null', operator='=', quantity='Null'):

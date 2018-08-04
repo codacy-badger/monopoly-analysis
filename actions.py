@@ -18,7 +18,39 @@ General Actions Handler
 
 
 def actions_handler(command):
-    """Will be triggered when user use '/' commands"""
+    """Will be triggered when user use '/' commands
+
+    Args:
+        command:
+    """
+
+    def buy():
+        """
+
+        """
+        pass
+
+    def sell():
+        """
+
+        """
+        pass
+
+    def upgrade():
+        """
+
+        """
+        pass
+
+    def skip():
+        """ Finish the player's turn
+        """
+        pass
+
+    def resolve():
+        """ Automatically resolve the situations, based on the current situation
+        """
+
     pass
 
 
@@ -33,16 +65,21 @@ def create_user():
     NOTE: Will contact transaction.add_user() directly
     """
 
+    sequence = 0
     # Repeatedly prompt user for username input
     while True:
-        username = service.prompt(prompt='user')
+        text_input = service.prompt(prompt='user')
+
+        if text_input.startswith('/'):
+            actions_handler(text_input)
 
         # If user pressed the ENTER without typing in any username, this function will finish itself.
-        if username == "":
+        if text_input != "":
+            # Create a transaction that adds a username to the game
+            sequence += 1
+            transaction.add_user(text_input, sequence)
+        else:
             break
-
-        # Create a transaction that adds a username to the game
-        transaction.add_user(username)
     return
 
 
@@ -120,4 +157,3 @@ def roll_dice():
         result += individual_dice_result
 
     return result, dice_result
-
