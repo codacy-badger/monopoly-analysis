@@ -12,7 +12,6 @@ import service
 import startup
 import support
 
-support.check_library()
 support.check_core_file()
 support.check_database_file()
 support.check_game_file()

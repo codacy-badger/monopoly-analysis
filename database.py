@@ -1,16 +1,10 @@
+# --- Module Import -----------------------------
 import os
 
-import actions
 import configuration
 import database
-# --- Module Import -----------------------------
 import service
-
-try:
-    # SQLite is a infamous package. We need these.
-    import sqlite3
-except ImportError as inst:
-    service.error(inst)
+import sqlite3
 
 """
 Database Module
@@ -38,9 +32,10 @@ def connect():
     """
     # Open the database
     try:
-        global DATABASE, DATABASE_CURSOR
-
+        global DATABASE
         DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
+
+        global DATABASE_CURSOR
         DATABASE_CURSOR = DATABASE.cursor()
     except Exception as inst:
         service.error(inst)
@@ -61,26 +56,37 @@ def initiate():
     Raises:
         IOError :
     """
-    # Make sure that the old ones is deleted properly
+
+    def check_database_file():
+        """
+
+        """
+        # Check for old database file
+        if not os.path.exists(configuration.CONFIG['database_path']):
+            service.error("There is no game.sqlite in {}".format(
+                configuration.CONFIG['database_path']))
+
     database.reset()
-
-    # Connect the database
     database.connect()
+    check_database_file()
+    database.create(configuration.CONFIG['database_create_file'])
 
-    # Check for old database file
-    if not os.path.exists(configuration.CONFIG['database_path']):
-        service.error("There is no game.sqlite in {}".format(
-            configuration.CONFIG['database_path']))
 
+def create(database_list: list):
+    """ Create a database to the game.sql
+
+    """
     # Create database using pre-created CREATE script
-    for j in configuration.CONFIG['database_create_file']:
+    for j in database_list:
         service.log(j)
         script = ""
 
         with open("config/database/{}".format(j)) as sql_script:
             for i in sql_script:
-                script += "{}\n".format(i)
-            # logging.debug(script)
+
+                if i.find("--") != -1:
+                    script += "{}\n".format(i)
+
             sql_script.close()  # Close file
 
         DATABASE.execute(script)
@@ -88,7 +94,6 @@ def initiate():
     # make sure the database change is closed.
     DATABASE.commit()
     DATABASE.close()
-    pass
 
 
 def select(column, table, row='Null', operator='=', quantity='Null'):
@@ -115,7 +120,7 @@ def select(column, table, row='Null', operator='=', quantity='Null'):
     DATABASE.execute("SELECT {} FROM {} WHERE {} {} {};".format(
         column, table, row, operator, quantity))
 
-    # make sure the database change is commited + closed.
+    # make sure the database change is committed + closed.
     DATABASE.commit()
     DATABASE.close()
     pass

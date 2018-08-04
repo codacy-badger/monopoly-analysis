@@ -27,30 +27,11 @@ def check_game_file():
     for i in configuration.CONFIG['file_to_check']:
         if not os.path.exists("config/{}/{}".format(game_package, i)):
             service.error(
-                "{} does not exists in game package folder!".format(i))
-            raise IOError
+                "{} does not exists in game package folder. Creating new one.".format(i))
+            file = open("config/{}/{}".format(game_package, i), 'w+')
+            file.close()
 
     return
-
-
-def check_library():
-    """ Check library that are required in each module.
-    """
-    try:
-        # --- Module Import -----------------------------
-        import service
-        import transaction
-        import database
-        import configuration
-        import actions
-        import support
-
-        # --- External Module Import
-        import sqlite3
-
-    except Exception as inst:
-        print("Unable to load some core module")
-
 
 def check_database_file():
     """

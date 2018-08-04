@@ -1,8 +1,5 @@
-import os
-
 # --- Module Import -----------------------------
 import configuration
-import actions
 import support
 
 """
@@ -18,12 +15,6 @@ def announce(text: str):
     Parameter:
         text: (String) the text that will be shown.
     """
-    try:
-        if isinstance(text, str):
-            str(text)
-    except Exception as inst:
-        error(inst)
-
     print("Service > {}".format(text))
 
     return
@@ -31,9 +22,21 @@ def announce(text: str):
 
 def error(instance: object):
     """ Generate Error to user and then try not to break the program
+
+    Args:
+        instance:
     """
-    print("Service [ERROR] > {}".format(instance))
+    print("[ ERROR ] > {}".format(instance))
     # raise SystemError
+
+
+def warning(instance: object):
+    """
+
+    Args:
+        instance:
+    """
+    print("[ Warning ] > {}".format(instance))
 
 
 def prompt(player=None, prompt=None):
@@ -45,12 +48,18 @@ def prompt(player=None, prompt=None):
 
         prompt: (String)
             Custom text that other function wants to show to user
+
+    Args:
+        player:
+        prompt:
     """
+
     def action_prompt(player: str):
         """ Send a prompt that requires user prompt
 
         Args:
-            player : Tag on which player
+            player:
+            prompt:
         """
         print("{} > Please choose action(s)".format(player))
         print("{}\t{}\t{}]\t{}".format(
