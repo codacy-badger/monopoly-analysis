@@ -1,17 +1,10 @@
-import os
-import logging
-
 # --- Module Import -----------------------------
-import service
+import os
+
 import configuration
 import database
-
-try:
-    # SQLite is a infamous package. We need these.
-    import sqlite3
-except ImportError as inst:
-    service.error(inst)
-
+import service
+import sqlite3
 
 """
 Database Module
@@ -41,7 +34,9 @@ def connect():
     try:
         global DATABASE
         DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
-        DATABASE = DATABASE.cursor()
+
+        global DATABASE_CURSOR
+        DATABASE_CURSOR = DATABASE.cursor()
     except Exception as inst:
         service.error(inst)
     return
@@ -61,28 +56,44 @@ def initiate():
     Raises:
         IOError :
     """
-    # Connect the database
+
+    def check_database_file():
+        """
+
+        """
+        # Check for old database file
+        if not os.path.exists(configuration.CONFIG['database_path']):
+            service.error("There is no game.sqlite in {}".format(
+                configuration.CONFIG['database_path']))
+
+    database.reset()
     database.connect()
+    check_database_file()
+    database.create(configuration.CONFIG['database_create_file'])
 
-    # Check for old database file
-    if not os.path.exists(configuration.CONFIG['database_path']):
-        service.error("There is no game.sqlite in {}".format(
-            configuration.CONFIG['database_path']))
 
+def create(database_list: list):
+    """ Create a database to the game.sql
+
+    """
     # Create database using pre-created CREATE script
-    for j in configuration.CONFIG['database_create_file']:
+    for j in database_list:
+        service.log(j)
         script = ""
+
         with open("config/database/{}".format(j)) as sql_script:
             for i in sql_script:
-                script += "{}\n".format(i)
-            # logging.debug(script)
+
+                if i.find("--") != -1:
+                    script += "{}\n".format(i)
+
             sql_script.close()  # Close file
 
         DATABASE.execute(script)
 
     # make sure the database change is closed.
+    DATABASE.commit()
     DATABASE.close()
-    pass
 
 
 def select(column, table, row='Null', operator='=', quantity='Null'):
@@ -106,27 +117,28 @@ def select(column, table, row='Null', operator='=', quantity='Null'):
     database.connect()
 
     # Make transaction on SELECT
-    DATABASE.execute("SELECT {} FROM {} WHERE {} {} {}".format(
+    DATABASE.execute("SELECT {} FROM {} WHERE {} {} {};".format(
         column, table, row, operator, quantity))
 
-    # make sure the database change is commited + closed.
+    # make sure the database change is committed + closed.
     DATABASE.commit()
     DATABASE.close()
     pass
 
 
-def update(table_name, column, operator, quantity, pk_column, pk_column_value):
+def update(table_name, column, operator, column_quantity,
+           where_column, where_column_value):
     """ Do an UPDATE script on database
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    UPDATE <table_name> SET <column> <operator> <column_quantity> WHERE <where_column> = <where_column_value>
 
     Args:
         table_name :
         column :
         operator :
-        quantity :
-        pk_column :
-        pk_column_value :
+        column_quantity :
+        where_column :
+        where_column_value :
 
     Return:
         none
@@ -138,21 +150,27 @@ def update(table_name, column, operator, quantity, pk_column, pk_column_value):
     database.connect()
 
     # Make transaction on UPDATE
-    DATABASE.execute("UPDATE {} SET {} {} {} WHERE {} = {}"
-                     .format(table_name, column, operator, quantity, pk_column, pk_column_value))
+    try:
+        DATABASE.execute("UPDATE {} SET {} {} {} WHERE {} = {};"
+                         .format(table_name, column, operator, column_quantity,
+                                 where_column, where_column_value))
 
-    # make sure the database change is commited + closed.
-    DATABASE.commit()
-    DATABASE.close()
+        # make sure the database change is committed + closed.
+        DATABASE.commit()
+        DATABASE.close()
+    except Exception as inst:
+        DATABASE.rollback()
+        service.error(inst)
 
 
-def insert(table_name, pk_column):
-    """ Do an UPDATE script on database
+def insert(table_name: str, values: list):
+    """ Do an INSERT script on database
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    INSERT INTO <table_name> VALUES (<values>);
 
     Args:
-        none
+        values:
+        table_name:
 
     Return:
         none
@@ -165,14 +183,23 @@ def insert(table_name, pk_column):
 
     # Give the default value for new entries, but need to check data
 
-    # DATABASE.execute("INSERT INTO {} VALUES {}", table_name, query_string)
+    # Execute a SQL command
+    try:
+        DATABASE.execute("INSERT INTO {} VALUES ({})"
+                         .format(table_name, values))
+        DATABASE.commit()
+        DATABASE.close()
+    except Exception as inst:
+        DATABASE.rollback()
+        service.error(inst)
+
     pass
 
 
-def reset_database():
-    """ Do an UPDATE script on database
+def reset():
+    """ Reset the database to make it newly generated
 
-    UPDATE <table_name> SET <column> <operator> <quantity> WHERE <pk_column> = <pk_column_value>
+    NOTE: This function will be called during the game initiation.
 
     Args:
         none
@@ -183,5 +210,19 @@ def reset_database():
     Raise:
         none
     """
+    service.log("Resetting the database")
+    # Open the database
     database.connect()
+
+    try:
+        # Delete the old database file
+        os.remove(configuration.CONFIG['database_path'])
+
+        # Create the new database file
+        file = open(configuration.CONFIG['database_path'], 'w+')
+        file.close()
+
+    except Exception as inst:
+        # Rollback the change
+        service.error(inst)
     pass

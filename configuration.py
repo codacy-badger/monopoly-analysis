@@ -2,10 +2,7 @@
 This module store set of game rules.
 For advanced player, you can edit this file to suit your game experience
 
-Parameters:
-    speed_dice (Default: False) -> Have speed dice in your game
-    free_parking_skip_turn (Default: True) -> Skip player's 1 turn from moving
-    money_unit (Default: M) -> The currency that will be used.
+To see how to edit this file, please checkout our wiki here : https://github.com/sagelga/monopoly-analysis/wiki/Configurations
 """
 
 CONFIG = {
@@ -14,7 +11,8 @@ CONFIG = {
 
     'database_path': 'config/StandardAmerican/game.sqlite',
     'database_create_path': 'config/database/',
-    'database_create_file': ['Player.sql', 'PlayerProperty.sql', 'Property.sql'],
+    'database_create_file': ['Player.sql', 'Property.sql', 'MoneyTransaction.sql', 'RollTransaction.sql',
+                             'PlayerProperty.sql'],
 
     'auto_roll': False,
     'dice_face': (1, 2, 3, 4, 5, 6),
@@ -25,6 +23,7 @@ CONFIG = {
 
     'free_parking_skip_turn': True,
     'money_unit': '$',
+    'money_unit_location': 'left',
     'money_denomination': 1,
 
     'starter_money': 200,

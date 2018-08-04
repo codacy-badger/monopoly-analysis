@@ -1,10 +1,3 @@
-# --- Module Import -----------------------------
-import service
-import transaction
-import database
-import configuration
-import actions
-
 """
 Main Module
 -----------
@@ -13,22 +6,32 @@ This module will initiate other module + start the game.
 If you liked to start the program, type `python3 main.py`
 """
 
+# --- Load library ----------------------------------------
+import database
+import service
+import startup
+import support
+
+support.check_core_file()
+support.check_database_file()
+support.check_game_file()
+
+# --- Starting the program initiation ---------------------
 service.announce("Initiating the service")
-service.prompt(prompt='package')
+
+# --- Check game file integrity ---------------------------
+startup.check_core_file()
+startup.check_database_file()
+startup.check_game_file()
+
+# --- Checking the library integrity ----------------------
+startup.check_library()
 
 # -- Generate the database from the script ----------------
 database.initiate()
 
-service.announce("Game package is loaded.")
-service.announce("Now I need player")
-
 # -- Add more players to the game until hitting ENTER -----
-while True:
-    try:
-        actions.create_user()
-    except:
-        break
-service.announce("Thanks!")
+# actions.create_user()
 
 # Start the game process
 

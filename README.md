@@ -23,6 +23,20 @@ Users that use this program will able to:
 
 and of course, understand what is going to happen next, just like you do. Win.
 
+## ![](img/icons8-features-list-24.png) Features
+Play Monopoly in your way
+- Edit the game rule to fit your game experiences
+- Make your game more random with Speed Dice support
+
+Create a suggestions on current game status
+- Show property valuations
+- Show rent on a property valuations
+- Probability of getting a bankrupt
+
+Create a report on the game status and after-game
+
+and many more!
+
 ## ![](img/icons8-downloading-updates-24.png) Installation
 Download this repository by cloning or click [here to download the .zip file](https://github.com/sagelga/monopoly-analysis/archive/master.zip).
 
@@ -92,8 +106,19 @@ We welcome all of the developers into the development of this program. Please co
 ### Configuration structure
 Please check on the [documentation](https://sagelga.github.io/monopoly-analysis) page for more information.
 
+### Project Checker
+**Fossa**<br>
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsagelga%2Fmonopoly-analysis.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsagelga%2Fmonopoly-analysis?ref=badge_large)
+
+**Codacy**<br>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd8039eda0c844f6ac181689383a5dcf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sagelga/monopoly-analysis&amp;utm_campaign=Badge_Grade)
+
+**CircleCI**<br>
+|master|develop|
+|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop)|
+
 ### Boring things that you need to know
-The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the gameplay.
+The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the game play.
 
 This project can be used in non-commercial or/and non-profit purpose and requires the users to respect all the developers, copyright owner(s) and trademark owner(s). We are not response of trademark infringement or any legal actions against us.<br>
 Make sure that you are **forking this repository** for further inspections.
