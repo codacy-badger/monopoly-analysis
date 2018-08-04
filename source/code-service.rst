@@ -1,5 +1,5 @@
-Loader Package Code Documentation
-=================================
+Service Package Code Documentation
+==================================
 
 .. automodule:: service
    :members:
