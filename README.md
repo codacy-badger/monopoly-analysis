@@ -38,6 +38,8 @@ Create a report on the game status and after-game
 and many more!
 
 ## ![](img/icons8-downloading-updates-24.png) Installation
+> To download and/or use this project, you have agreed and acknowledge of our [Terms of Use](https://github.com/sagelga/monopoly-analysis#boring-things-that-you-need-to-know).
+
 Download this repository by cloning or click [here to download the .zip file](https://github.com/sagelga/monopoly-analysis/archive/master.zip).
 
 > This program requires Python programming language and SQLite. Please download prior the launch of the program.
@@ -123,18 +125,18 @@ develop<br>
 ### Boring things that you need to know
 The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the game play.
 
-This project can be used in non-commercial or/and non-profit purpose and requires the users to respect all the developers, copyright owner(s) and trademark owner(s). We are not response of trademark infringement or any legal actions against us.<br>
-Make sure that you are **forking this repository** for further inspections.
+You hereby agreed to know and understand that we (developers) and the project (sagelga/monopoly-analysis) does not affiliate Hasbro and/or Monopoly board game product line. And you hereby to release Hasbro, as well as any employees or agents, from any and all liability, corporate, or personal loss caused to you or others by the use of this project.
+
+This project can be used in personal non-commercial purpose and requires the users (you) to respect all the developers, copyright owner(s) and trademark owner(s). We are not response of liability, personal loss and any affliations created by this project.<br>
+If you liked to use our project in yours, make sure that you are **forking this repository and also crediting us and Hasbro** and also make sure that your legal terms are based on us.
 
 If you liked to use this repository in a commercial or for-profit benefits, please contact me and respective game trademark owner.
 
-If you liked to suggests on legal terms we have in this repository, please **directly** contact me via email, provided in my profile page.
-
 [Monopoly](https://www.hasbro.com/en-us/brands/monopoly) is a trademark from Hasbro or its subsidiaries, licensors, licensees, suppliers and accounts.<br>
 
-Icons inside this project's README file is from [icons8.com](icons8.com).
+Icons inside this project's README file is from [icons8.com](icons8.com) and [ForTheBadge](https://forthebadge.com).
 
-Information about Monopoly game rule is from official Monopoly website and Wikipedia.
+> We are currenly open for your help on legal terms. Please **directly** contact me via email, provided in my profile page.
 
 ---
 
