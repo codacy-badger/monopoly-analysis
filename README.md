@@ -134,9 +134,9 @@ If you liked to use this repository in a commercial or for-profit benefits, plea
 
 [Monopoly](https://www.hasbro.com/en-us/brands/monopoly) is a trademark from Hasbro or its subsidiaries, licensors, licensees, suppliers and accounts.<br>
 
-Icons inside this project's README file is from [icons8.com](icons8.com) and [ForTheBadge](https://forthebadge.com).
+Icons inside this project's README file is from [icons8.com](https://icons8.com) and [ForTheBadge](https://forthebadge.com).
 
-> We are currenly open for your help on legal terms. Please **directly** contact me via email, provided in my profile page.
+> We are currently open for your help on legal terms. Please **directly** contact me via email, provided in my profile page.
 
 ---
 
