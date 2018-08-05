@@ -1,10 +1,9 @@
 # --- Module Import -----------------------------
 import os
+import sqlite3
 
 import configuration
 import database
-import sqlite3
-
 import service
 
 """
@@ -88,15 +87,15 @@ def create(database_list: list):
         with open("config/database/{}".format(j)) as sql_script:
             for i in sql_script:
 
-                if i.find("--") != -1:
+                if i.find("--") == -1:
                     script += "{}\n".format(i)
 
             sql_script.close()  # Close file
 
         DATABASE.execute(script)
+        DATABASE.commit()
 
     # make sure the database change is closed.
-    DATABASE.commit()
     DATABASE.close()
 
 
@@ -192,14 +191,18 @@ def insert(table_name: str, values: list):
     # Open the database
     database.connect()
 
-    # Give the default value for new entries, but need to check data
+    # Change the values of list into a string
+    values = str(values).lstrip('[').rstrip(']')
 
     # Execute a SQL command
     try:
-        DATABASE.execute("INSERT INTO {} VALUES ({})"
-                         .format(table_name, values))
+        sql_script = "INSERT INTO {} VALUES ({})".format(table_name, values)
+
+        DATABASE.execute(sql_script)
         DATABASE.commit()
         DATABASE.close()
+
+        service.log("Execute SQL : {}".format(sql_script))
     except Exception as inst:
         DATABASE.rollback()
         service.error(inst)

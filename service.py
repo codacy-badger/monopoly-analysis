@@ -38,7 +38,7 @@ def announce(text: str):
     Parameter:
         text: (String) the text that will be shown.
     """
-    print("Service > {}".format(text))
+    print("\nService > {}".format(text))
 
     return
 
@@ -84,7 +84,7 @@ def prompt(player=None, prompt=None):
         return result
 
     def user_prompt():
-        announce("Please type in your player name")
+        announce("Please type in your player name. Press ENTER to stop")
         items = input()
         return items
 

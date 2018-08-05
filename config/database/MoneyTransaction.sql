@@ -1,6 +1,7 @@
-CREATE TABLE RollTransaction (
-  rollId    INTEGER AUTO_INCREMENT,
-  player    TEXT NOT NULL,
-  rollCount REAL NOT NULL,
-  turnCount REAL NOT NULL
-)
+CREATE TABLE MoneyTransaction (
+  moneyTransactionId REAL PRIMARY KEY,
+  playerWithdraw     TEXT,
+  playerDeposit      TEXT,
+  amount             REAL,
+  rollCountId        REAL
+);
