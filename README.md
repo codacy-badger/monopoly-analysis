@@ -114,8 +114,11 @@ Please check on the [documentation](https://sagelga.github.io/monopoly-analysis)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd8039eda0c844f6ac181689383a5dcf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sagelga/monopoly-analysis&amp;utm_campaign=Badge_Grade)
 
 **CircleCI**<br>
-|master|develop|
-|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop)|
+master<br>
+[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg&circle-token=ce1cb3eb8a0730306315123563fc70bc5f635969)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)
+
+develop<br>
+[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop.svg?style=svg&circle-token=ce1cb3eb8a0730306315123563fc70bc5f635969)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop)
 
 ### Boring things that you need to know
 The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the game play.
