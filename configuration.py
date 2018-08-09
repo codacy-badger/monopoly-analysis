@@ -45,23 +45,34 @@ CONFIG = {
     'house_sell_mode': 'relative',
 
     'remortgage_price': 0.6,
-    'remortgage_price_mode': 'relative'
+    'remortgage_price_mode': 'relative',
+
+    'liquidate_weight': {'mortgage': 1, 'sell': 0.5, 'sell_when_monopoly': 0.1, 'dice_probability': 0.5}
 }
 
 
-def update(key: str, value):
-    """
-    Use for updating the configuration dictionary
+def add(key: str, value: object):
+    """ Add a temporary configuration into dictionary
 
-    Parameter:
+    Args:
+        key:
+        value:
+    """
+    if key is not None and value is not None:
+        CONFIG[key] = value
+
+
+def update(key: str, value):
+    """ Use for updating the configuration dictionary
+
+    Args:
         key: setting topic that want to be changed
         value: new value to be changed into
     """
     import service
-    import configuration
 
-    if value is not None:
-        service.announce("Overriding '{}' from configuration".format(key))
-        configuration.CONFIG[key] = value
+    if key is not None and value is not None:
+        service.log("Overriding '{}' from configuration".format(key))
+        CONFIG[key] = value
 
     return

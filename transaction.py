@@ -44,6 +44,10 @@ def reorder(username: str, new_order: int):
     pass
 
 
+def check_user(player):
+    return database.exists('Player', 'username', player)
+
+
 """ --- Property Transaction ---------------------------------------------- """
 
 
@@ -172,11 +176,14 @@ def buy_hotel(player, property):
     """ Buy a hotel to the property
     Will complete when user can buy the hotel
     NOTE: Will delete house, because following the hotel buy rule
+
     Args:
         player (String) : username that wants to buy a hotel
         property (String) : property to buy a hotel
+
     Raises:
         TransactionError
+
     """
 
     # Check Data Validation
@@ -198,6 +205,11 @@ def buy_hotel(player, property):
 def sell_hotel(player, property):
     """ Sell the hotel to liquidify
     NOTE: 1 hotel = 5 house (in the need of selling the hotel)
+
+    Args:
+        player:
+        property:
+
     """
 
     # Check Data Validation
@@ -219,6 +231,7 @@ def sell_hotel(player, property):
 
 def update_value(player):
     """ Update player value from the database
+
     Args:
         player:
     """
@@ -226,7 +239,8 @@ def update_value(player):
 
 
 def get_value(player):
-    """
+    """ Get the player's value
+
     Args:
         player:
     """
@@ -234,7 +248,8 @@ def get_value(player):
 
 
 def set_value(player, value):
-    """
+    """ Set the value of the player with the value
+
     Args:
         player:
         value:
@@ -246,7 +261,8 @@ def set_value(player, value):
 
 
 def get_mortgage_status(property):
-    """ Get the mortgage status, based on <property>
+    """ Get the mortgage status, based on <property> listings
+
     Args:
         property:
     """
@@ -254,10 +270,11 @@ def get_mortgage_status(property):
 
 
 def set_mortgage_status(property, status):
-    """
+    """ Set the mortgage status to the property
+
     Args:
-        property:
-        status:
+        property: property to be set status with
+        status: status that property will have
     """
     pass
 

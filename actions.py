@@ -17,11 +17,8 @@ General Actions Handler
 """
 
 
-def actions_handler(command):
-    """Will be triggered when user use '/' commands
-
-    Args:
-        command:
+def actions_handler(text):
+    """ Will be triggered when user type in '/' commands
     """
 
     def buy():
@@ -51,7 +48,19 @@ def actions_handler(command):
         """ Automatically resolve the situations, based on the current situation
         """
 
-    pass
+    text = text.split(" ")
+    command = text[0]
+
+    if command == "/buy":
+        buy()
+    elif command == "/sell":
+        sell()
+    elif command == "/upgrade":
+        upgrade()
+    elif command == "/skip":
+        skip()
+    else:
+        resolve()
 
 
 """
@@ -70,27 +79,49 @@ def create_user():
     while True:
         text_input = service.prompt(prompt='user')
 
+        if text_input == "":
+            break
+
         if text_input.startswith('/'):
             actions_handler(text_input)
 
         # If user pressed the ENTER without typing in any username, this function will finish itself.
-        if text_input != "":
-            # Create a transaction that adds a username to the game
-            sequence += 1
-            transaction.add_user(text_input, sequence)
+        if text_input.isalnum():
+            if not user_existed(text_input):
+                # Create a transaction that adds a username to the game
+                sequence += 1
+                transaction.add_user(text_input, sequence)
+            else:
+                service.warning(text_input + " is already exists")
         else:
-            break
+            service.warning(text_input + " contains non-character")
     return
 
 
-def delete_user():
+def delete_user(username):
     """ Delete user from the service
     Just because they are bankrupt or quit the game during the gameplay.
 
     NOTE: Will contact transaction.remove_user() directly
     TODO: Need to resolve on how to deal with "quit during gameplay" user.
+
+    Args:
+        username:
     """
     pass
+
+
+def user_existed(username):
+    """ Check if user is existed by throwing instance to transaction.check_user()
+
+    Args:
+        username (String) : name of the user that wants to check existence
+
+    Returns:
+        transaction.check_user(username) result
+
+    """
+    return transaction.check_user(username)
 
 
 """
@@ -100,21 +131,24 @@ Suggestions / Decision Support Actions
 
 
 def suggest_liquidate(player: str, amount: int):
-    """ Suggests player to sell property (or mortgage) when the cash is not enough
+    """ Suggests player to sell property (or mortgage)
+    This function can be triggered when player can't pay a rent or wants to liquidize the assets.
 
     By getting all the property from the database, and try to sell or mortgage properties.
     All possible calculations will later be weighted by
-    - Methods of liquidation (like Mortgage or Sell)
-    - Monopoly bonus benefits
-    - Chance / Community Chest benefits
-    - Landing probability
+
+    - Methods of liquidation (like Mortgage or Sell)<br>
+    - Monopoly bonus benefits<br>
+    - Chance / Community Chest benefits<br>
+    - Landing probability<br>
 
     Args:
         player (String) : player that wants to liquidate the property
         amount (Integer) : amount that need to be pay for rent (after making the money to 0)
 
     Returns:
-        choice (List) : all possible ways to liquidate, and given back the weight of each ones (more weight is better deals)
+        choice (List) : all possible ways to liquidate,
+                        and given back the weight of each ones (more weight = better choice)
     """
     pass
 

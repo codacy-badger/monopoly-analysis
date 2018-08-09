@@ -1,5 +1,5 @@
 # --- Module Import -----------------------------
-import configuration
+import service
 
 """
 Service Module
@@ -58,23 +58,28 @@ def prompt(player=None, prompt=None):
         prompt:
     """
 
-    def action_prompt(player: str):
-        """ Send a prompt that requires user prompt
+    def action(player: str):
+        """ Send a prompt that requires user
 
         Args:
             player:
-            prompt:
         """
         print("{} > Please choose action(s)".format(player))
-        print("{}\t{}\t{}]\t{}".format(
-            '[buy] Buy Property at full',
-            '[auction] Auction Property',
-            '[trade] Trade money or Property',
-            '[done] Finished your turn'))
+        print("{}\t{}\t{}".format(
+            '[ /roll ] Roll a dice',
+            '[ /upgrade ] Buy house/hotel on a property',
+            '[ /auto ] Automatically make a decision'))
 
-        return
+    def resolve(player: str):
+        print("{} > Please choose action(s)".format(player))
+        print("{}\t{}\t{}]\t{}\t{}".format(
+            '[ /buy ] Buy Property at full price',
+            '[ /auction ] Auction this property',
+            '[ /trade ] Trade money or Property',
+            '[ /done ] Finished your turn',
+            '[ /auto ] Automatically make a decision'))
 
-    def confirm_prompt(player: str):
+    def confirm(player: str):
         """
         :param player:
         :return:
@@ -83,20 +88,23 @@ def prompt(player=None, prompt=None):
         result = bool(input())
         return result
 
-    def user_prompt():
+    def user():
         announce("Please type in your player name. Press ENTER to stop")
         items = input()
         return items
 
     # Edit prompt() here ----------
-    if type(prompt) != type("String"):
+    if not isinstance(type(prompt), str):
+        service.error("Action is not string format")
         raise ValueError
 
     if prompt == 'action':
-        action_prompt(player)
+        action(player)
+    elif prompt == 'resolve':
+        resolve(player)
     elif prompt == "confirm":
-        confirm_prompt(player)
+        confirm(player)
     elif prompt == 'user':
-        return user_prompt()
+        return user()
 
     return
