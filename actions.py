@@ -19,21 +19,24 @@ General Actions Handler
 
 def actions_handler(text):
     """ Will be triggered when user type in '/' commands
+
+    Args:
+        text:
     """
 
-    def buy():
+    def buy(text):
         """
 
         """
         pass
 
-    def sell():
+    def sell(text):
         """
 
         """
         pass
 
-    def upgrade():
+    def upgrade(text):
         """
 
         """
@@ -47,20 +50,26 @@ def actions_handler(text):
     def resolve():
         """ Automatically resolve the situations, based on the current situation
         """
+        pass
+
+    def invalid(text):
+        service.warning("Command not found. Type /help for lists of command.")
 
     text = text.split(" ")
     command = text[0]
 
     if command == "/buy":
-        buy()
+        buy(text)
     elif command == "/sell":
-        sell()
+        sell(text)
     elif command == "/upgrade":
-        upgrade()
+        upgrade(text)
     elif command == "/skip":
         skip()
-    else:
+    elif command == "/resolve":
         resolve()
+    else:
+        invalid(text)
 
 
 """
@@ -77,7 +86,7 @@ def create_user():
     sequence = 0
     # Repeatedly prompt user for username input
     while True:
-        text_input = service.prompt(prompt='user')
+        text_input = service.prompt(prompt="user")
 
         if text_input == "":
             break

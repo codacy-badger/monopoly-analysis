@@ -29,7 +29,6 @@ def connect():
         DATABASE_CURSOR = DATABASE.cursor()
     except Exception as inst:
         service.error(inst)
-    return
 
 
 def initiate():
@@ -49,27 +48,29 @@ def initiate():
     create(configuration.CONFIG['database_create_file'])
 
 
-def create(database_list: list):
+def create(database_file_list: list):
     """ Create a database to the game.sql
 
     Args:
-        database_list:
+        database_file_list:
     """
     # Create database using pre-created CREATE script
-    for j in database_list:
+    for j in database_file_list:
 
         service.log("Loading database file : {}".format(j))
         script = ""
 
-        with open("config/database/{}".format(j)) as sql_script:
-            for i in sql_script:
+        try:
+            with open("config/database/{}".format(j)) as sql_script:
+                for i in sql_script:
 
-                if i.find("--") == -1:
-                    script += "{}\n".format(i)
-
+                    if i.find("--") == -1:
+                        script += "{}\n".format(i)
             sql_script.close()  # Close file
+        except BaseException as inst:
+            service.error(inst)
 
-        service.log(script)
+        # service.log(script)
 
         try:
             DATABASE.execute(script)
@@ -89,14 +90,27 @@ def create(database_list: list):
     DATABASE.close()
 
 
-def describe():
+def describe(table_name):
     """
+    Args:
+        table_name:
 
     """
-    pass
+    # connect()
+    #
+    # try:
+    #     DATABASE.execute("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {}".format(table_name))
+    # except sqlite3.Error as inst:
+    #     service.error(inst)
+    #     DATABASE.rollback()
+    # finally:
+    #     DATABASE.commit()
+    #
+    # DATABASE.close()
 
 
-def select(column: str, table: str, row: str = None, operator: str = None, quantity: str = None):
+def select(column: str, table: str, row: str = None, operator: str = None, quantity: str = None, fetch=False):
+    # Open the database
     """ Create a SELECT script on database
 
     SELECT <column> FROM <table> WHERE <row> <operator> <quantity>
@@ -107,19 +121,27 @@ def select(column: str, table: str, row: str = None, operator: str = None, quant
         row:
         operator:
         quantity:
+        fetch:
     """
-    # Open the database
     connect()
 
-    if row is None or operator is None or quantity is None:
-        # Make SELECT without WHERE
-        DATABASE.execute("SELECT {} FROM {}".format(column, table))
-    else:
-        # Make full SELECT with WHERE
-        DATABASE.execute("SELECT {} FROM {} WHERE {} {} {};".format(
-            column, table, row, operator, quantity))
+    try:
+        if row is None or operator is None or quantity is None:
+            # Make SELECT without WHERE keyword
+            DATABASE.execute("SELECT {} FROM {}".format(column, table))
 
-    # make sure the database change is closed.
+        else:
+            # Make full SELECT with WHERE keyword
+            DATABASE.execute("SELECT {} FROM {} WHERE {} {} {};".format(
+                column, table, row, operator, quantity))
+
+        if fetch:
+            return DATABASE_CURSOR.fetchall()
+
+    except sqlite3.Error as inst:
+        raise inst
+
+    # Close the database
     DATABASE.close()
 
 
@@ -152,12 +174,14 @@ def update(table_name, column, operator, column_quantity,
                                                                     where_column, where_column_value)
         DATABASE.execute(sql_script)
 
-        # make sure the database change is committed + closed.
-        DATABASE.commit()
-        DATABASE.close()
     except Exception as inst:
         DATABASE.rollback()
         service.error(inst)
+
+    finally:
+        DATABASE.commit()
+
+    DATABASE.close()
 
 
 def insert(table_name: str, values: list):
@@ -187,12 +211,14 @@ def insert(table_name: str, values: list):
 
         DATABASE.execute(sql_script)
 
-        DATABASE.commit()
-        DATABASE.close()
         service.log("Execute SQL : {}".format(sql_script))
     except Exception as inst:
         DATABASE.rollback()
         service.error(inst)
+    finally:
+        DATABASE.commit()
+
+    DATABASE.close()
 
 
 def exists(table_name, column, entry):
@@ -210,8 +236,8 @@ def exists(table_name, column, entry):
         DATABASE.rollback()
         service.error(inst)
 
-    else:
-        return True
+    DATABASE.close()
+    return True
 
 
 def reset():
@@ -234,4 +260,3 @@ def reset():
     except Exception as inst:
         # Rollback the change
         service.error(inst)
-    pass

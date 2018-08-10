@@ -1,5 +1,4 @@
 # --- Module Import -----------------------------
-import service
 
 """
 Service Module
@@ -9,22 +8,26 @@ Service gives information and asks prompt from user
 
 
 def error(instance: object):
-    """ Generate Error to user and then try not to break the program
+    """ Send the users error issues. Program probably be stopped by the Exception.
 
     Args:
         instance:
     """
     print("{1}[ Error ]{2} > {0}".format(instance, '\x1b[6;30;41m', '\x1b[0m'))
-    raise instance
 
 
 def warning(instance: object):
+    """ Send the users warning issues
+
+    Args:
+        instance:
+    """
     print("{1}[ Warning ]{2} > {0}".format(
         instance, '\x1b[6;30;43m', '\x1b[0m'))
 
 
 def log(log_text):
-    """
+    """ Send the users log process
 
     Args:
         log_text:
@@ -81,23 +84,25 @@ def prompt(player=None, prompt=None):
 
     def confirm(player: str):
         """
-        :param player:
-        :return:
+        Args:
+            player:
+
         """
         print("{} > Are you sure?".format(player))
         result = bool(input())
         return result
 
     def user():
+        """
+
+        Returns:
+
+        """
         announce("Please type in your player name. Press ENTER to stop")
         items = input()
         return items
 
-    # Edit prompt() here ----------
-    if not isinstance(type(prompt), str):
-        service.error("Action is not string format")
-        raise ValueError
-
+    # Resolve the prompt here ----------
     if prompt == 'action':
         action(player)
     elif prompt == 'resolve':
