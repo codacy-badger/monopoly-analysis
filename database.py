@@ -3,7 +3,6 @@ import os
 import sqlite3
 
 import configuration
-import database
 import service
 
 """
@@ -38,15 +37,16 @@ def initiate():
 
     Generally for starting the new game.
     """
-
-    database.reset()
-    database.connect()
+    # Make sure the database is cleansed
+    reset()
+    # Open the database
+    connect()
 
     if not os.path.exists(configuration.CONFIG['database_path']):
         service.error("There is no game.sqlite in {}".format(
             configuration.CONFIG['database_path']))
 
-    database.create(configuration.CONFIG['database_create_file'])
+    create(configuration.CONFIG['database_create_file'])
 
 
 def create(database_list: list):
@@ -108,7 +108,8 @@ def select(column: str, table: str, row: str = None, operator: str = None, quant
         operator:
         quantity:
     """
-    database.connect()
+    # Open the database
+    connect()
 
     if row is None or operator is None or quantity is None:
         # Make SELECT without WHERE
@@ -143,7 +144,7 @@ def update(table_name, column, operator, column_quantity,
         none
     """
     # Open the database
-    database.connect()
+    connect()
 
     # Make transaction on UPDATE
     try:
@@ -175,7 +176,7 @@ def insert(table_name: str, values: list):
         none
     """
     # Open the database
-    database.connect()
+    connect()
 
     # Change the values of list into a string
     values = str(values).lstrip('[').rstrip(']')
@@ -195,7 +196,8 @@ def insert(table_name: str, values: list):
 
 
 def exists(table_name, column, entry):
-    database.connect()
+    # Open the database
+    connect()
 
     try:
         sql_script = "SELECT * FROM {} WHERE {} = {}".format(table_name, column, entry)
@@ -219,7 +221,7 @@ def reset():
     """
     service.log("Resetting the database")
     # Open the database
-    database.connect()
+    connect()
 
     try:
         # Delete the old database file
