@@ -20,15 +20,6 @@ def connect():
     """ Connect the database
 
     Using the SQLite, the database is stored locally.
-
-    Args:
-        none
-
-    Returns:
-        none
-
-    Raises:
-        IOError :
     """
     # Open the database
     try:
@@ -105,7 +96,7 @@ def describe():
     pass
 
 
-def select(column, table, row=None, operator=None, quantity=None):
+def select(column: str, table: str, row: str = None, operator: str = None, quantity: str = None):
     """ Create a SELECT script on database
 
     SELECT <column> FROM <table> WHERE <row> <operator> <quantity>
@@ -202,8 +193,6 @@ def insert(table_name: str, values: list):
         DATABASE.rollback()
         service.error(inst)
 
-    pass
-
 
 def exists(table_name, column, entry):
     database.connect()
@@ -227,15 +216,6 @@ def reset():
     """ Reset the database to make it newly generated
 
     NOTE: This function will be called during the game initiation.
-
-    Args:
-        none
-
-    Return:
-        none
-
-    Raise:
-        none
     """
     service.log("Resetting the database")
     # Open the database
