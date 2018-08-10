@@ -1,4 +1,4 @@
-CREATE TABLE PlayerProperty
+CREATE TABLE PlayerAsset
 (
   -- username stores the player that owns the property
   -- property stores the property owns by the player
@@ -8,22 +8,23 @@ CREATE TABLE PlayerProperty
   -- is_mortgage store information if the property is in mortgage
 
   username    TEXT,
-  property    TEXT,
-  rent_price  REAL,
-  is_monopoly TEXT NOT NULL,
+  propertyId  TEXT,
   house_count REAL NOT NULL,
-  is_mortgage TEXT,
+  hotel_conut REAL NOT NULL,
+  is_monopoly TEXT NOT NULL,
+  is_mortgage TEXT NOT NULL,
+  rent_price  REAL NOT NULL,
 
-  CONSTRAINT PlayerProperty_username_property_pk
-  PRIMARY KEY (username, property),
+  CONSTRAINT PlayerProperty_username_asset_pk
+  PRIMARY KEY (username, propertyId),
 
   CONSTRAINT PlayerProperty_Player_name_fk
   FOREIGN KEY (username)
   REFERENCES Player (username)
     ON DELETE CASCADE,
 
-  CONSTRAINT PlayerProperty_Property_property_fk
-  FOREIGN KEY (property)
-  REFERENCES Property (property)
+  CONSTRAINT PlayerProperty_propertyId_id_fk
+  FOREIGN KEY (propertyId)
+  REFERENCES Asset (id)
     ON DELETE CASCADE
 );

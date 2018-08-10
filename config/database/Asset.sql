@@ -1,7 +1,7 @@
-CREATE TABLE Property
+CREATE TABLE Asset
 (
   -- propertyId stores property location (1 is for Brown property that next to GO)
-  -- propertyColor stores propery color
+  -- propertyColor stores property color
   -- propertyColorId stores property location, based on color
   -- name stores property name
   -- type stores property type (eg. 'Utility', 'Transport', 'Site')
