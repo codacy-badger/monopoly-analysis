@@ -23,5 +23,5 @@
     "telemetry.enableTelemetry": false,
     "git.autofetch": true,
     "git.enableCommitSigning": true,
-    "python.autoComplete.addBrackets": true,
+    "python.autoComplete.addBrackets": true
 }
