@@ -6,13 +6,12 @@ The famous fast-trading board game Monopoly meets decision support analysis.
 
 > Monopoly, the fast-dealing property trading game where players buy, sell, dream and scheme their way to riches
 
-**WARNING** This program is still in Alpha. There will be a lot of hickups along the way. Sorry for the inconveninece.
-
-**WARNING** This program **currently** have no user interface. User that cannot troubleshoot Python code should not try the program until beta.
+**WARNING** This program **currently** have no user interface, as we released the Alpha 0.1.<br>
+User that cannot troubleshoot Python code should not try the program until beta.
 
 ## ![](img/icons8-goal-24.png) Objective
 This repository and project is created for **decision support** usage.<br>
-Users can use this project in decisions-making purpose that could change the game aspects or leaders.
+Users can use this service in decisions-making purpose that could make the game more exciting.
 
 The analysis will be based on information given, statistics calculations and many risks factor that other player have create.
 
@@ -27,11 +26,13 @@ and of course, understand what is going to happen next, just like you do. Win.
 Play Monopoly in your way
 - Edit the game rule to fit your game experiences
 - Make your game more random with Speed Dice support
+- Buy or sell a property and home with the interface
 
-Create a suggestions on current game status
-- Show property valuations
+Also, this service can mame a suggestions on current game status
+- Show property estimated values
 - Show rent on a property valuations
 - Probability of getting a bankrupt
+- Probability to land on the desired space
 
 Create a report on the game status and after-game
 
@@ -63,7 +64,8 @@ Python supports Windows, MacOS, Linux Distributions. You can start the game from
 ## ![](img/icons8-game-controller-24.png) How to use
 > For more details, please check out our [user manual](https://sagelga.github.io/monopoly-analysis/).
 
-I recommended that you play on the real Monopoly board game, and use this service to provide more information about the game. We are not the game itself.
+We recommend you to play the Monopoly game on a real Monopoly board game <br>
+and use this service to provide more information during the real-life gameplay. Our project goal is to support.
 
 There is a few steps of the game that you need to follow. You will be asked for multiple inputs (eg. turns, decision made, dice rolls result) and there will be prompt in the command line (for current version)
 
@@ -77,7 +79,7 @@ and the process will repeat until we have the last man standing
 The interface will show the current game status. You
 
 ## ![](img/icons8-user-manual-24.png) Documentation
-The documentation on how to use/modify our modules, projects will be available shortly in GitHub Pages.
+The documentation on how to use/modify our modules, projects is available [here : https://sagelga.github.io/monopoly-analysis/](https://sagelga.github.io/monopoly-analysis/)
 
 ### Module distribution
 This project is divided to 6 modules (Python file), which is<br>
@@ -99,12 +101,20 @@ which each module has it's own purpose
 User can edit the configuration to suit their game.
 
 ## ![](img/icons8-code-fork-24.png) Contribute
-We welcome all of the developers into the development of this program. Please contact me for more information or to enroll.
+We welcome all of the developers into the development of this program.<br>
+We have open the pull requests from all of the kind developers to improve this project.
 
-----
+For the new comers, please do as follows
+1. Fork this repository
+2. Create a new branch at the forked repository (as it will named as `your_username/monopoly-analysis`)
+3. Create a pull request in this repository (sagelga/monopoly-analysis)
+4. We will make a suggestions and merged your changes
+
 ## Other Stuff
-### Configuration structure
-Please check on the [documentation](https://sagelga.github.io/monopoly-analysis) page for more information.
+### Edit your own game
+Please check on the [documentation](https://github.com/sagelga/monopoly-analysis/wiki/Configurations) page on how you can edit the game parameters
+
+> NOTE: You should able to read the Python Dictionary syntax to edit the file.
 
 ### Project Checker
 **Fossa**<br>
@@ -118,10 +128,12 @@ Please check on the [documentation](https://sagelga.github.io/monopoly-analysis)
 |[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/master)|[![CircleCI](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop.svg?style=svg)](https://circleci.com/gh/sagelga/monopoly-analysis/tree/develop)|
 
 ### Boring things that you need to know
+> We are covered our repository with Apache License version 2. Please check out the [LICENSE.md]() for more information.
+
 The project is fan-made and built in the purpose of **support** the players (user) into making the decisions along the game play.
 
 This project can be used in non-commercial or/and non-profit purpose and requires the users to respect all the developers, copyright owner(s) and trademark owner(s). We are not response of trademark infringement or any legal actions against us.<br>
-Make sure that you are **forking this repository** for further inspections.
+Make sure that you are following our license.
 
 If you liked to use this repository in a commercial or for-profit benefits, please contact me and respective game trademark owner.
 
