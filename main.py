@@ -34,7 +34,11 @@ database.initiate()
 actions.create_user()
 
 # Start the game process
+actions.generate_game()
 
+while True
+    try:
+        # do something
 # Roll the dice
 
 # Action resolve
@@ -44,3 +48,6 @@ actions.create_user()
 # Action resolve
 
 # Repeat
+    except StopException as inst:
+        break
+

@@ -38,7 +38,7 @@ def log(log_text):
 def announce(text: str):
     """ This function is used to format the program.
 
-    Parameter:
+    Args:
         text: (String) the text that will be shown.
     """
     print("\nService > {}".format(text))
@@ -49,20 +49,13 @@ def announce(text: str):
 def prompt(player=None, prompt=None):
     """ Prompt user to do something to resolve background requests
 
-    Parameter:
-        player: (String)
-            Username of the player that needs to resolve request
-
-        prompt: (String)
-            Custom text that other function wants to show to user
-
     Args:
-        player:
-        prompt:
+        player (String): Username of the player that needs to resolve request
+        prompt (String): Custom text that other function wants to show to user
     """
 
     def action(player: str):
-        """ Send a prompt that requires user
+        """ Give user information on how to resolve the turn actions
 
         Args:
             player:
@@ -74,6 +67,11 @@ def prompt(player=None, prompt=None):
             '[ /auto ] Automatically make a decision'))
 
     def resolve(player: str):
+        """ Give user information on how to resolve the unowned property
+
+        Args:
+            player (str):
+        """
         print("{} > Please choose action(s)".format(player))
         print("{}\t{}\t{}]\t{}\t{}".format(
             '[ /buy ] Buy Property at full price',
@@ -82,20 +80,21 @@ def prompt(player=None, prompt=None):
             '[ /done ] Finished your turn',
             '[ /auto ] Automatically make a decision'))
 
-    def confirm(player: str):
-        """
+    def confirm(player: str) -> bool:
+        """ Prompt user to confirm the transaction
         Args:
-            player:
+            player (str):
 
         """
         print("{} > Are you sure?".format(player))
         result = bool(input())
         return result
 
-    def user():
-        """
+    def user() -> str:
+        """ Prompt user with username input
 
         Returns:
+            items (str):
 
         """
         announce("Please type in your player name. Press ENTER to stop")

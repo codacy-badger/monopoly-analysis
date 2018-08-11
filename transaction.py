@@ -66,6 +66,13 @@ def count_user():
     return database.select('COUNT(username)', 'Player')
 
 
+def list_user():
+    """
+
+    """
+    pass
+
+
 # --- Property Transaction ----------------------------------------------
 
 

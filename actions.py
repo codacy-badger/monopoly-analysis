@@ -104,7 +104,10 @@ def create_user():
                 service.warning(text_input + " is already exists")
         else:
             service.warning(text_input + " contains non-character")
-    return
+
+    # Finally, count how many players in the game.
+    transaction.count_user()
+    transaction.list_user()
 
 
 def delete_user(username):
@@ -166,6 +169,10 @@ def suggest_liquidate(player: str, amount: int):
 Gameplay Actions
 ----------------
 """
+
+
+def generate_game():
+    pass
 
 
 def roll_dice():
