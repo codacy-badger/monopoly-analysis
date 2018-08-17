@@ -13,7 +13,7 @@ def error(instance: object):
     Args:
         instance:
     """
-    print("{1}[ Error ]{2} > {0}".format(instance, '\x1b[6;30;41m', '\x1b[0m'))
+    print("{1}[ Error ]{2} {0}".format(instance, '\x1b[6;30;41m', '\x1b[0m'))
 
 
 def warning(instance: object):
@@ -22,7 +22,7 @@ def warning(instance: object):
     Args:
         instance:
     """
-    print("{1}[ Warning ]{2} > {0}".format(
+    print("{1}[ Warning ]{2} {0}".format(
         instance, '\x1b[6;30;43m', '\x1b[0m'))
 
 
@@ -32,7 +32,8 @@ def log(log_text):
     Args:
         log_text:
     """
-    print('\x1b[6;30;42m' + "[ Log ]" + '\x1b[0m' + " > " + log_text)
+    print('\x1b[6;30;42m' + "[ Log ]" + '\x1b[0m' + " ", end="")
+    print(log_text)
 
 
 def announce(text: str):
@@ -41,38 +42,38 @@ def announce(text: str):
     Args:
         text: (String) the text that will be shown.
     """
-    print("\nService > {}".format(text))
+    print("\nService {}".format(text))
 
     return
 
 
-def prompt(player=None, prompt=None):
+def prompt(player=None, prompted_text=None):
     """ Prompt user to do something to resolve background requests
 
     Args:
+        prompted_text (String): Custom text that other function wants to show to user
         player (String): Username of the player that needs to resolve request
-        prompt (String): Custom text that other function wants to show to user
     """
 
-    def action(player: str):
+    def action(username: str):
         """ Give user information on how to resolve the turn actions
 
         Args:
-            player:
+            username:
         """
-        print("{} > Please choose action(s)".format(player))
+        print("{} > Please choose action(s)".format(username))
         print("{}\t{}\t{}".format(
             '[ /roll ] Roll a dice',
             '[ /upgrade ] Buy house/hotel on a property',
             '[ /auto ] Automatically make a decision'))
 
-    def resolve(player: str):
+    def resolve(username: str):
         """ Give user information on how to resolve the unowned property
 
         Args:
-            player (str):
+            username (str):
         """
-        print("{} > Please choose action(s)".format(player))
+        print("{} > Please choose action(s)".format(username))
         print("{}\t{}\t{}]\t{}\t{}".format(
             '[ /buy ] Buy Property at full price',
             '[ /auction ] Auction this property',
@@ -80,13 +81,13 @@ def prompt(player=None, prompt=None):
             '[ /done ] Finished your turn',
             '[ /auto ] Automatically make a decision'))
 
-    def confirm(player: str) -> bool:
+    def confirm(username: str) -> bool:
         """ Prompt user to confirm the transaction
         Args:
-            player (str):
+            username (str):
 
         """
-        print("{} > Are you sure?".format(player))
+        print("{} > Are you sure?".format(username))
         result = bool(input())
         return result
 
@@ -102,13 +103,11 @@ def prompt(player=None, prompt=None):
         return items
 
     # Resolve the prompt here ----------
-    if prompt == 'action':
+    if prompted_text == 'action':
         action(player)
-    elif prompt == 'resolve':
+    elif prompted_text == 'resolve':
         resolve(player)
-    elif prompt == "confirm":
+    elif prompted_text == "confirm":
         confirm(player)
-    elif prompt == 'user':
+    elif prompted_text == 'user':
         return user()
-
-    return

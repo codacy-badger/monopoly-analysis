@@ -1,3 +1,4 @@
+import math
 import random
 
 import configuration
@@ -11,10 +12,8 @@ Create, resolve issues in background.
 Also runs the game (logic) in background after player's action.
 """
 
-"""
-General Actions Handler
------------------------
-"""
+
+# General Actions Handler ---------------------------------
 
 
 def actions_handler(text):
@@ -24,22 +23,37 @@ def actions_handler(text):
         text:
     """
 
-    def buy(text):
+    def buy(command):
         """
 
         """
+        if command is "":
+            # transaction.buy_property()
+            pass
         pass
 
-    def sell(text):
+    def sell(command):
         """
 
         """
+        if command is "":
+            # transaction.mortgage()
+            pass
         pass
 
-    def upgrade(text):
+    def upgrade(command):
         """
 
         """
+        try:
+            # transaction.buy_house(command)
+            pass
+        except transaction.TransactionError:
+            try:
+                # transaction.buy_hotel()
+                pass
+            except transaction.TransactionError as inst:
+                service.error("Cannot do any upgrades")
         pass
 
     def skip():
@@ -55,27 +69,24 @@ def actions_handler(text):
     def invalid(text):
         service.warning("Command not found. Type /help for lists of command.")
 
-    text = text.split(" ")
-    command = text[0]
+    command = text.split(" ")[0]
+    command_param = text[1:]
 
     if command == "/buy":
-        buy(text)
+        buy(command_param)
     elif command == "/sell":
-        sell(text)
+        sell(command_param)
     elif command == "/upgrade":
-        upgrade(text)
+        upgrade(command_param)
     elif command == "/skip":
         skip()
     elif command == "/resolve":
         resolve()
     else:
-        invalid(text)
+        invalid(command_param)
 
 
-"""
-Player/User Related Actions
----------------------------
-"""
+# Player/User Related Actions -----------------------------
 
 
 def create_user():
@@ -86,7 +97,7 @@ def create_user():
     sequence = 0
     # Repeatedly prompt user for username input
     while True:
-        text_input = service.prompt(prompt="user")
+        text_input = service.prompt(prompted_text="user")
 
         if text_input == "":
             break
@@ -136,10 +147,7 @@ def user_existed(username):
     return transaction.check_user(username)
 
 
-"""
-Suggestions / Decision Support Actions
---------------------------------------
-"""
+# Suggestions / Decision Support Actions ------------------
 
 
 def suggest_liquidate(player: str, amount: int):
@@ -162,20 +170,76 @@ def suggest_liquidate(player: str, amount: int):
         choice (List) : all possible ways to liquidate,
                         and given back the weight of each ones (more weight = better choice)
     """
-    pass
+    weight = configuration.CONFIG['liquidate_weight']
 
 
-"""
-Gameplay Actions
-----------------
-"""
+# Gameplay Actions ----------------------------------------
 
 
-def generate_game():
-    pass
+def generate_game(normal_game=True):
+    """
+
+    """
+    if normal_game:
+        get_game_map()
+        print_game_map(full=True)
 
 
-def roll_dice():
+def get_game_map(file_path="config/{}".format(configuration.CONFIG['game_package'])):
+    """
+    Args:
+        file_path:
+
+    """
+
+    tile_file_path = "{}/tiles.csv".format(file_path)
+
+    global GAME_MAP
+    GAME_MAP = dict()
+
+    try:
+        with open(tile_file_path, 'r+') as file:
+            for i in file:
+                GAME_MAP[str(i)] = None
+
+    except FileNotFoundError:
+        service.error("tiles.csv not found")
+    except BaseException as inst:
+        service.error(inst)
+
+
+def print_game_map(full=False, max_tile=12, player_sequence=1):
+    """ Prints the game map from a select <max_tile> scope
+    Args:
+        player_sequence:
+        full:
+        max_tile:
+    """
+
+    for tile_number in range(max_tile):
+        # Retrieve the data
+        current_player_location = transaction.get_location(player_sequence)
+        property_id = ""
+        property_name = ""
+        property_price = "P"
+        number_to_roll = 0
+
+        # Check tile length
+        text_length = 0
+
+        # Choose color
+
+        # Print tiles
+        print("-" * math.ceil(text_length * 1.2))
+        print(property_id)
+        print(property_name)
+        print("")
+        print("")
+        print(property_price)
+        print(number_to_roll)
+
+
+def roll_dice(normal_dice_count=2, speed_dice_count=0):
     """ Roll a dice. Any dice.
     This function also can roll a speed dice.
 
@@ -184,14 +248,14 @@ def roll_dice():
         dice_result (Integer List) : Individual result from 2 dice
     """
 
-    def roll():
+    def roll(dice_type: str):
         """ Random a dice face and return it's result
 
         Return:
             individual_dice_result: (Integer)
                 Value that is in the dice (in configuration file)
         """
-        dice_face = configuration.CONFIG['dice_face']
+        dice_face = configuration.CONFIG[dice_type]
         number = random.randint(0, len(dice_face))
 
         return dice_face[number]
@@ -201,9 +265,12 @@ def roll_dice():
     result = 0
 
     # Start rolling a dice, twice. and then store the result into the placeholder variables
-    for _ in range(2):
-        individual_dice_result = roll()
+    for _ in range(normal_dice_count):
+        individual_dice_result = roll('dice_face')
         dice_result.append(individual_dice_result)
         result += individual_dice_result
+
+    for _ in range(speed_dice_count):
+        pass
 
     return result, dice_result

@@ -24,21 +24,22 @@ support.check_core_file()
 support.check_database_file()
 support.check_game_file()
 
-# --- Checking the library integrity ----------------------
-support.check_library()
-
 # -- Generate the database from the script ----------------
 database.initiate()
 
 # -- Add more players to the game until hitting ENTER -----
 actions.create_user()
 
-# Start the game process
+# -- Start the game process -------------------------------
 actions.generate_game()
 
-while True
+while True:
     try:
+        pass
+    except RuntimeError as inst:
+        break
         # do something
+
 # Roll the dice
 
 # Action resolve
@@ -48,6 +49,3 @@ while True
 # Action resolve
 
 # Repeat
-    except StopException as inst:
-        break
-

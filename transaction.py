@@ -18,66 +18,65 @@ def add_user(username, sequence):
         username: name of the user (username) that will be added
         sequence:
     """
-    money = configuration.CONFIG['starter_money']
-    lists = [username, money, sequence, money]
+    starter_money = configuration.CONFIG['starter_money']
 
-    database.insert('Player', lists)
-    pass
+    database.insert(
+        'Player', [username, starter_money, sequence, starter_money])
 
 
 def delete_user(username):
     """ Delete the user from the database, because they have bankrupt or quit the game
 
     Args:
-        username: (String) name of the user that will be deleted from Player table
+        username (str): name of the user that will be deleted from Player table
     """
     pass
 
 
-def reorder(username: str, new_order: int):
+def reorder_user(username: str, new_order: int):
     """ Reorder the user into different sequence
 
     Args:
-        username:
-        new_order:
+        username (str):
+        new_order (int):
 
     """
     pass
 
 
 def check_user(player):
-    """
+    """ Check that the username is duplicated or not
 
     Args:
         player:
-
-    Returns:
-
     """
     return database.exists('Player', 'username', player)
 
 
 def count_user():
-    """
+    """ Count user that is in the game
 
     Returns:
-
+        result from database.count()
     """
-    return database.select('COUNT(username)', 'Player')
+    return database.count('Player')
 
 
 def list_user():
-    """
+    """ List the user that is in the game
 
+    Returns:
+        result from database.select('username', 'Player')
     """
-    pass
+    return database.select('username', 'Player')
 
 
 # --- Property Transaction ----------------------------------------------
 
 
 def buy_property(player, asset, price=None):
-    """ Buy a property
+    """ Buy a property that is not currently owned
+
     NOTE: Program will check for money. If not, it will raise TransactionError
 
     Args:
@@ -91,8 +90,27 @@ def buy_property(player, asset, price=None):
     pass
 
 
-# def sell_property(player, property, price=None):
-#     pass
+def sell_property(player, asset, price=None):
+    """ Sell property that player IS OWNING
+
+    Args:
+        player:
+        asset:
+        price:
+    """
+    pass
+
+
+def get_location(user_sequence):
+    """ Get the user location from user sequence
+
+    Args:
+        user_sequence:
+
+    Returns:
+
+    """
+    return database.select('location', 'Player', 'sequence', '=', user_sequence)
 
 
 def get_property(asset) -> str:
@@ -105,6 +123,7 @@ def get_property(asset) -> str:
     Returns:
         player: (String) player's username that owns the property. If not owned, will return None
     """
+    pass
 
 
 def set_property(player, asset):
@@ -119,21 +138,21 @@ def set_property(player, asset):
 
 
 def transfer_property(player, new_player, asset):
-    """
-    Transfer property ownership
+    """ Transfer property ownership
 
     Args:
         player:
         new_player:
         asset:
     """
+    pass
 
 
 # --- Money Transaction -------------------------------------------------
 
 
 def get_money(player: str):
-    """ Check player 's money account
+    """ Check player's money account
 
     Args:
         player:
@@ -146,18 +165,30 @@ def get_money(player: str):
 
 
 def set_money(player, money):
-    """
-    Set the money balance to the database
+    """ Set the money balance to the database
 
     Args:
         player:
         money:
     """
+
+    # Check parameter validation
+
+    # Create a UPDATE script
     pass
 
 
 def add_money(player, money):
-    pass
+    """ Add money to the player in specific amount
+
+    Args:
+        player:
+        money:
+    """
+
+    if money > 0:
+        # Do the transaction
+        pass
 
 
 # --- House Transaction -------------------------------------------------
@@ -165,11 +196,15 @@ def add_money(player, money):
 
 def buy_house(player, asset: str, money: int):
     """ Create a transaction when user want to buy a property
+
+    Args:
+        player:
+        asset:
+        money:
     """
 
     # Retrieve data from the database
-    if player == get_property(asset):
-        house_count = get_house(asset)
+    house_count = get_house(asset) if player == get_property(asset) else 0
 
     # Data validation
     if (house_count <= 0) or (house_count >= 5):
@@ -184,8 +219,15 @@ def buy_house(player, asset: str, money: int):
     # return
 
 
-def sell_house(player, property, amount):
-    """
+def sell_house(player, asset, amount):
+    """ Sell the house, at a fixed rate
+
+    Notes: House reselling rate is in the configuration file. You can edit it.
+
+    Args:
+        player:
+        asset:
+        amount:
     """
 
     # Retrieve the data from the database
@@ -203,25 +245,19 @@ def sell_house(player, property, amount):
 
 
 def get_house(asset):
-    """
-\
+    """ Get house count from the asset given
+
     Args:
         asset:
-
-    Returns:
-
     """
     return int(database.select('house_count', 'PlayerAsset', 'propertyId', '=', asset))
 
 
 def property_name_to_property_id(property_name):
-    """
+    """ Convert the property name to id (for database queries)
 
     Args:
         property_name:
-
-    Returns:
-
     """
     return database.select('id', 'Asset', 'name', '=', property_name)
 
@@ -231,7 +267,8 @@ def property_name_to_property_id(property_name):
 
 def buy_hotel(player, asset):
     """ Buy a hotel to the property
-    Will complete when user can buy the hotel
+
+    Complete when user can buy the hotel
     NOTE: Will delete house, because following the hotel buy rule
 
     Args:
@@ -260,7 +297,8 @@ def buy_hotel(player, asset):
 
 
 def sell_hotel(player, asset):
-    """ Sell the hotel to liquidify
+    """ Sell the hotel to liquidise
+
     NOTE: 1 hotel = 5 house (in the need of selling the hotel)
 
     Args:
@@ -318,23 +356,23 @@ def set_value(player, value):
 
 
 def get_mortgage_status(asset):
-    """ Get the mortgage status, based on <property> listings
+    """ Get the mortgage status based on <asset> input listing
 
     Args:
         asset:
 
     """
-    pass
+    return bool(database.select('is_mortgage', 'PlayerAsset'))
 
 
-def set_mortgage_status(asset, status):
+def set_mortgage_status(asset: str, status: bool):
     """ Set the mortgage status to the property
 
     Args:
         asset: property to be set status with
         status: status that property will have
     """
-    pass
+    database.update('PlayerAsset', 'is_mortgage', '=', status)
 
 
 def mortgage(player, asset):
@@ -344,11 +382,12 @@ def mortgage(player, asset):
         asset:
         player:
     """
-    pass
+    database.update('is_mortgage', 'PlayerAsset', 'True')
 
 
 def remortgage(asset):
     """ Remortgage the property
+
     Args:
         asset:
     """
@@ -358,8 +397,9 @@ def remortgage(asset):
 # Composite Transaction -------------------------------------------------
 
 
-def transfer(player, new_player, asset=None, money=0):
+def transfer(player, new_player, asset: list = None, money: float = 0):
     """ Transfer money and/or asset from player -> new player
+
     Args:
         player (String) : Player that starts the transfer
         new_player (String) : Player that will get the benefit from the transfer
@@ -379,9 +419,11 @@ def transfer(player, new_player, asset=None, money=0):
             Raised when transaction is not completed, resulted from errors
     """
 
-    def check_property(player, asset):
-        """ INTERNAL FUNCTION
-        Check asset ownership validation
+    def check_property_validation(player, asset):
+        """ Check asset ownership validation
+
+        INTERNAL FUNCTION
+
         Args:
             player:
             asset:
@@ -391,18 +433,22 @@ def transfer(player, new_player, asset=None, money=0):
 
         return True if (player == get_property(asset)) else False
 
-    def check_money(player, money):
-        """ INTERNAL FUNCTION
-        Check money validation
+    def check_money_validation(target_player, money):
+        """ Check money validation
+
+        INTERNAL FUNCTION
         Args:
-            player:
+            target_player:
             money:
         Returns:
             1 if enough, else 0
         """
-        return True if (money <= get_money(player)) else False
+        return True if (money <= get_money(target_player)) else False
 
-    # transfer() starts here
+    def do_transaction(sender_player, recieve_player, asset: list, money: float):
+        pass
+
+    # transaction.transfer() starts here ----------------------------
     if asset is None:
         asset = list()
 
@@ -413,9 +459,11 @@ def transfer(player, new_player, asset=None, money=0):
 
     if money != 0:
         # Check player's money balance
-        if not check_money(player, money):
+        if not check_money_validation(player, money) \
+                or not check_property_validation(player, asset):
             raise TransactionError
         else:
+            # Start the real transaction process
             pass
             # transfer_money(player, new_player, money)
 
@@ -424,7 +472,8 @@ def transfer(player, new_player, asset=None, money=0):
 
 
 class TransactionError(Exception):
-    """Will rise when the transaction cannot be completed"""
+    """ Will rise when the transaction cannot be completed
+    """
 
     def __init__(self, message, errors):
         # Call the base class constructor with the parameters it needs

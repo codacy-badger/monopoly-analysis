@@ -2,7 +2,8 @@
 This module store set of game rules.
 For advanced player, you can edit this file to suit your game experience
 
-To see how to edit this file, please checkout our wiki here : https://github.com/sagelga/monopoly-analysis/wiki/Configurations
+To see how to edit this file, please checkout our wiki here :
+https://github.com/sagelga/monopoly-analysis/wiki/Configurations
 """
 
 CONFIG = {
@@ -12,7 +13,7 @@ CONFIG = {
     'database_path': 'config/StandardAmerican/game.sqlite',
     'database_create_path': 'config/database/',
     'database_create_file': ['Player.sql', 'Asset.sql', 'PlayerAsset.sql', 'MoneyTransaction.sql',
-                             'RollTransaction.sql'],
+                             'LocationTransaction.sql'],
 
     'auto_roll': False,
     'dice_face': (1, 2, 3, 4, 5, 6),
