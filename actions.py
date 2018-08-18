@@ -1,3 +1,11 @@
+"""
+Actions Module
+--------------
+
+Create, resolve issues in background.
+Also runs the game (logic) in background after player's action.
+"""
+
 import math
 import random
 
@@ -5,16 +13,8 @@ import configuration
 import service
 import transaction
 
-"""
-Actions Module
---------------
-Create, resolve issues in background.
-Also runs the game (logic) in background after player's action.
-"""
-
 
 # General Actions Handler ---------------------------------
-
 
 def actions_handler(text):
     """ Will be triggered when user type in '/' commands
@@ -32,17 +32,30 @@ def actions_handler(text):
             pass
         pass
 
-    def sell(command):
+    def mortgage(command):
         """
 
         """
         if command is "":
+            # Do the mortgage process in current space
+
             # transaction.mortgage()
+            pass
+        else:
+            # Use the given command parameter to mortgage the target asset
+
+            # Check if the asset is valid
+
+            # Check if the asset is users
+
+            # Check if the asset id not mortgage
+
+            # Check if the asset have no house/hotel on
             pass
         pass
 
     def upgrade(command):
-        """
+        """ Upgrade the asset with house / hotel
 
         """
         try:
@@ -58,6 +71,7 @@ def actions_handler(text):
 
     def skip():
         """ Finish the player's turn
+
         """
         pass
 
@@ -67,6 +81,13 @@ def actions_handler(text):
         pass
 
     def invalid(text):
+        """ Marked the input command with invalid.
+
+        This method can be improved by adding the auto correct functionality
+
+        Args:
+            text:
+        """
         service.warning("Command not found. Type /help for lists of command.")
 
     command = text.split(" ")[0]
@@ -74,8 +95,8 @@ def actions_handler(text):
 
     if command == "/buy":
         buy(command_param)
-    elif command == "/sell":
-        sell(command_param)
+    elif command == "/mortgage":
+        mortgage(command_param)
     elif command == "/upgrade":
         upgrade(command_param)
     elif command == "/skip":
@@ -173,16 +194,21 @@ def suggest_liquidate(player: str, amount: int):
     weight = configuration.CONFIG['liquidate_weight']
 
 
-# Gameplay Actions ----------------------------------------
+# Game play Actions ----------------------------------------
 
 
 def generate_game(normal_game=True):
-    """
+    """ Generate the game by getting game components
+
+    Args:
+        normal_game:
 
     """
+
     if normal_game:
         get_game_map()
         print_game_map(full=True)
+        transaction.load_property('config/StandardAmerican/property.csv')
 
 
 def get_game_map(file_path="config/{}".format(configuration.CONFIG['game_package'])):

@@ -1,57 +1,17 @@
-# --- Module Import -----------------------------
+"""
+Database Module
+---------------
+
+This file is for connect, create, query, update and reset database.
+
+Do not use the database directly. Use 'transaction' instead.
+"""
+
 import os
 import sqlite3
 
 import configuration
 import service
-
-"""
-Database Module
----------------
-This file is for connect, create, querry, update and reset database.
-
-
-Do not use the database directly. Use 'transaction' instead. 
-"""
-
-
-def connect():
-    """ Connect the database
-
-    To connect the database, 'game.sqlite' file is required.
-    You may need to create() the database first. 
-    """
-
-    # Open the database
-    try:
-        global DATABASE
-        DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
-
-        global DATABASE_CURSOR
-        DATABASE_CURSOR = DATABASE.cursor()
-
-    except Exception as inst:
-        service.error(inst)
-
-
-def initiate():
-    """ Generate a new brand new table (database)
-
-    Generally for starting the new game.
-    """
-
-    # Make sure the database is purged
-    reset()
-
-    # Open the database
-    connect()
-
-    database_path = configuration.CONFIG['database_path']
-
-    if not os.path.exists(database_path):
-        service.error("There is no game.sqlite in {}".format(database_path))
-
-    create(configuration.CONFIG['database_create_file'])
 
 
 def create(database_file_list: list):
@@ -60,12 +20,13 @@ def create(database_file_list: list):
     Args:
         database_file_list:
     """
-    # Create database using pre-created CREATE script
 
-    print(database_file_list)
+    service.log("These file of SQL Script will be executed... " +
+                str(database_file_list))
 
     for j in database_file_list:
 
+        connect()
         service.log("Loading database file : {}".format(j))
         script = ""
 
@@ -81,13 +42,68 @@ def create(database_file_list: list):
 
             DATABASE.execute(script)
             DATABASE.commit()
+            del script
 
         except sqlite3.Error as inst:
-            service.error("Problem raised from database.create() : " + str(inst))
+            service.error(
+                "Problem raised from database.create() : " + str(inst))
             DATABASE.rollback()
 
         finally:
             DATABASE.close()
+
+
+def connect():
+    """ Connect the database
+
+    To connect the database, 'game.sqlite' file is required.
+    You HAVE to execute database.create() to create the database file first
+    """
+
+    # Open the database
+    try:
+        global DATABASE
+        DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
+
+        global DATABASE_CURSOR
+        DATABASE_CURSOR = DATABASE.cursor()
+
+    except Exception as inst:
+        service.error(inst)
+
+
+def disconnect():
+    """ Disconnect the database
+
+    After using the database, the connection should be closed.
+    This code block will be optimized soon. Don't worry.
+    """
+
+    try:
+        DATABASE.close()
+        del DATABASE
+
+        DATABASE_CURSOR.close()
+        del DATABASE_CURSOR
+
+    except sqlite3.Error as inst:
+        service.error("Cannot close the database")
+
+
+def initiate():
+    """ Generate a new brand new table (database)
+
+    Generally for starting the new game.
+    """
+
+    # Make sure the database is purged
+    reset()
+
+    # Open the database
+    connect()
+
+    # Create a database
+    create(configuration.CONFIG['database_create_file'])
 
 
 def describe(table_name):
@@ -99,30 +115,30 @@ def describe(table_name):
     connect()
 
     try:
-        DATABASE.execute(
-            "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {}".format(table_name))
+        # DATABASE.execute(
+        #     "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {}".format(table_name))
         DATABASE.commit()
 
-    except sqlite3.Error as inst:
+    except sqlite3.OperationalError as inst:
         service.error(inst)
         DATABASE.rollback()
 
     finally:
-        DATABASE.close()
+        disconnect()
 
 
-def select(column_name: str, table_name: str, ref_column_name: str = None, operator: str = None, quantity: str = None,
-           fetch=False, limit: int = 999, top_amount=1.00, catch_exception=True):
+def select(column_name: str, table_name: str, ref_column_name: str = None, operator: str = '=', quantity=None,
+           limit: int = 999, top_percent: int = 100):
     """ Create a SELECT script on database
-    
+
     Full SELECT script is :
-    SELECT <column_name> 
-    FROM <table_name> 
-    WHERE <ref_column_name> <operator> <quantity> 
+    SELECT <column_name>
+    FROM <table_name>
+    WHERE <ref_column_name> <operator> <quantity>
     LIMIT <limit>
-    
+
     If <ref_column_name> or <operator> or <quantity> is not given,
-    WHERE statement will be removed. 
+    WHERE statement will be removed.
 
     Args:
         column_name:
@@ -130,66 +146,70 @@ def select(column_name: str, table_name: str, ref_column_name: str = None, opera
         ref_column_name:
         operator:
         quantity:
-        fetch:
         limit:
-        top_amount:
-        catch_exception:
+        top_percent:
     """
 
     # Open the database
     connect()
 
+    # Create a WHERE script
+    if ref_column_name is None or operator is None or quantity is None:
+        where_script = "WHERE {} {} {}".format(
+            ref_column_name, operator, quantity)
+    else:
+        where_script = ""
+
     try:
-        where_script = "WHERE {} {} {}".format(ref_column_name, operator, quantity) \
-            if ref_column_name is None or operator is None or quantity is None \
-            else ""
+        # Execute the SQL script
+        DATABASE.execute(
+            "SELECT {} {} FROM {} {} LIMIT {}".format(top_percent, column_name, table_name, where_script, limit))
 
-        DATABASE.execute("SELECT {} FROM {} {} LIMIT {}".format(column_name, table_name, where_script, limit))
+        # Fetch the result from the query
+        return DATABASE_CURSOR.fetchall()
 
-        return DATABASE_CURSOR.fetchall() if fetch else None
-
-    except sqlite3.Error as inst:
-        if not catch_exception:
-            service.error("SQLite3 handle SELECT Query Error")
+    except sqlite3.OperationalError:
+        service.error("SQLite3 handle SELECT Query Error")
 
     finally:
-        # Close the database
-        DATABASE.close()
+        disconnect()
 
 
-def update(table_name: str, column_name: str, column_quantity,
-           ref_column: str, operator: str, ref_column_quantity):
+def update(table_name: str, set_column_name: str, set_column_quantity,
+           ref_column: str, ref_column_quantity, set_operator: str = '=', ref_operator='='):
     """ Do an UPDATE script on database
 
-    UPDATE <table_name> 
-    SET <column_name> = <column_quantity> 
-    WHERE <ref_column> <operator> <ref_column_quantity>;
+    UPDATE <table_name>
+    SET <column_name> <set_operator> <column_quantity>
+    WHERE <ref_column> <ref_operator> <ref_column_quantity>;
 
     Args:
         table_name:
-        column_name:
-        column_quantity:
+        set_column_name:
+        set_column_quantity:
         ref_column:
-        operator:
         ref_column_quantity:
+        set_operator:
+        ref_operator:
     """
     # Open the database
     connect()
 
     # Make transaction on UPDATE
     try:
-        sql_script = "UPDATE {} SET {} {} {} WHERE {} = {};".format(
-            table_name, column_name, operator, column_quantity, ref_column, ref_column_quantity)
+        sql_script = "UPDATE {} SET {} {} {} WHERE {} {} {};".format(
+            table_name, set_column_name, set_operator, set_column_quantity, ref_column, ref_operator,
+            ref_column_quantity)
+
         DATABASE.execute(sql_script)
         DATABASE.commit()
 
-    except Exception as inst:
+    except sqlite3.OperationalError as inst:
         DATABASE.rollback()
         service.error(inst)
 
     finally:
-        # Close the database
-        DATABASE.close()
+        disconnect()
 
 
 def insert(table_name: str, values: list):
@@ -214,50 +234,96 @@ def insert(table_name: str, values: list):
         DATABASE.commit()
         service.log("Execute SQL : {}".format(sql_script))
 
-    except Exception as inst:
+    except sqlite3.OperationalError as inst:
         DATABASE.rollback()
         service.error(inst)
 
     finally:
-        # Close the database
-        DATABASE.close()
+        disconnect()
 
 
-def exists(table_name: str, column_name: str, entry):
-    # Open the database
-    connect()
+def delete(table_name: str, ref_column_name: str, ref_values: str, operator: str = '='):
+    """ Do a DELETE SQL Script
 
-    result = False  # Set as default, if not changed by finally
+    Args:
+        table_name:
+        ref_column_name:
+        operator:
+        ref_values:
+    """
+
     try:
-        select(column_name, table_name, entry, catch_exception=False)
+        connect()
+
+        DATABASE.execute("DELETE FROM {} WHERE {} {} {}".format(
+            table_name, ref_column_name, operator, ref_values))
+
+    except sqlite3.OperationalError as inst:
+        service.error("Error on database.delete()")
+
+    finally:
+        disconnect()
+
+
+def exists(column_name: str, table_name: str, quantity=None) -> bool:
+    """ Check if there is a record in a certain table
+
+    Args:
+        column_name:
+        table_name:
+        quantity:
+
+    Returns:
+
+    """
+    # Set as default, if not changed by finally
+    result = False
+
+    try:
+        connect()
+
+        # Do the SQL queries
+        select(column_name=column_name, table_name=table_name, ref_column_name=column_name, quantity=quantity, limit=1)
+
+        # If there is no errors on the prev. line, the result will return
         result = True
+
+        # Actually returns the result
+        return result
 
     except sqlite3.OperationalError:
         service.warning("database.exists() create sqlite3.OperationalError")
 
     finally:
-        # Return the database and return the result
-        DATABASE.close()
-        return result
+        disconnect()
 
 
 def count(table_name: str):
+    """ Count the record from the table_name
+
+    Args:
+        table_name:
+
+    Returns:
+
+    """
     # Connect to the database
-    connect()
 
     try:
+        connect()
+
         DATABASE.execute("SELECT COUNT(*) FROM {}".format(table_name))
         result = DATABASE_CURSOR.fetchall()
         return result
 
-    except sqlite3.Error as inst:
+    except sqlite3.OperationalError as inst:
         DATABASE.rollback()
 
         service.warning("Cannot count the result")
         service.warning(inst)
 
     finally:
-        DATABASE.close()
+        disconnect()
 
 
 def reset():
@@ -265,11 +331,10 @@ def reset():
 
     NOTE: This function will be called during the game initiation.
     """
-    service.log("Resetting the database")
-    # Open the database
-    connect()
 
     try:
+        service.log("Attempted to reset the database")
+
         # Delete the old database file
         os.remove(configuration.CONFIG['database_path'])
 
@@ -277,7 +342,7 @@ def reset():
         file = open(configuration.CONFIG['database_path'], 'w+')
         file.close()
 
-    except Exception as inst:
+    except BaseException as inst:
         service.error(inst)
 
     finally:

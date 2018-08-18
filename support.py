@@ -1,14 +1,15 @@
+"""
+Support Module
+--------------
+
+This module will check the game file configurations
+and do data integrity check
+"""
+
 import os
 
 import configuration
 import service
-
-"""
-Support Module
---------------
-This module will check the game file configurations
-and do data integrity check
-"""
 
 
 def check_game_file():
@@ -26,23 +27,17 @@ def check_game_file():
 
     for i in configuration.CONFIG['file_to_check']:
         if not os.path.exists("config/{}/{}".format(game_package, i)):
-            service.error(
+            service.warning(
                 "{} does not exists in game package folder. Creating new one.".format(i))
             file = open("config/{}/{}".format(game_package, i), 'w+')
             file.close()
 
-    return
-
 
 def check_database_file():
-    """
+    """ Check if the database file is still in the folder
 
     """
-    pass
+    database_path = configuration.CONFIG['database_path']
 
-
-def check_core_file():
-    """
-
-    """
-    pass
+    if not os.path.exists(database_path):
+        service.error("There is no game.sqlite in {}".format(database_path))

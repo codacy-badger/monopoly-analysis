@@ -1,11 +1,13 @@
-import configuration
-import database
-
 """
 Transaction Module
 -----------------
+
 Transaction module makes the actions into the pre SQL script.
 """
+
+import configuration
+import database
+import service
 
 
 # --- Player / User Related Transaction ---------------------------------
@@ -20,17 +22,17 @@ def add_user(username, sequence):
     """
     starter_money = configuration.CONFIG['starter_money']
 
-    database.insert(
-        'Player', [username, starter_money, sequence, starter_money])
+    database.insert(table_name='Player', values=[username, starter_money, sequence, starter_money])
 
 
-def delete_user(username):
+def delete_user(username: str):
     """ Delete the user from the database, because they have bankrupt or quit the game
 
     Args:
         username (str): name of the user that will be deleted from Player table
     """
-    pass
+
+    database.delete(table_name='Player', ref_column_name='name', ref_values='username')
 
 
 def reorder_user(username: str, new_order: int):
@@ -50,7 +52,8 @@ def check_user(player):
     Args:
         player:
     """
-    return database.exists('Player', 'username', player)
+
+    return database.exists(table_name='Player', column_name='username', quantity=player)
 
 
 def count_user():
@@ -59,6 +62,7 @@ def count_user():
     Returns:
         result from database.count()
     """
+
     return database.count('Player')
 
 
@@ -68,7 +72,8 @@ def list_user():
     Returns:
         result from database.select('username', 'Player')
     """
-    return database.select('username', 'Player')
+
+    return database.select(column_name='username', table_name='Player')
 
 
 # --- Property Transaction ----------------------------------------------
@@ -98,6 +103,13 @@ def sell_property(player, asset, price=None):
         asset:
         price:
     """
+
+    # Check property ownership
+
+    # Check if the property have home / hotel inside
+    database.select(column_name='house_count', table_name='PlayerAsset')
+
+    # Start the transaction
     pass
 
 
@@ -110,11 +122,15 @@ def get_location(user_sequence):
     Returns:
 
     """
-    return database.select('location', 'Player', 'sequence', '=', user_sequence)
+    return database.select(column_name='location',
+                           table_name='Player',
+                           ref_column_name='sequence',
+                           operator='=',
+                           quantity=user_sequence)
 
 
 def get_property(asset) -> str:
-    """ Retrieve players property
+    """ Retrieve player that owns the <asset>
 
     Args:
         asset: (String or String List) Property name that doesn't know owner
@@ -123,11 +139,11 @@ def get_property(asset) -> str:
     Returns:
         player: (String) player's username that owns the property. If not owned, will return None
     """
-    pass
+    # return database.select(column_name='')
 
 
 def set_property(player, asset):
-    """ Assign property to the player
+    """ Assign <asset> to the <player>
 
     Args:
         player:
@@ -138,7 +154,7 @@ def set_property(player, asset):
 
 
 def transfer_property(player, new_player, asset):
-    """ Transfer property ownership
+    """ Transfer property's ownership
 
     Args:
         player:
@@ -151,8 +167,8 @@ def transfer_property(player, new_player, asset):
 # --- Money Transaction -------------------------------------------------
 
 
-def get_money(player: str):
-    """ Check player's money account
+def get_money(player: str) -> float:
+    """ Check player money balance
 
     Args:
         player:
@@ -164,18 +180,19 @@ def get_money(player: str):
     pass
 
 
-def set_money(player, money):
+def set_money(player: str, money):
     """ Set the money balance to the database
 
+    This method is different from transaction.add_money that, this SET the new value
+    While the add_money increases the money
+
     Args:
-        player:
-        money:
+        player (str): name of the user (not ID)
+        money (float or int): money that will be set
     """
 
-    # Check parameter validation
-
-    # Create a UPDATE script
-    pass
+    database.update(table_name='Player', set_column_name='money', set_column_quantity=money, ref_column='name',
+                    ref_column_quantity=player)
 
 
 def add_money(player, money):
@@ -186,9 +203,8 @@ def add_money(player, money):
         money:
     """
 
-    if money > 0:
-        # Do the transaction
-        pass
+    database.update(table_name='Player', set_column_name='money', set_column_quantity='money + {}'.format(money),
+                    ref_column='name', ref_column_quantity=player)
 
 
 # --- House Transaction -------------------------------------------------
@@ -214,7 +230,12 @@ def buy_house(player, asset: str, money: int):
 
     # Check if any parameter is invalid
 
+    # If still good, normalized some parameters
+    asset = property_name_to_property_id(asset)
+
     # If still good, make transaction to database
+    database.update(table_name='PlayerAsset', set_column_name='house_count', set_column_quantity=house_count,
+                    ref_column='asset_id', ref_column_quantity=asset)
 
     # return
 
@@ -231,7 +252,7 @@ def sell_house(player, asset, amount):
     """
 
     # Retrieve the data from the database
-    database.select('*', 'PlayerAsset')
+    database.select(column_name='*', table_name='PlayerAsset')
 
     # Data Input validation
     # if amount <= 0 or amount >= 5:
@@ -250,7 +271,9 @@ def get_house(asset):
     Args:
         asset:
     """
-    return int(database.select('house_count', 'PlayerAsset', 'propertyId', '=', asset))
+    return int(
+        database.select(column_name='house_count', table_name='PlayerAsset', ref_column_name='propertyId', operator='=',
+                        quantity=asset))
 
 
 def property_name_to_property_id(property_name):
@@ -259,7 +282,8 @@ def property_name_to_property_id(property_name):
     Args:
         property_name:
     """
-    return database.select('id', 'Asset', 'name', '=', property_name)
+    return database.select(column_name='id', table_name='Asset', ref_column_name='name', operator='=',
+                           quantity=property_name)
 
 
 # --- Hotel Transaction -------------------------------------------------
@@ -362,7 +386,7 @@ def get_mortgage_status(asset):
         asset:
 
     """
-    return bool(database.select('is_mortgage', 'PlayerAsset'))
+    return bool(database.select(column_name='is_mortgage', table_name='PlayerAsset'))
 
 
 def set_mortgage_status(asset: str, status: bool):
@@ -372,7 +396,8 @@ def set_mortgage_status(asset: str, status: bool):
         asset: property to be set status with
         status: status that property will have
     """
-    database.update('PlayerAsset', 'is_mortgage', '=', status)
+    database.update(table_name='PlayerAsset', set_column_name='is_mortgage', set_column_quantity=status,
+                    ref_column='assetId', ref_column_quantity=property_name_to_property_id(asset))
 
 
 def mortgage(player, asset):
@@ -382,7 +407,7 @@ def mortgage(player, asset):
         asset:
         player:
     """
-    database.update('is_mortgage', 'PlayerAsset', 'True')
+    # database.update(set_column_name='is_mortgage', table_name='PlayerAsset', set_column_quantity='True')
 
 
 def remortgage(asset):
@@ -419,33 +444,40 @@ def transfer(player, new_player, asset: list = None, money: float = 0):
             Raised when transaction is not completed, resulted from errors
     """
 
-    def check_property_validation(player, asset):
+    def check_property_validation(username, property_name):
         """ Check asset ownership validation
 
-        INTERNAL FUNCTION
-
         Args:
-            player:
-            asset:
+            username:
+            property_name:
+
         Returns:
             1 if player owned that asset, else 0
         """
 
-        return True if (player == get_property(asset)) else False
+        return True if (username == get_property(property_name)) else False
 
-    def check_money_validation(target_player, money):
+    def check_money_validation(username, money_value):
         """ Check money validation
 
-        INTERNAL FUNCTION
         Args:
-            target_player:
-            money:
+            username:
+            money_value:
+
         Returns:
             1 if enough, else 0
         """
-        return True if (money <= get_money(target_player)) else False
+        return True if (money_value <= get_money(username)) else False
 
-    def do_transaction(sender_player, recieve_player, asset: list, money: float):
+    def do_transaction(sender_player, receive_player, asset: list, money: float):
+        """
+
+        Args:
+            sender_player:
+            receive_player:
+            asset:
+            money:
+        """
         pass
 
     # transaction.transfer() starts here ----------------------------
@@ -466,6 +498,31 @@ def transfer(player, new_player, asset: list = None, money: float = 0):
             # Start the real transaction process
             pass
             # transfer_money(player, new_player, money)
+
+
+def load_property(asset_reference_file):
+    """
+
+    Args:
+        asset_reference_file:
+    """
+    try:
+        file = open(asset_reference_file, 'r')
+
+        for line in file:
+
+            # Remove the line that have no id
+            if not line[0].isnumeric():
+                continue
+
+            # Remove all space + convert to list
+            line = line.replace(' ', '').split(',')
+
+            # Insert the record to the database
+            database.insert('Asset', line)
+
+    except IOError:
+        service.error('Cannot load property file')
 
 
 # --- Custom-defined Exception -------------------------------------------

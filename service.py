@@ -1,8 +1,7 @@
-# --- Module Import -----------------------------
-
 """
 Service Module
 --------------
+
 Service gives information and asks prompt from user
 """
 
