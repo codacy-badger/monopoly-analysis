@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Service Package Code Documentation &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Support Package Code Documentation" href="code-support.html" />
+    <link rel="prev" title="Main Package Code Documentation" href="code-main.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-support.html" title="Support Package Code Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="code-main.html" title="Main Package Code Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-service">
+<span id="service-package-code-documentation"></span><h1>Service Package Code Documentation<a class="headerlink" href="#module-service" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="service-module">
+<h2>Service Module<a class="headerlink" href="#service-module" title="Permalink to this headline">¶</a></h2>
+<p>Service gives information and asks prompt from user</p>
+<dl class="function">
+<dt id="service.announce">
+<code class="descclassname">service.</code><code class="descname">announce</code><span class="sig-paren">(</span><em>text: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service.html#announce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#service.announce" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to format the program.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>text: (String) the text that will be shown.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="service.error">
+<code class="descclassname">service.</code><code class="descname">error</code><span class="sig-paren">(</span><em>instance: object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service.html#error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#service.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the users error issues. Program probably be stopped by the Exception.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>instance:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="service.log">
+<code class="descclassname">service.</code><code class="descname">log</code><span class="sig-paren">(</span><em>log_text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service.html#log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#service.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the users log process</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>log_text:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="service.prompt">
+<code class="descclassname">service.</code><code class="descname">prompt</code><span class="sig-paren">(</span><em>player=None</em>, <em>prompted_text=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service.html#prompt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#service.prompt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prompt user to do something to resolve background requests</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>prompted_text (String): Custom text that other function wants to show to user
+player (String): Username of the player that needs to resolve request</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="service.warning">
+<code class="descclassname">service.</code><code class="descname">warning</code><span class="sig-paren">(</span><em>instance: object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/service.html#warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#service.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the users warning issues</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>instance:</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Service Package Code Documentation</a><ul>
+<li><a class="reference internal" href="#service-module">Service Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="code-main.html"
+                        title="previous chapter">Main Package Code Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code-support.html"
+                        title="next chapter">Support Package Code Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code-service.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-support.html" title="Support Package Code Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="code-main.html" title="Main Package Code Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>

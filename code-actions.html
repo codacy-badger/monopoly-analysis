@@ -1,0 +1,232 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Actions Package Code Documentation &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database Package Code Documentation" href="code-database.html" />
+    <link rel="prev" title="Welcome to Monopoly Analysis’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-database.html" title="Database Package Code Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Monopoly Analysis’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-actions">
+<span id="actions-package-code-documentation"></span><h1>Actions Package Code Documentation<a class="headerlink" href="#module-actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="actions-module">
+<h2>Actions Module<a class="headerlink" href="#actions-module" title="Permalink to this headline">¶</a></h2>
+<p>Create, resolve issues in background.
+Also runs the game (logic) in background after player’s action.</p>
+<dl class="function">
+<dt id="actions.actions_handler">
+<code class="descclassname">actions.</code><code class="descname">actions_handler</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#actions_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.actions_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will be triggered when user type in ‘/’ commands</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>text:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.create_user">
+<code class="descclassname">actions.</code><code class="descname">create_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#create_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.create_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use for creating new user and add it into database
+NOTE: Will contact transaction.add_user() directly</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.delete_user">
+<code class="descclassname">actions.</code><code class="descname">delete_user</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#delete_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.delete_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete user from the service
+Just because they are bankrupt or quit the game during the gameplay.</p>
+<p>NOTE: Will contact transaction.remove_user() directly
+TODO: Need to resolve on how to deal with “quit during gameplay” user.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>username:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.generate_game">
+<code class="descclassname">actions.</code><code class="descname">generate_game</code><span class="sig-paren">(</span><em>normal_game=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#generate_game"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.generate_game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the game by getting game components</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>normal_game:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.get_game_map">
+<code class="descclassname">actions.</code><code class="descname">get_game_map</code><span class="sig-paren">(</span><em>file_path='config/StandardAmerican'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#get_game_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.get_game_map" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd>file_path:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.print_game_map">
+<code class="descclassname">actions.</code><code class="descname">print_game_map</code><span class="sig-paren">(</span><em>full=False</em>, <em>max_tile=12</em>, <em>player_sequence=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#print_game_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.print_game_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the game map from a select &lt;max_tile&gt; scope
+Args:</p>
+<blockquote>
+<div>player_sequence:
+full:
+max_tile:</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.roll_dice">
+<code class="descclassname">actions.</code><code class="descname">roll_dice</code><span class="sig-paren">(</span><em>normal_dice_count=2</em>, <em>speed_dice_count=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#roll_dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.roll_dice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll a dice. Any dice.
+This function also can roll a speed dice.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>result (Integer) : Result of the 2 dice
+dice_result (Integer List) : Individual result from 2 dice</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.suggest_liquidate">
+<code class="descclassname">actions.</code><code class="descname">suggest_liquidate</code><span class="sig-paren">(</span><em>player: str</em>, <em>amount: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#suggest_liquidate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.suggest_liquidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suggests player to sell property (or mortgage)
+This function can be triggered when player can’t pay a rent or wants to liquidize the assets.</p>
+<p>By getting all the property from the database, and try to sell or mortgage properties.
+All possible calculations will later be weighted by</p>
+<ul class="simple">
+<li>Methods of liquidation (like Mortgage or Sell)&lt;br&gt;</li>
+<li>Monopoly bonus benefits&lt;br&gt;</li>
+<li>Chance / Community Chest benefits&lt;br&gt;</li>
+<li>Landing probability&lt;br&gt;</li>
+</ul>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player (String) : player that wants to liquidate the property
+amount (Integer) : amount that need to be pay for rent (after making the money to 0)</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>choice (List) <span class="classifier-delimiter">:</span> <span class="classifier">all possible ways to liquidate,</span></dt>
+<dd>and given back the weight of each ones (more weight = better choice)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="actions.user_existed">
+<code class="descclassname">actions.</code><code class="descname">user_existed</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actions.html#user_existed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#actions.user_existed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if user is existed by throwing instance to transaction.check_user()</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>username (String) : name of the user that wants to check existence</dd>
+<dt>Returns:</dt>
+<dd>transaction.check_user(username) result</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Actions Package Code Documentation</a><ul>
+<li><a class="reference internal" href="#actions-module">Actions Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Monopoly Analysis’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code-database.html"
+                        title="next chapter">Database Package Code Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code-actions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-database.html" title="Database Package Code Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Monopoly Analysis’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>

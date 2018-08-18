@@ -1,0 +1,384 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>actions &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">monopoly-analysis 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for actions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Actions Module</span>
+<span class="sd">--------------</span>
+
+<span class="sd">Create, resolve issues in background.</span>
+<span class="sd">Also runs the game (logic) in background after player&#39;s action.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">configuration</span>
+<span class="kn">import</span> <span class="nn">service</span>
+<span class="kn">import</span> <span class="nn">transaction</span>
+
+
+<span class="c1"># General Actions Handler ---------------------------------</span>
+
+<div class="viewcode-block" id="actions_handler"><a class="viewcode-back" href="../code-actions.html#actions.actions_handler">[docs]</a><span class="k">def</span> <span class="nf">actions_handler</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Will be triggered when user type in &#39;/&#39; commands</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># transaction.buy_property()</span>
+            <span class="k">pass</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">mortgage</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="c1"># Do the mortgage process in current space</span>
+
+            <span class="c1"># transaction.mortgage()</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Use the given command parameter to mortgage the target asset</span>
+
+            <span class="c1"># Check if the asset is valid</span>
+
+            <span class="c1"># Check if the asset is users</span>
+
+            <span class="c1"># Check if the asset id not mortgage</span>
+
+            <span class="c1"># Check if the asset have no house/hotel on</span>
+            <span class="k">pass</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">upgrade</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Upgrade the asset with house / hotel</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># transaction.buy_house(command)</span>
+            <span class="k">pass</span>
+        <span class="k">except</span> <span class="n">transaction</span><span class="o">.</span><span class="n">TransactionError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># transaction.buy_hotel()</span>
+                <span class="k">pass</span>
+            <span class="k">except</span> <span class="n">transaction</span><span class="o">.</span><span class="n">TransactionError</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
+                <span class="n">service</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Cannot do any upgrades&quot;</span><span class="p">)</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">skip</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot; Finish the player&#39;s turn</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">resolve</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot; Automatically resolve the situations, based on the current situation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">invalid</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Marked the input command with invalid.</span>
+
+<span class="sd">        This method can be improved by adding the auto correct functionality</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Command not found. Type /help for lists of command.&quot;</span><span class="p">)</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">command_param</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;/buy&quot;</span><span class="p">:</span>
+        <span class="n">buy</span><span class="p">(</span><span class="n">command_param</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;/mortgage&quot;</span><span class="p">:</span>
+        <span class="n">mortgage</span><span class="p">(</span><span class="n">command_param</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;/upgrade&quot;</span><span class="p">:</span>
+        <span class="n">upgrade</span><span class="p">(</span><span class="n">command_param</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;/skip&quot;</span><span class="p">:</span>
+        <span class="n">skip</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;/resolve&quot;</span><span class="p">:</span>
+        <span class="n">resolve</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">invalid</span><span class="p">(</span><span class="n">command_param</span><span class="p">)</span></div>
+
+
+<span class="c1"># Player/User Related Actions -----------------------------</span>
+
+
+<div class="viewcode-block" id="create_user"><a class="viewcode-back" href="../code-actions.html#actions.create_user">[docs]</a><span class="k">def</span> <span class="nf">create_user</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Use for creating new user and add it into database</span>
+<span class="sd">    NOTE: Will contact transaction.add_user() directly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sequence</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Repeatedly prompt user for username input</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">text_input</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="n">prompted_text</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">text_input</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">text_input</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
+            <span class="n">actions_handler</span><span class="p">(</span><span class="n">text_input</span><span class="p">)</span>
+
+        <span class="c1"># If user pressed the ENTER without typing in any username, this function will finish itself.</span>
+        <span class="k">if</span> <span class="n">text_input</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">user_existed</span><span class="p">(</span><span class="n">text_input</span><span class="p">):</span>
+                <span class="c1"># Create a transaction that adds a username to the game</span>
+                <span class="n">sequence</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">transaction</span><span class="o">.</span><span class="n">add_user</span><span class="p">(</span><span class="n">text_input</span><span class="p">,</span> <span class="n">sequence</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">service</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">text_input</span> <span class="o">+</span> <span class="s2">&quot; is already exists&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">text_input</span> <span class="o">+</span> <span class="s2">&quot; contains non-character&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Finally, count how many players in the game.</span>
+    <span class="n">transaction</span><span class="o">.</span><span class="n">count_user</span><span class="p">()</span>
+    <span class="n">transaction</span><span class="o">.</span><span class="n">list_user</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="delete_user"><a class="viewcode-back" href="../code-actions.html#actions.delete_user">[docs]</a><span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Delete user from the service</span>
+<span class="sd">    Just because they are bankrupt or quit the game during the gameplay.</span>
+
+<span class="sd">    NOTE: Will contact transaction.remove_user() directly</span>
+<span class="sd">    TODO: Need to resolve on how to deal with &quot;quit during gameplay&quot; user.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="user_existed"><a class="viewcode-back" href="../code-actions.html#actions.user_existed">[docs]</a><span class="k">def</span> <span class="nf">user_existed</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Check if user is existed by throwing instance to transaction.check_user()</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (String) : name of the user that wants to check existence</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        transaction.check_user(username) result</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">transaction</span><span class="o">.</span><span class="n">check_user</span><span class="p">(</span><span class="n">username</span><span class="p">)</span></div>
+
+
+<span class="c1"># Suggestions / Decision Support Actions ------------------</span>
+
+
+<div class="viewcode-block" id="suggest_liquidate"><a class="viewcode-back" href="../code-actions.html#actions.suggest_liquidate">[docs]</a><span class="k">def</span> <span class="nf">suggest_liquidate</span><span class="p">(</span><span class="n">player</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Suggests player to sell property (or mortgage)</span>
+<span class="sd">    This function can be triggered when player can&#39;t pay a rent or wants to liquidize the assets.</span>
+
+<span class="sd">    By getting all the property from the database, and try to sell or mortgage properties.</span>
+<span class="sd">    All possible calculations will later be weighted by</span>
+
+<span class="sd">    - Methods of liquidation (like Mortgage or Sell)&lt;br&gt;</span>
+<span class="sd">    - Monopoly bonus benefits&lt;br&gt;</span>
+<span class="sd">    - Chance / Community Chest benefits&lt;br&gt;</span>
+<span class="sd">    - Landing probability&lt;br&gt;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        player (String) : player that wants to liquidate the property</span>
+<span class="sd">        amount (Integer) : amount that need to be pay for rent (after making the money to 0)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        choice (List) : all possible ways to liquidate,</span>
+<span class="sd">                        and given back the weight of each ones (more weight = better choice)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;liquidate_weight&#39;</span><span class="p">]</span></div>
+
+
+<span class="c1"># Game play Actions ----------------------------------------</span>
+
+
+<div class="viewcode-block" id="generate_game"><a class="viewcode-back" href="../code-actions.html#actions.generate_game">[docs]</a><span class="k">def</span> <span class="nf">generate_game</span><span class="p">(</span><span class="n">normal_game</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Generate the game by getting game components</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        normal_game:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">normal_game</span><span class="p">:</span>
+        <span class="n">get_game_map</span><span class="p">()</span>
+        <span class="n">print_game_map</span><span class="p">(</span><span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">transaction</span><span class="o">.</span><span class="n">load_property</span><span class="p">(</span><span class="s1">&#39;config/StandardAmerican/property.csv&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_game_map"><a class="viewcode-back" href="../code-actions.html#actions.get_game_map">[docs]</a><span class="k">def</span> <span class="nf">get_game_map</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;config/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;game_package&#39;</span><span class="p">])):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_path:</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tile_file_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/tiles.csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="k">global</span> <span class="n">GAME_MAP</span>
+    <span class="n">GAME_MAP</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tile_file_path</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">GAME_MAP</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;tiles.csv not found&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
+        <span class="n">service</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="print_game_map"><a class="viewcode-back" href="../code-actions.html#actions.print_game_map">[docs]</a><span class="k">def</span> <span class="nf">print_game_map</span><span class="p">(</span><span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_tile</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">player_sequence</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Prints the game map from a select &lt;max_tile&gt; scope</span>
+<span class="sd">    Args:</span>
+<span class="sd">        player_sequence:</span>
+<span class="sd">        full:</span>
+<span class="sd">        max_tile:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">tile_number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_tile</span><span class="p">):</span>
+        <span class="c1"># Retrieve the data</span>
+        <span class="n">current_player_location</span> <span class="o">=</span> <span class="n">transaction</span><span class="o">.</span><span class="n">get_location</span><span class="p">(</span><span class="n">player_sequence</span><span class="p">)</span>
+        <span class="n">property_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">property_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">property_price</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span>
+        <span class="n">number_to_roll</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Check tile length</span>
+        <span class="n">text_length</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Choose color</span>
+
+        <span class="c1"># Print tiles</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">text_length</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">property_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">property_price</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">number_to_roll</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="roll_dice"><a class="viewcode-back" href="../code-actions.html#actions.roll_dice">[docs]</a><span class="k">def</span> <span class="nf">roll_dice</span><span class="p">(</span><span class="n">normal_dice_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">speed_dice_count</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Roll a dice. Any dice.</span>
+<span class="sd">    This function also can roll a speed dice.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        result (Integer) : Result of the 2 dice</span>
+<span class="sd">        dice_result (Integer List) : Individual result from 2 dice</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="n">dice_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Random a dice face and return it&#39;s result</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            individual_dice_result: (Integer)</span>
+<span class="sd">                Value that is in the dice (in configuration file)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dice_face</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">CONFIG</span><span class="p">[</span><span class="n">dice_type</span><span class="p">]</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dice_face</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">dice_face</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
+
+    <span class="c1"># Initiate the dice rolling with placeholder variables</span>
+    <span class="n">dice_result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Start rolling a dice, twice. and then store the result into the placeholder variables</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">normal_dice_count</span><span class="p">):</span>
+        <span class="n">individual_dice_result</span> <span class="o">=</span> <span class="n">roll</span><span class="p">(</span><span class="s1">&#39;dice_face&#39;</span><span class="p">)</span>
+        <span class="n">dice_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">individual_dice_result</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">individual_dice_result</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">speed_dice_count</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">dice_result</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">monopoly-analysis 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>

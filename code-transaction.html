@@ -1,0 +1,472 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Transaction Package Code Documentation &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Support Package Code Documentation" href="code-support.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-support.html" title="Support Package Code Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-transaction">
+<span id="transaction-package-code-documentation"></span><h1>Transaction Package Code Documentation<a class="headerlink" href="#module-transaction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transaction-module">
+<h2>Transaction Module<a class="headerlink" href="#transaction-module" title="Permalink to this headline">¶</a></h2>
+<p>Transaction module makes the actions into the pre SQL script.</p>
+<dl class="exception">
+<dt id="transaction.TransactionError">
+<em class="property">exception </em><code class="descclassname">transaction.</code><code class="descname">TransactionError</code><span class="sig-paren">(</span><em>message</em>, <em>errors</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#TransactionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.TransactionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will rise when the transaction cannot be completed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.add_money">
+<code class="descclassname">transaction.</code><code class="descname">add_money</code><span class="sig-paren">(</span><em>player</em>, <em>money</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#add_money"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.add_money" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add money to the player in specific amount</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+money:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.add_user">
+<code class="descclassname">transaction.</code><code class="descname">add_user</code><span class="sig-paren">(</span><em>username</em>, <em>sequence</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#add_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.add_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a transaction that will add user to the database</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>username: name of the user (username) that will be added
+sequence:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.buy_hotel">
+<code class="descclassname">transaction.</code><code class="descname">buy_hotel</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#buy_hotel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.buy_hotel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Buy a hotel to the property</p>
+<p>Complete when user can buy the hotel
+NOTE: Will delete house, because following the hotel buy rule</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player (String) : username that wants to buy a hotel
+asset: (String) : property to buy a hotel</dd>
+<dt>Raises:</dt>
+<dd>TransactionError</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.buy_house">
+<code class="descclassname">transaction.</code><code class="descname">buy_house</code><span class="sig-paren">(</span><em>player</em>, <em>asset: str</em>, <em>money: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#buy_house"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.buy_house" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a transaction when user want to buy a property</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+asset:
+money:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.buy_property">
+<code class="descclassname">transaction.</code><code class="descname">buy_property</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em>, <em>price=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#buy_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.buy_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Buy a property that is not currently owned</p>
+<p>NOTE: Program will check for money. If not, it will raise TransactionError</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player :
+asset :
+price :</dd>
+<dt>Raises:</dt>
+<dd>TransactionError :</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.check_user">
+<code class="descclassname">transaction.</code><code class="descname">check_user</code><span class="sig-paren">(</span><em>player</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#check_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.check_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the username is duplicated or not</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.count_user">
+<code class="descclassname">transaction.</code><code class="descname">count_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#count_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.count_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count user that is in the game</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>result from database.count()</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.delete_user">
+<code class="descclassname">transaction.</code><code class="descname">delete_user</code><span class="sig-paren">(</span><em>username: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#delete_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.delete_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the user from the database, because they have bankrupt or quit the game</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>username (str): name of the user that will be deleted from Player table</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_house">
+<code class="descclassname">transaction.</code><code class="descname">get_house</code><span class="sig-paren">(</span><em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#get_house"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_house" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get house count from the asset given</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_location">
+<code class="descclassname">transaction.</code><code class="descname">get_location</code><span class="sig-paren">(</span><em>user_sequence</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#get_location"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user location from user sequence</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>user_sequence:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_money">
+<code class="descclassname">transaction.</code><code class="descname">get_money</code><span class="sig-paren">(</span><em>player: str</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/transaction.html#get_money"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_money" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check player money balance</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_mortgage_status">
+<code class="descclassname">transaction.</code><code class="descname">get_mortgage_status</code><span class="sig-paren">(</span><em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#get_mortgage_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_mortgage_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mortgage status based on &lt;asset&gt; input listing</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_property">
+<code class="descclassname">transaction.</code><code class="descname">get_property</code><span class="sig-paren">(</span><em>asset</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/transaction.html#get_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve player that owns the &lt;asset&gt;</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset: (String or String List) Property name that doesn’t know owner</dd>
+<dt>Returns:</dt>
+<dd>player: (String) player’s username that owns the property. If not owned, will return None</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.get_value">
+<code class="descclassname">transaction.</code><code class="descname">get_value</code><span class="sig-paren">(</span><em>player</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.get_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the player’s value</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.list_user">
+<code class="descclassname">transaction.</code><code class="descname">list_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#list_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.list_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the user that is in the game</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>result from database.select(‘username’, ‘Player’)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.load_property">
+<code class="descclassname">transaction.</code><code class="descname">load_property</code><span class="sig-paren">(</span><em>asset_reference_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#load_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.load_property" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Args:</dt>
+<dd>asset_reference_file:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.mortgage">
+<code class="descclassname">transaction.</code><code class="descname">mortgage</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#mortgage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.mortgage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mortgage the property and add money to player</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset:
+player:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.property_name_to_property_id">
+<code class="descclassname">transaction.</code><code class="descname">property_name_to_property_id</code><span class="sig-paren">(</span><em>property_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#property_name_to_property_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.property_name_to_property_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the property name to id (for database queries)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>property_name:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.remortgage">
+<code class="descclassname">transaction.</code><code class="descname">remortgage</code><span class="sig-paren">(</span><em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#remortgage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.remortgage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remortgage the property</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.reorder_user">
+<code class="descclassname">transaction.</code><code class="descname">reorder_user</code><span class="sig-paren">(</span><em>username: str</em>, <em>new_order: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#reorder_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.reorder_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorder the user into different sequence</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>username (str):
+new_order (int):</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.sell_hotel">
+<code class="descclassname">transaction.</code><code class="descname">sell_hotel</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#sell_hotel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.sell_hotel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sell the hotel to liquidise</p>
+<p>NOTE: 1 hotel = 5 house (in the need of selling the hotel)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.sell_house">
+<code class="descclassname">transaction.</code><code class="descname">sell_house</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em>, <em>amount</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#sell_house"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.sell_house" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sell the house, at a fixed rate</p>
+<p>Notes: House reselling rate is in the configuration file. You can edit it.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+asset:
+amount:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.sell_property">
+<code class="descclassname">transaction.</code><code class="descname">sell_property</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em>, <em>price=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#sell_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.sell_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sell property that player IS OWNING</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+asset:
+price:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.set_money">
+<code class="descclassname">transaction.</code><code class="descname">set_money</code><span class="sig-paren">(</span><em>player: str</em>, <em>money</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#set_money"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.set_money" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the money balance to the database</p>
+<p>This method is different from transaction.add_money that, this SET the new value
+While the add_money increases the money</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player (str): name of the user (not ID)
+money (float or int): money that will be set</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.set_mortgage_status">
+<code class="descclassname">transaction.</code><code class="descname">set_mortgage_status</code><span class="sig-paren">(</span><em>asset: str</em>, <em>status: bool</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#set_mortgage_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.set_mortgage_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mortgage status to the property</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>asset: property to be set status with
+status: status that property will have</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.set_property">
+<code class="descclassname">transaction.</code><code class="descname">set_property</code><span class="sig-paren">(</span><em>player</em>, <em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#set_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.set_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign &lt;asset&gt; to the &lt;player&gt;</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.set_value">
+<code class="descclassname">transaction.</code><code class="descname">set_value</code><span class="sig-paren">(</span><em>player</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#set_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.set_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the player with the value</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+value:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.transfer">
+<code class="descclassname">transaction.</code><code class="descname">transfer</code><span class="sig-paren">(</span><em>player</em>, <em>new_player</em>, <em>asset: list = None</em>, <em>money: float = 0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer money and/or asset from player -&gt; new player</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">player (String) : Player that starts the transfer
+new_player (String) : Player that will get the benefit from the transfer
+asset: (List)</p>
+<blockquote>
+<div>Lists of asset that will be transferred to new_player from player
+If left blank, asset will not be transferred.
+If given incorrect property, will raised ValueError</div></blockquote>
+<dl class="last docutils">
+<dt>money: (Integer)</dt>
+<dd>Money that will be transferred to new_player from player
+If left blank or zero, money will not be transferred and raised ValueError
+If left negative, money will not be transferred and raised ValueError</dd>
+</dl>
+</dd>
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt>ValueError:</dt>
+<dd>Money data is not valid
+Property data is not valid</dd>
+<dt>TransactionException:</dt>
+<dd>Raised when transaction is not completed, resulted from errors</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.transfer_property">
+<code class="descclassname">transaction.</code><code class="descname">transfer_property</code><span class="sig-paren">(</span><em>player</em>, <em>new_player</em>, <em>asset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#transfer_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.transfer_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transfer property’s ownership</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:
+new_player:
+asset:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="transaction.update_value">
+<code class="descclassname">transaction.</code><code class="descname">update_value</code><span class="sig-paren">(</span><em>player</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transaction.html#update_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transaction.update_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update player value from the database</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>player:</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Transaction Package Code Documentation</a><ul>
+<li><a class="reference internal" href="#transaction-module">Transaction Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="code-support.html"
+                        title="previous chapter">Support Package Code Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code-transaction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-support.html" title="Support Package Code Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>

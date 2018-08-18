@@ -1,0 +1,194 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>service &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">monopoly-analysis 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for service</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Service Module</span>
+<span class="sd">--------------</span>
+
+<span class="sd">Service gives information and asks prompt from user</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="error"><a class="viewcode-back" href="../code-service.html#service.error">[docs]</a><span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">instance</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Send the users error issues. Program probably be stopped by the Exception.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        instance:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{1}</span><span class="s2">[ Error ]</span><span class="si">{2}</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[6;30;41m&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[0m&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="warning"><a class="viewcode-back" href="../code-service.html#service.warning">[docs]</a><span class="k">def</span> <span class="nf">warning</span><span class="p">(</span><span class="n">instance</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Send the users warning issues</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        instance:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{1}</span><span class="s2">[ Warning ]</span><span class="si">{2}</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">instance</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[6;30;43m&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[0m&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../code-service.html#service.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">log_text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Send the users log process</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        log_text:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[6;30;42m&#39;</span> <span class="o">+</span> <span class="s2">&quot;[ Log ]&quot;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[0m&#39;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">log_text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="announce"><a class="viewcode-back" href="../code-service.html#service.announce">[docs]</a><span class="k">def</span> <span class="nf">announce</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; This function is used to format the program.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: (String) the text that will be shown.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Service </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="prompt"><a class="viewcode-back" href="../code-service.html#service.prompt">[docs]</a><span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="n">player</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prompted_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Prompt user to do something to resolve background requests</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prompted_text (String): Custom text that other function wants to show to user</span>
+<span class="sd">        player (String): Username of the player that needs to resolve request</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Give user information on how to resolve the turn actions</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            username:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> &gt; Please choose action(s)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;[ /roll ] Roll a dice&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /upgrade ] Buy house/hotel on a property&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /auto ] Automatically make a decision&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Give user information on how to resolve the unowned property</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            username (str):</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> &gt; Please choose action(s)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s2">]</span><span class="se">\t</span><span class="si">{}</span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">&#39;[ /buy ] Buy Property at full price&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /auction ] Auction this property&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /trade ] Trade money or Property&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /done ] Finished your turn&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;[ /auto ] Automatically make a decision&#39;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">confirm</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Prompt user to confirm the transaction</span>
+<span class="sd">        Args:</span>
+<span class="sd">            username (str):</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> &gt; Are you sure?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">user</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Prompt user with username input</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            items (str):</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">announce</span><span class="p">(</span><span class="s2">&quot;Please type in your player name. Press ENTER to stop&quot;</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">items</span>
+
+    <span class="c1"># Resolve the prompt here ----------</span>
+    <span class="k">if</span> <span class="n">prompted_text</span> <span class="o">==</span> <span class="s1">&#39;action&#39;</span><span class="p">:</span>
+        <span class="n">action</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">prompted_text</span> <span class="o">==</span> <span class="s1">&#39;resolve&#39;</span><span class="p">:</span>
+        <span class="n">resolve</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">prompted_text</span> <span class="o">==</span> <span class="s2">&quot;confirm&quot;</span><span class="p">:</span>
+        <span class="n">confirm</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">prompted_text</span> <span class="o">==</span> <span class="s1">&#39;user&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">user</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">monopoly-analysis 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>

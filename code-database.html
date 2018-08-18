@@ -1,0 +1,263 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Database Package Code Documentation &#8212; monopoly-analysis 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Main Package Code Documentation" href="code-main.html" />
+    <link rel="prev" title="Actions Package Code Documentation" href="code-actions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-main.html" title="Main Package Code Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="code-actions.html" title="Actions Package Code Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-database">
+<span id="database-package-code-documentation"></span><h1>Database Package Code Documentation<a class="headerlink" href="#module-database" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="database-module">
+<h2>Database Module<a class="headerlink" href="#database-module" title="Permalink to this headline">¶</a></h2>
+<p>This file is for connect, create, query, update and reset database.</p>
+<p>Do not use the database directly. Use ‘transaction’ instead.</p>
+<dl class="function">
+<dt id="database.connect">
+<code class="descclassname">database.</code><code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect the database</p>
+<p>To connect the database, ‘game.sqlite’ file is required.
+You HAVE to execute database.create() to create the database file first</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.count">
+<code class="descclassname">database.</code><code class="descname">count</code><span class="sig-paren">(</span><em>table_name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the record from the table_name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>table_name:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.create">
+<code class="descclassname">database.</code><code class="descname">create</code><span class="sig-paren">(</span><em>database_file_list: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a database to the game.sql</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>database_file_list:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.delete">
+<code class="descclassname">database.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>table_name: str</em>, <em>ref_column_name: str</em>, <em>ref_values: str</em>, <em>operator: str = '='</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do a DELETE SQL Script</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>table_name:
+ref_column_name:
+operator:
+ref_values:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.describe">
+<code class="descclassname">database.</code><code class="descname">describe</code><span class="sig-paren">(</span><em>table_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#describe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe the table attribute. Not for normal usage.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>table_name:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.disconnect">
+<code class="descclassname">database.</code><code class="descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect the database</p>
+<p>After using the database, the connection should be closed.
+This code block will be optimized soon. Don’t worry.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.exists">
+<code class="descclassname">database.</code><code class="descname">exists</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>table_name: str</em>, <em>quantity=None</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="_modules/database.html#exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if there is a record in a certain table</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>column_name:
+table_name:
+quantity:</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.initiate">
+<code class="descclassname">database.</code><code class="descname">initiate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#initiate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.initiate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new brand new table (database)</p>
+<p>Generally for starting the new game.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.insert">
+<code class="descclassname">database.</code><code class="descname">insert</code><span class="sig-paren">(</span><em>table_name: str</em>, <em>values: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do an INSERT script on database</p>
+<p>INSERT INTO &lt;table_name&gt; VALUES (&lt;values&gt;);</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>values:
+table_name:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.reset">
+<code class="descclassname">database.</code><code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the database to make it newly generated</p>
+<p>NOTE: This function will be called during the game initiation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.select">
+<code class="descclassname">database.</code><code class="descname">select</code><span class="sig-paren">(</span><em>column_name: str</em>, <em>table_name: str</em>, <em>ref_column_name: str = None</em>, <em>operator: str = '='</em>, <em>quantity=None</em>, <em>limit: int = 999</em>, <em>top_percent: int = 100</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a SELECT script on database</p>
+<p>Full SELECT script is :
+SELECT &lt;column_name&gt;
+FROM &lt;table_name&gt;
+WHERE &lt;ref_column_name&gt; &lt;operator&gt; &lt;quantity&gt;
+LIMIT &lt;limit&gt;</p>
+<p>If &lt;ref_column_name&gt; or &lt;operator&gt; or &lt;quantity&gt; is not given,
+WHERE statement will be removed.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>column_name:
+table_name:
+ref_column_name:
+operator:
+quantity:
+limit:
+top_percent:</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="database.update">
+<code class="descclassname">database.</code><code class="descname">update</code><span class="sig-paren">(</span><em>table_name: str</em>, <em>set_column_name: str</em>, <em>set_column_quantity</em>, <em>ref_column: str</em>, <em>ref_column_quantity</em>, <em>set_operator: str = '='</em>, <em>ref_operator='='</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do an UPDATE script on database</p>
+<p>UPDATE &lt;table_name&gt;
+SET &lt;column_name&gt; &lt;set_operator&gt; &lt;column_quantity&gt;
+WHERE &lt;ref_column&gt; &lt;ref_operator&gt; &lt;ref_column_quantity&gt;;</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>table_name:
+set_column_name:
+set_column_quantity:
+ref_column:
+ref_column_quantity:
+set_operator:
+ref_operator:</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Database Package Code Documentation</a><ul>
+<li><a class="reference internal" href="#database-module">Database Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="code-actions.html"
+                        title="previous chapter">Actions Package Code Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code-main.html"
+                        title="next chapter">Main Package Code Documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code-database.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="code-main.html" title="Main Package Code Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="code-actions.html" title="Actions Package Code Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">monopoly-analysis 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Kunanon S..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.
+    </div>
+  </body>
+</html>
