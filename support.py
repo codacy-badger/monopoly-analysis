@@ -1,6 +1,4 @@
-"""
-Support Module
---------------
+""" Support Module
 
 This module will check the game file configurations
 and do data integrity check

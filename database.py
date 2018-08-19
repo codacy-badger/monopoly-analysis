@@ -1,6 +1,4 @@
-"""
-Database Module
----------------
+""" Database Module
 
 This file is for connect, create, query, update and reset database.
 
@@ -26,7 +24,7 @@ def create(database_file_list: list):
 
     for j in database_file_list:
 
-        connect()
+        # connect()
         service.log("Loading database file : {}".format(j))
         script = ""
 
@@ -49,8 +47,8 @@ def create(database_file_list: list):
                 "Problem raised from database.create() : " + str(inst))
             DATABASE.rollback()
 
-        finally:
-            DATABASE.close()
+        # finally:
+        #     DATABASE.close()
 
 
 def connect():
@@ -63,9 +61,9 @@ def connect():
     # Open the database
     try:
         global DATABASE
-        DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
-
         global DATABASE_CURSOR
+
+        DATABASE = sqlite3.connect(configuration.CONFIG['database_path'])
         DATABASE_CURSOR = DATABASE.cursor()
 
     except Exception as inst:
@@ -106,27 +104,6 @@ def initiate():
     create(configuration.CONFIG['database_create_file'])
 
 
-def describe(table_name):
-    """ Describe the table attribute. Not for normal usage.
-
-    Args:
-        table_name:
-    """
-    connect()
-
-    try:
-        # DATABASE.execute(
-        #     "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {}".format(table_name))
-        DATABASE.commit()
-
-    except sqlite3.OperationalError as inst:
-        service.error(inst)
-        DATABASE.rollback()
-
-    finally:
-        disconnect()
-
-
 def select(column_name: str, table_name: str, ref_column_name: str = None, operator: str = '=', quantity=None,
            limit: int = 999, top_percent: int = 100):
     """ Create a SELECT script on database
@@ -151,7 +128,7 @@ def select(column_name: str, table_name: str, ref_column_name: str = None, opera
     """
 
     # Open the database
-    connect()
+    # connect()
 
     # Create a WHERE script
     if ref_column_name is None or operator is None or quantity is None:
@@ -162,8 +139,10 @@ def select(column_name: str, table_name: str, ref_column_name: str = None, opera
 
     try:
         # Execute the SQL script
-        DATABASE.execute(
-            "SELECT {} {} FROM {} {} LIMIT {}".format(top_percent, column_name, table_name, where_script, limit))
+        sql_script = "SELECT {} {} FROM {} {} LIMIT {}".format(
+            top_percent, column_name, table_name, where_script,
+            limit)
+        DATABASE.execute(sql_script)
 
         # Fetch the result from the query
         return DATABASE_CURSOR.fetchall()
@@ -171,8 +150,8 @@ def select(column_name: str, table_name: str, ref_column_name: str = None, opera
     except sqlite3.OperationalError:
         service.error("SQLite3 handle SELECT Query Error")
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def update(table_name: str, set_column_name: str, set_column_quantity,
@@ -193,7 +172,7 @@ def update(table_name: str, set_column_name: str, set_column_quantity,
         ref_operator:
     """
     # Open the database
-    connect()
+    # connect()
 
     # Make transaction on UPDATE
     try:
@@ -208,8 +187,8 @@ def update(table_name: str, set_column_name: str, set_column_quantity,
         DATABASE.rollback()
         service.error(inst)
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def insert(table_name: str, values: list):
@@ -222,24 +201,26 @@ def insert(table_name: str, values: list):
         table_name:
     """
     # Open the database
-    connect()
+    # connect()
 
     # Change the values of list into a string
     values = str(values).lstrip('[').rstrip(']')
 
     # Execute a SQL command
     try:
-        sql_script = "INSERT INTO {} VALUES ({})".format(table_name, values)
+        sql_script = "INSERT INTO {} VALUES ({})".format(
+            table_name, values)
         DATABASE.execute(sql_script)
         DATABASE.commit()
+
         service.log("Execute SQL : {}".format(sql_script))
 
     except sqlite3.OperationalError as inst:
         DATABASE.rollback()
         service.error(inst)
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def delete(table_name: str, ref_column_name: str, ref_values: str, operator: str = '='):
@@ -253,16 +234,17 @@ def delete(table_name: str, ref_column_name: str, ref_values: str, operator: str
     """
 
     try:
-        connect()
-
-        DATABASE.execute("DELETE FROM {} WHERE {} {} {}".format(
-            table_name, ref_column_name, operator, ref_values))
+        # connect()
+        sql_script = "DELETE FROM {} WHERE {} {} {}".format(
+            table_name, ref_column_name, operator, ref_values)
+        DATABASE.execute(sql_script)
+        DATABASE.commit()
 
     except sqlite3.OperationalError as inst:
         service.error("Error on database.delete()")
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def exists(column_name: str, table_name: str, quantity=None) -> bool:
@@ -280,10 +262,11 @@ def exists(column_name: str, table_name: str, quantity=None) -> bool:
     result = False
 
     try:
-        connect()
+        # connect()
 
         # Do the SQL queries
-        select(column_name=column_name, table_name=table_name, ref_column_name=column_name, quantity=quantity, limit=1)
+        select(column_name=column_name, table_name=table_name,
+               ref_column_name=column_name, quantity=quantity, limit=1)
 
         # If there is no errors on the prev. line, the result will return
         result = True
@@ -294,8 +277,8 @@ def exists(column_name: str, table_name: str, quantity=None) -> bool:
     except sqlite3.OperationalError:
         service.warning("database.exists() create sqlite3.OperationalError")
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def count(table_name: str):
@@ -307,10 +290,9 @@ def count(table_name: str):
     Returns:
 
     """
-    # Connect to the database
 
     try:
-        connect()
+        # connect()
 
         DATABASE.execute("SELECT COUNT(*) FROM {}".format(table_name))
         result = DATABASE_CURSOR.fetchall()
@@ -322,8 +304,8 @@ def count(table_name: str):
         service.warning("Cannot count the result")
         service.warning(inst)
 
-    finally:
-        disconnect()
+    # finally:
+    #     disconnect()
 
 
 def reset():

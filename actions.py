@@ -1,6 +1,4 @@
-"""
-Actions Module
---------------
+""" Actions Module
 
 Create, resolve issues in background.
 Also runs the game (logic) in background after player's action.
@@ -33,7 +31,10 @@ def actions_handler(text):
         pass
 
     def mortgage(command):
-        """
+        """ Player choose to mortgage the asset
+
+        Args:
+            command:
 
         """
         if command is "":
@@ -57,6 +58,7 @@ def actions_handler(text):
     def upgrade(command):
         """ Upgrade the asset with house / hotel
 
+        But it will check that the user owns the property and have enough money
         """
         try:
             # transaction.buy_house(command)
@@ -72,16 +74,19 @@ def actions_handler(text):
     def skip():
         """ Finish the player's turn
 
+        It will also check if more actions is required to be resolve first.
         """
         pass
 
     def resolve():
         """ Automatically resolve the situations, based on the current situation
+
+        Or let the user choose the priority of each situations
         """
         pass
 
     def invalid(text):
-        """ Marked the input command with invalid.
+        """ Marked the input command as invalid.
 
         This method can be improved by adding the auto correct functionality
 
@@ -112,6 +117,7 @@ def actions_handler(text):
 
 def create_user():
     """ Use for creating new user and add it into database
+
     NOTE: Will contact transaction.add_user() directly
     """
 
@@ -144,6 +150,7 @@ def create_user():
 
 def delete_user(username):
     """ Delete user from the service
+
     Just because they are bankrupt or quit the game during the gameplay.
 
     NOTE: Will contact transaction.remove_user() directly
@@ -173,6 +180,7 @@ def user_existed(username):
 
 def suggest_liquidate(player: str, amount: int):
     """ Suggests player to sell property (or mortgage)
+
     This function can be triggered when player can't pay a rent or wants to liquidize the assets.
 
     By getting all the property from the database, and try to sell or mortgage properties.
@@ -206,36 +214,15 @@ def generate_game(normal_game=True):
     """
 
     if normal_game:
-        get_game_map()
-        print_game_map(full=True)
-        transaction.load_property('config/StandardAmerican/property.csv')
+        # Retrieve the game map data
+        transaction.load_property('property.csv')
 
-
-def get_game_map(file_path="config/{}".format(configuration.CONFIG['game_package'])):
-    """
-    Args:
-        file_path:
-
-    """
-
-    tile_file_path = "{}/tiles.csv".format(file_path)
-
-    global GAME_MAP
-    GAME_MAP = dict()
-
-    try:
-        with open(tile_file_path, 'r+') as file:
-            for i in file:
-                GAME_MAP[str(i)] = None
-
-    except FileNotFoundError:
-        service.error("tiles.csv not found")
-    except BaseException as inst:
-        service.error(inst)
+        # Print the game map
 
 
 def print_game_map(full=False, max_tile=12, player_sequence=1):
     """ Prints the game map from a select <max_tile> scope
+
     Args:
         player_sequence:
         full:
@@ -266,8 +253,7 @@ def print_game_map(full=False, max_tile=12, player_sequence=1):
 
 
 def roll_dice(normal_dice_count=2, speed_dice_count=0):
-    """ Roll a dice. Any dice.
-    This function also can roll a speed dice.
+    """ Roll a dice. This function also supports a speed dice.
 
     Returns:
         result (Integer) : Result of the 2 dice

@@ -1,6 +1,4 @@
-"""
-Main Module
------------
+""" Main Module
 
 This module will initiate other module + start the game.
 
@@ -12,35 +10,42 @@ import database
 import service
 import support
 
-# --- Starting the program initiation ---------------------
-service.announce("Initiating the service")
+try:
+    # --- Starting the program initiation ---------------------
+    service.announce("Initiating the service")
 
-# --- Check game file integrity ---------------------------
-support.check_database_file()
-support.check_game_file()
+    # --- Check game file integrity ---------------------------
+    support.check_database_file()
+    support.check_game_file()
 
-# -- Generate the database from the script ----------------
-database.initiate()
+    # -- Generate the database from the script ----------------
+    database.initiate()
 
-# -- Add more players to the game until hitting ENTER -----
-actions.create_user()
+    # -- Add more players to the game until hitting ENTER -----
+    actions.create_user()
 
-# -- Start the game process -------------------------------
-actions.generate_game()
+    # -- Preparing the game process -------------------------------
+    actions.generate_game()
 
-while True:
-    try:
-        pass
-    except RuntimeError as inst:
-        break
-        # do something
+    # -- Start the game
+    global CURRENT_PLAYER
+    
+    while True:
+        try:
+            pass
+            # Roll the dice
+            # Action resolve
+            # Create actions
+            # Action resolve
+            # Repeat
 
-# Roll the dice
+        except KeyboardInterrupt:
+            # Stop the game, because user is stopping the instance
+            break
+    
+except KeyboardInterrupt:
+    service.log("Stopped by KeyboardInterrupt")
 
-# Action resolve
-
-# Create actions
-
-# Action resolve
-
-# Repeat
+finally:
+    # Make sure that the database is disconnected before the program stops
+    database.disconnect()

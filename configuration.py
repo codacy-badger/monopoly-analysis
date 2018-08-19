@@ -1,6 +1,4 @@
-"""
-Configuration Module
---------------------
+""" Configuration Module
 
 This module store set of game rules.
 For advanced player, you can edit this file to suit your game experience

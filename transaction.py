@@ -1,6 +1,4 @@
-"""
-Transaction Module
------------------
+""" Transaction Module
 
 Transaction module makes the actions into the pre SQL script.
 """
@@ -500,13 +498,16 @@ def transfer(player, new_player, asset: list = None, money: float = 0):
             # transfer_money(player, new_player, money)
 
 
-def load_property(asset_reference_file):
+def load_property(asset_reference_file='property.csv'):
     """
 
     Args:
         asset_reference_file:
     """
     try:
+        asset_reference_file = "{}/{}".format(
+            configuration.CONFIG['game_package'], asset_reference_file)
+
         file = open(asset_reference_file, 'r')
 
         for line in file:
