@@ -1,7 +1,5 @@
 # Python CircleCI 2.0 configuration file
-#
 # Check https://circleci.com/docs/2.0/language-python/ for more details
-#
 version: 2
 jobs:
   build:
@@ -25,3 +23,5 @@ jobs:
             . venv/bin/activate
       - run:
           command: python3 main.py < testscript/testscript1.txt
+#      - run:
+#          command: python main.py < testscript/testscript2.txt
