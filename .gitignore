@@ -5,7 +5,7 @@
 docs/
 wiki/
 wiki
-config/StandardAmerican/game\.sqlite
+.vs/
 
 # From github.com/github/gitignore/blob/master/Python.gitignore
 __pycache__/
