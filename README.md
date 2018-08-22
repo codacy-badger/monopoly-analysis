@@ -121,7 +121,7 @@ Please check on the [documentation](https://github.com/sagelga/monopoly-analysis
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsagelga%2Fmonopoly-analysis.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsagelga%2Fmonopoly-analysis?ref=badge_large)
 
 **Codacy**<br>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd8039eda0c844f6ac181689383a5dcf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sagelga/monopoly-analysis&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/600b857dd7eb47198768a3031efdb888)](https://www.codacy.com/app/sagelga/monopoly-analysis?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sagelga/monopoly-analysis&amp;utm_campaign=Badge_Grade)
 
 **CircleCI**<br>
 |master|develop|
