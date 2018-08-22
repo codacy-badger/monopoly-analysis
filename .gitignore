@@ -4,7 +4,6 @@
 # Custom ignore list
 docs/
 wiki/
-wiki
 config/StandardAmerican/game\.sqlite
 
 # From github.com/github/gitignore/blob/master/Python.gitignore
